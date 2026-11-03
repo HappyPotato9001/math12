@@ -21,6 +21,7 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret:
       process.env.AUTH_SECRET || "math12-dev-secret-change-me-in-production",
+    secureCookie: request.nextUrl.protocol === "https:",
   });
 
   if (!token?.userId) {
