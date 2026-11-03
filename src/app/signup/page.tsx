@@ -1,11 +1,13 @@
 import { Suspense } from "react";
 import { AuthForm } from "@/components/AuthForm";
+import { oauthProvidersEnabled } from "@/lib/oauth";
 
 export default function SignupPage() {
+  const oauth = oauthProvidersEnabled();
   return (
     <div className="mx-auto w-full max-w-md px-5 py-10 sm:py-14">
       <Suspense fallback={<div className="text-ink-soft">Loading…</div>}>
-        <AuthForm mode="signup" />
+        <AuthForm mode="signup" oauth={oauth} />
       </Suspense>
     </div>
   );

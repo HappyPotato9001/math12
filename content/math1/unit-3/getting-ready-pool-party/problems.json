@@ -1,0 +1,55 @@
+[
+  {
+    "id": "gpp-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "$V(t)=2000-50t$ gallons after $t$ minutes. Find $V(10)$.",
+    "answer": 1500,
+    "hint": "Substitute t = 10.",
+    "solution": "$2000-500=1500$.",
+    "explanation": "Evaluate the function at the given time."
+  },
+  {
+    "id": "gpp-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "For $V(t)=2000-50t$, after how many minutes is the pool empty?",
+    "answer": 40,
+    "hint": "Set V(t) = 0.",
+    "solution": "$2000-50t=0\\Rightarrow t=40$.",
+    "explanation": "The x-intercept gives the time the pool empties."
+  },
+  {
+    "id": "gpp-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "In $V(t)=2000-50t$, what does $-50$ mean?",
+    "choices": [
+      "The pool loses 50 gallons per minute",
+      "The pool starts with 50 gallons",
+      "The pool is empty after 50 minutes",
+      "The pool gains 50 gallons per minute"
+    ],
+    "answer": "The pool loses 50 gallons per minute",
+    "hint": "It is the slope.",
+    "solution": "Slope is the rate of change in gallons per minute; negative means decreasing.",
+    "explanation": "Starting volume is the constant term 2000."
+  },
+  {
+    "id": "gpp-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "A pool has 300 gallons and fills at 25 gallons per minute. Write $V(t)$. Enter like $10+4t$.",
+    "answer": "300+25t",
+    "acceptedAnswers": [
+      "300+25t",
+      "25t+300",
+      "v(t)=300+25t",
+      "V(t)=25t+300",
+      "V(t)=300+25t"
+    ],
+    "hint": "Start plus rate times time.",
+    "solution": "$V(t)=300+25t$.",
+    "explanation": "Initial value plus rate × input."
+  }
+]

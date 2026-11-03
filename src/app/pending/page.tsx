@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export default async function PendingPage() {
   const user = await getSessionUser();
   if (!user) redirect("/login");
-  if (user.status === "approved") redirect("/math1");
+  if (user.status === "approved") redirect("/learning");
 
   return (
     <div className="mx-auto w-full max-w-lg px-5 py-10 sm:py-14">

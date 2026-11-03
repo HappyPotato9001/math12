@@ -1,0 +1,61 @@
+[
+  {
+    "id": "spd-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Which situation is discrete?",
+    "choices": [
+      "Number of students in a class",
+      "Height of a growing plant over time",
+      "Temperature during a day",
+      "Volume of water in a filling tank"
+    ],
+    "answer": "Number of students in a class",
+    "hint": "Can you have 2.5 of it?",
+    "solution": "Students are counted in whole numbers.",
+    "explanation": "Countable quantities are discrete."
+  },
+  {
+    "id": "spd-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Which situation is continuous?",
+    "choices": [
+      "Distance a car has traveled as time passes",
+      "Number of pencils in a box",
+      "Number of cars sold",
+      "Number of people on a bus"
+    ],
+    "answer": "Distance a car has traveled as time passes",
+    "hint": "Can it take any value in an interval?",
+    "solution": "Distance and time vary smoothly.",
+    "explanation": "Measured quantities are continuous."
+  },
+  {
+    "id": "spd-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Movie tickets cost $\\$8$ each (whole tickets only). What is the greatest number of tickets you can buy with $\\$50$?",
+    "answer": 6,
+    "hint": "Divide and round down.",
+    "solution": "$50\\div8=6.25$, so at most $6$ tickets ($\\$48$).",
+    "explanation": "Discrete contexts restrict answers to whole numbers."
+  },
+  {
+    "id": "spd-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Write the cost function $C(n)$ for $n$ tickets at $\\$8$ each. Enter like $5n$.",
+    "answer": "8n",
+    "acceptedAnswers": [
+      "8n",
+      "8*n",
+      "c(n)=8n",
+      "C(n)=8n",
+      "C(n)=8*n"
+    ],
+    "hint": "Cost = price × number.",
+    "solution": "$C(n)=8n$ with domain $n=0,1,2,\\dots$",
+    "explanation": "The formula is linear, but the graph is discrete points."
+  }
+]

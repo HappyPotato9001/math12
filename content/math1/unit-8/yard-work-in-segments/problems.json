@@ -1,0 +1,48 @@
+[
+  {
+    "id": "yw-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "What is the $x$-coordinate of the midpoint of $A(2,4)$ and $B(10,8)$?",
+    "answer": 6,
+    "hint": "Average the $x$-coordinates.",
+    "solution": "$(2+10)/2=6$.",
+    "explanation": "Midpoint formula averages each coordinate."
+  },
+  {
+    "id": "yw-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Find the distance between $(1,2)$ and $(7,10)$.",
+    "answer": 10,
+    "hint": "Horizontal change 6, vertical change 8.",
+    "solution": "$\\sqrt{36+64}=10$.",
+    "explanation": "The distance formula comes from the Pythagorean theorem."
+  },
+  {
+    "id": "yw-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "$M(4,3)$ is the midpoint of $\\overline{AB}$ and $A=(1,-1)$. What is the $y$-coordinate of $B$?",
+    "answer": 7,
+    "hint": "$(-1+y_B)/2=3$.",
+    "solution": "$y_B=2(3)-(-1)=7$.",
+    "explanation": "Double the midpoint, then subtract the known endpoint."
+  },
+  {
+    "id": "yw-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Which gives the $x$-coordinate of the midpoint of endpoints with $x$-values $x_1$ and $x_2$?",
+    "choices": [
+      "$\\frac{x_1+x_2}{2}$",
+      "$x_1+x_2$",
+      "$\\frac{x_2-x_1}{2}$",
+      "$x_1x_2$"
+    ],
+    "answer": "$\\frac{x_1+x_2}{2}$",
+    "hint": "The midpoint is the average.",
+    "solution": "Add and divide by 2.",
+    "explanation": "The midpoint is halfway between the endpoints."
+  }
+]

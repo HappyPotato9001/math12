@@ -1,0 +1,54 @@
+[
+  {
+    "id": "hotr-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Let $f(n)=3n-1$ for $n=1,2,3,4,5,6$. What is the largest value in the range?",
+    "answer": 17,
+    "hint": "The largest output comes from the largest input in the domain.",
+    "solution": "$f(6)=3(6)-1=17$.",
+    "explanation": "The function is increasing, so the last term is the largest."
+  },
+  {
+    "id": "hotr-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "What is the domain of the sequence $f(n)=4+5(n-1)$?",
+    "choices": [
+      "All real numbers",
+      "Positive integers (n = 1, 2, 3, ...)",
+      "All positive real numbers",
+      "Multiples of 5"
+    ],
+    "answer": "Positive integers (n = 1, 2, 3, ...)",
+    "hint": "The input is the term number.",
+    "solution": "Term numbers are counting numbers: 1, 2, 3, ....",
+    "explanation": "Sequences have a discrete domain."
+  },
+  {
+    "id": "hotr-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Let $f(n)=100-4n$ with domain $n=1,2,\\dots,10$. What is the smallest value in the range?",
+    "answer": 60,
+    "hint": "The function is decreasing, so use the largest n.",
+    "solution": "$f(10)=100-40=60$.",
+    "explanation": "For a decreasing sequence the minimum is the last term in the domain."
+  },
+  {
+    "id": "hotr-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "A sequence has domain $n=1,2,3,\\dots$ and range $\\{5,10,15,20,\\dots\\}$. Write its explicit rule. Enter like $3n$.",
+    "answer": "5n",
+    "acceptedAnswers": [
+      "5n",
+      "5*n",
+      "f(n)=5n",
+      "f(n)=5*n"
+    ],
+    "hint": "Each term is a multiple of its term number.",
+    "solution": "$f(1)=5$, $f(2)=10$, $f(3)=15$, so $f(n)=5n$.",
+    "explanation": "Multiples of 5 correspond to arithmetic growth with d = 5 starting at 5."
+  }
+]

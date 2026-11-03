@@ -1,0 +1,48 @@
+[
+  {
+    "id": "ft-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the mean of $3,5,7,9,11$.",
+    "answer": 7,
+    "hint": "Add and divide by 5.",
+    "solution": "$35/5=7$.",
+    "explanation": "Mean is the balance point."
+  },
+  {
+    "id": "ft-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Find the median of $12,3,9,7$.",
+    "answer": 8,
+    "hint": "Order first: $3,7,9,12$.",
+    "solution": "$(7+9)/2=8$.",
+    "explanation": "With an even count, average the middle two."
+  },
+  {
+    "id": "ft-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Find the IQR of $2,4,6,8,10,12,14,16$.",
+    "answer": 8,
+    "hint": "Find the medians of the lower and upper halves.",
+    "solution": "$Q_1=5$, $Q_3=13$, IQR $=8$.",
+    "explanation": "IQR measures the spread of the middle 50%."
+  },
+  {
+    "id": "ft-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Which measure of center is best when the data contain a large outlier?",
+    "choices": [
+      "Mean",
+      "Median",
+      "Range",
+      "Sum"
+    ],
+    "answer": "Median",
+    "hint": "Which is resistant to outliers?",
+    "solution": "The median is not pulled by extreme values.",
+    "explanation": "Use median and IQR for skewed data."
+  }
+]

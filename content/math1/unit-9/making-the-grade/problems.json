@@ -1,0 +1,48 @@
+[
+  {
+    "id": "mg-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the mean of the grades 80, 90, 100, 70.",
+    "answer": 85,
+    "hint": "Add and divide by 4.",
+    "solution": "$340/4=85$.",
+    "explanation": "Mean is the balanced grade."
+  },
+  {
+    "id": "mg-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Tests count 40% and homework 60%. Test average 90, homework average 80. What is the weighted grade?",
+    "answer": 84,
+    "hint": "$0.4(90)+0.6(80)$.",
+    "solution": "$36+48=84$.",
+    "explanation": "Weights show how much each category counts."
+  },
+  {
+    "id": "mg-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "A student has scores 82, 88, 80 on three tests. What score on the fourth test gives a mean of 85?",
+    "answer": 90,
+    "hint": "Total needed is $4\\times85$.",
+    "solution": "$340-(82+88+80)=340-250=90$.",
+    "explanation": "Target total minus current total."
+  },
+  {
+    "id": "mg-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Grades: 40, 88, 90, 92, 95 (mean 81, median 90). Which better describes a typical grade?",
+    "choices": [
+      "The mean, because it uses all values",
+      "The median, because the low outlier pulls the mean down",
+      "The range",
+      "Neither"
+    ],
+    "answer": "The median, because the low outlier pulls the mean down",
+    "hint": "Compare mean and median.",
+    "solution": "The 40 drags the mean to 81; most grades are near 90.",
+    "explanation": "Use median when data are skewed by an outlier."
+  }
+]

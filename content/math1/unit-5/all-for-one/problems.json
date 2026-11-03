@@ -1,0 +1,51 @@
+[
+  {
+    "id": "af-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Solve $y=2x+1$ and $y=-x+7$. What is $x$?",
+    "answer": 2,
+    "hint": "Set the expressions equal.",
+    "solution": "$2x+1=-x+7\\Rightarrow3x=6\\Rightarrow x=2$.",
+    "explanation": "When both are solved for $y$, set them equal."
+  },
+  {
+    "id": "af-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Which method is most efficient for $y=4x-1$ and $3x+2y=20$?",
+    "choices": [
+      "Substitution",
+      "Guess and check only",
+      "Elimination after rewriting both in standard form",
+      "Graph by hand"
+    ],
+    "answer": "Substitution",
+    "hint": "One variable is already isolated.",
+    "solution": "Substitute $y=4x-1$: $3x+8x-2=20$, so $x=2$.",
+    "explanation": "Isolated variable suggests substitution."
+  },
+  {
+    "id": "af-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Solve $3x+2y=16$ and $5x-2y=8$. What is $y$?",
+    "answer": 3.5,
+    "acceptedAnswers": [
+      "7/2"
+    ],
+    "hint": "Add the equations to eliminate $y$.",
+    "solution": "$8x=24$, $x=3$; $9+2y=16$, $y=3.5$.",
+    "explanation": "Opposite coefficients make elimination fast."
+  },
+  {
+    "id": "af-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "Adult tickets cost 8 dollars and child tickets cost 5 dollars. 20 tickets sold for 127 dollars. How many adult tickets?",
+    "answer": 9,
+    "hint": "$a+c=20$ and $8a+5c=127$.",
+    "solution": "$8a+5(20-a)=127\\Rightarrow3a+100=127\\Rightarrow a=9$.",
+    "explanation": "Count plus total money gives a solvable system."
+  }
+]

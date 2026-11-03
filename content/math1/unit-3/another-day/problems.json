@@ -1,0 +1,55 @@
+[
+  {
+    "id": "ad-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Let $g(x)=3\\cdot2^x$. Find $g(4)$.",
+    "answer": 48,
+    "hint": "2⁴ = 16.",
+    "solution": "$3\\cdot16=48$.",
+    "explanation": "Evaluate the power first."
+  },
+  {
+    "id": "ad-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "With $f(x)=2x+10$ and $g(x)=3\\cdot2^x$, what is the smallest whole number $x$ with $g(x)>f(x)$?",
+    "answer": 3,
+    "hint": "Check x = 2 and 3.",
+    "solution": "$x=2$: $12<14$. $x=3$: $24>16$.",
+    "explanation": "Exponential growth overtakes the line."
+  },
+  {
+    "id": "ad-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which is true about $f(x)=2x+10$ and $g(x)=3\\cdot2^x$ for $x\\ge0$?",
+    "choices": [
+      "Both are increasing",
+      "Both have a constant rate of change",
+      "g has an x-intercept",
+      "f has a horizontal asymptote"
+    ],
+    "answer": "Both are increasing",
+    "hint": "Think about the graphs.",
+    "solution": "f has slope 2; g multiplies by 2 each step; both rise.",
+    "explanation": "Only f has a constant rate; g has no x-intercept; g has the asymptote."
+  },
+  {
+    "id": "ad-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "An exponential function passes through $(0,3)$ and $(2,12)$. Write it. Enter like $5\\cdot3^x$ as 5*3^x.",
+    "answer": "3*2^x",
+    "acceptedAnswers": [
+      "3*2^x",
+      "3(2)^x",
+      "3(2^x)",
+      "f(x)=3*2^x",
+      "f(x)=3(2)^x"
+    ],
+    "hint": "Start 3; ratio over two steps is 4.",
+    "solution": "$b^2=4\\Rightarrow b=2$, so $f(x)=3\\cdot2^x$.",
+    "explanation": "Use the y-intercept as a and solve for b."
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "wcn-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "An arithmetic sequence is $4,9,14,\\dots$ Find the 10th term.",
+    "answer": 49,
+    "hint": "d = 5, so f(10) = 4 + 5·9.",
+    "solution": "$4+5(9)=49$.",
+    "explanation": "Arithmetic explicit rule: f(n)=f(1)+d(n−1)."
+  },
+  {
+    "id": "wcn-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A geometric sequence is $3,6,12,\\dots$ Find the 8th term.",
+    "answer": 384,
+    "hint": "Ratio is 2; f(8)=3·2^7.",
+    "solution": "$3\\cdot2^7=3\\cdot128=384$.",
+    "explanation": "Geometric explicit rule: f(n)=f(1)·r^(n−1)."
+  },
+  {
+    "id": "wcn-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which describes $2,6,18,54,\\dots$?",
+    "choices": [
+      "Geometric with ratio 3",
+      "Arithmetic with difference 4",
+      "Arithmetic with difference 3",
+      "Neither arithmetic nor geometric"
+    ],
+    "answer": "Geometric with ratio 3",
+    "hint": "Divide consecutive terms.",
+    "solution": "$6\\div2=18\\div6=54\\div18=3$.",
+    "explanation": "A constant ratio identifies a geometric sequence."
+  },
+  {
+    "id": "wcn-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Write an explicit rule for the arithmetic sequence $7,12,17,\\dots$ with $f(1)=7$. Enter like $7+5(n-1)$ or $5n+2$.",
+    "answer": "5n+2",
+    "acceptedAnswers": [
+      "5n+2",
+      "2+5n",
+      "7+5(n-1)",
+      "7+5n-5",
+      "f(n)=5n+2",
+      "f(n)=7+5(n-1)"
+    ],
+    "hint": "The common difference is 5.",
+    "solution": "$f(n)=7+5(n-1)=5n+2$.",
+    "explanation": "Start plus difference times (n−1)."
+  }
+]

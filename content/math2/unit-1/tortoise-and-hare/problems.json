@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tah-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Evaluate $2^8$.",
+    "answer": 256,
+    "hint": "Multiply 2 by itself 8 times.",
+    "solution": "$2^8=256$.",
+    "explanation": "Compare $8^2=64$: the exponential is already far larger."
+  },
+  {
+    "id": "tah-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "A table has $y$-values $3,6,12,24$ for consecutive $x$. What type of function is it?",
+    "choices": [
+      "Linear",
+      "Quadratic",
+      "Exponential",
+      "Constant"
+    ],
+    "answer": "Exponential",
+    "hint": "Compare ratios of consecutive values.",
+    "solution": "$6/3=12/6=24/12=2$, a constant ratio.",
+    "explanation": "Differences $3,6,12$ are not constant, so it is not linear; second differences $3,6$ are not constant, so not quadratic."
+  },
+  {
+    "id": "tah-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "For $n>4$, what is the smallest whole number $n$ with $2^n>n^2$?",
+    "answer": 5,
+    "hint": "$2^4=4^2$. Try $n=5$.",
+    "solution": "$2^5=32>25=5^2$.",
+    "explanation": "The two are equal at $n=2$ and $n=4$; after $n=4$ the exponential stays larger."
+  },
+  {
+    "id": "tah-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "For large $n$, which grows faster: $n^2$ or $2^n$?",
+    "choices": [
+      "$n^2$",
+      "$2^n$",
+      "They stay equal",
+      "Neither grows"
+    ],
+    "answer": "$2^n$",
+    "hint": "Exponentials multiply by a constant factor.",
+    "solution": "$2^n$ eventually exceeds $n^2$ and the gap keeps widening.",
+    "explanation": "Repeated multiplication outpaces repeated addition of growing amounts."
+  }
+]

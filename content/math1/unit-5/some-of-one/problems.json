@@ -1,0 +1,54 @@
+[
+  {
+    "id": "so-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "How many solutions does $y=2x+3$, $y=2x-5$ have?",
+    "choices": [
+      "One",
+      "Two",
+      "None",
+      "Infinitely many"
+    ],
+    "answer": "None",
+    "hint": "Compare slopes and intercepts.",
+    "solution": "Same slope $2$, different intercepts $3$ and $-5$: parallel lines.",
+    "explanation": "Parallel lines never meet."
+  },
+  {
+    "id": "so-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "How many solutions does $2x+4y=8$, $x+2y=4$ have?",
+    "choices": [
+      "One",
+      "None",
+      "Exactly two",
+      "Infinitely many"
+    ],
+    "answer": "Infinitely many",
+    "hint": "Multiply the second equation by 2.",
+    "solution": "$2(x+2y)=2(4)$ gives $2x+4y=8$, the same line.",
+    "explanation": "Equivalent equations share every solution."
+  },
+  {
+    "id": "so-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "For which value of $k$ does $y=3x+1$, $y=kx+4$ have no solution?",
+    "answer": 3,
+    "hint": "Parallel lines have equal slopes.",
+    "solution": "Slopes must match: $k=3$. The intercepts $1$ and $4$ differ, so no solution.",
+    "explanation": "Same slope with different intercepts gives parallel lines."
+  },
+  {
+    "id": "so-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "For which value of $c$ does $4x-2y=6$, $y=2x-c$ have infinitely many solutions?",
+    "answer": 3,
+    "hint": "Solve the first equation for $y$.",
+    "solution": "$-2y=-4x+6\\Rightarrow y=2x-3$. Match $y=2x-c$: $c=3$.",
+    "explanation": "Identical slope and intercept means the same line."
+  }
+]

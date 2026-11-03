@@ -2,20 +2,21 @@
 @import "katex/dist/katex.min.css";
 
 :root {
-  --ink: #1c2430;
-  --ink-soft: #4a5568;
-  --paper: #f3efe6;
-  --paper-deep: #e7e0d2;
-  --line: #cfc5b4;
-  --accent: #0f6e56;
-  --accent-deep: #0a5340;
-  --accent-soft: #d7efe6;
+  --ink: #152018;
+  --ink-soft: #44554a;
+  --paper: #eef3ee;
+  --paper-deep: #dde7df;
+  --line: #c2d0c6;
+  --accent: #1f7a4d;
+  --accent-deep: #145c39;
+  --accent-soft: #d7eddf;
   --warn: #9a3412;
   --warn-soft: #fde8dc;
   --ok: #166534;
   --ok-soft: #dcfce7;
-  --surface: #fffdf8;
-  --shadow: 0 18px 50px rgba(28, 36, 48, 0.08);
+  --surface: #f7fbf8;
+  --shadow: 0 20px 55px rgba(21, 32, 24, 0.1);
+  --hero-ink: #0f1c14;
 }
 
 @theme inline {
@@ -49,9 +50,9 @@ body {
   min-height: 100%;
   color: var(--ink);
   background:
-    radial-gradient(circle at 12% 18%, rgba(15, 110, 86, 0.08), transparent 32%),
-    radial-gradient(circle at 88% 8%, rgba(154, 52, 18, 0.07), transparent 28%),
-    linear-gradient(180deg, #f7f2e8 0%, var(--paper) 45%, #ebe4d6 100%);
+    radial-gradient(circle at 8% 12%, rgba(31, 122, 77, 0.12), transparent 34%),
+    radial-gradient(circle at 92% 6%, rgba(45, 90, 120, 0.08), transparent 30%),
+    linear-gradient(180deg, #f4f8f5 0%, var(--paper) 48%, #e5ece7 100%);
   background-attachment: fixed;
   font-family: var(--font-plex), "IBM Plex Sans", sans-serif;
 }
@@ -61,12 +62,12 @@ body::before {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  opacity: 0.35;
+  opacity: 0.28;
   background-image:
-    linear-gradient(rgba(28, 36, 48, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(28, 36, 48, 0.03) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: linear-gradient(180deg, black, transparent 90%);
+    linear-gradient(rgba(21, 32, 24, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 32, 24, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, black, transparent 88%);
 }
 
 a {
@@ -124,11 +125,29 @@ a {
 @keyframes rise-in {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -145,9 +164,34 @@ a {
 }
 
 .animate-rise {
-  animation: rise-in 0.45s ease both;
+  animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade {
+  animation: fade-in 0.7s ease both;
+}
+
+.animate-draw {
+  transform-origin: left center;
+  animation: draw-line 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-ok {
   animation: pop-ok 0.35s ease both;
+}
+
+.delay-1 {
+  animation-delay: 0.08s;
+}
+
+.delay-2 {
+  animation-delay: 0.16s;
+}
+
+.delay-3 {
+  animation-delay: 0.24s;
+}
+
+.delay-4 {
+  animation-delay: 0.32s;
 }

@@ -1,0 +1,60 @@
+[
+  {
+    "id": "mtm-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Which describes $y=-2(x-1)^2+3$?",
+    "choices": [
+      "Opens up, vertex $(1,3)$",
+      "Opens down, vertex $(1,3)$",
+      "Opens down, vertex $(-1,3)$",
+      "Opens up, vertex $(-1,-3)$"
+    ],
+    "answer": "Opens down, vertex $(1,3)$",
+    "hint": "Sign of $a$ gives direction.",
+    "solution": "$a=-2<0$, $h=1$, $k=3$.",
+    "explanation": "The vertex is a maximum."
+  },
+  {
+    "id": "mtm-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Evaluate $y=-\\frac12x^2$ at $x=4$.",
+    "answer": -8,
+    "hint": "Square first.",
+    "solution": "$-\\frac12(16)=-8$.",
+    "explanation": "$x^2=16$, then multiply by $-\\frac12$."
+  },
+  {
+    "id": "mtm-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write the equation of the parabola with vertex $(0,0)$ that is reflected over the $x$-axis and stretched vertically by 3. Enter like $-3x^2$.",
+    "answer": "-3x^2",
+    "acceptedAnswers": [
+      "-3x^2",
+      "-3*x^2",
+      "y=-3x^2",
+      "-(3x^2)"
+    ],
+    "hint": "Reflection makes $a$ negative.",
+    "solution": "$y=-3x^2$.",
+    "explanation": "$|a|=3$ stretches; the minus sign reflects."
+  },
+  {
+    "id": "mtm-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "Compared with $y=x^2$, the graph of $y=0.25x^2$ is:",
+    "choices": [
+      "Narrower",
+      "Wider",
+      "Reflected",
+      "Shifted up"
+    ],
+    "answer": "Wider",
+    "hint": "Compare $|a|$ with 1.",
+    "solution": "$0<0.25<1$, so a vertical compression.",
+    "explanation": "Outputs are one quarter as large, so it is wider."
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "uc-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "You bisect an $80^\\circ$ angle. What is the measure of each resulting angle (degrees)?",
+    "answer": 40,
+    "hint": "Divide by 2.",
+    "solution": "$80/2=40$.",
+    "explanation": "A bisector creates two congruent angles."
+  },
+  {
+    "id": "uc-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "The perpendicular bisector of $\\overline{AB}$ is the set of points that are:",
+    "choices": [
+      "Equidistant from $A$ and $B$",
+      "Twice as far from $A$ as $B$",
+      "On the same side as $A$",
+      "Exactly 1 unit from $A$"
+    ],
+    "answer": "Equidistant from $A$ and $B$",
+    "hint": "Both arcs use the same radius.",
+    "solution": "Each point on the bisector is the same distance from $A$ and $B$.",
+    "explanation": "Equal radii justify the construction."
+  },
+  {
+    "id": "uc-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "$AB=14$ cm and $M$ is the midpoint. What is $AM$ in cm?",
+    "answer": 7,
+    "hint": "Midpoint cuts the segment in half.",
+    "solution": "$14/2=7$.",
+    "explanation": "The perpendicular bisector passes through the midpoint."
+  },
+  {
+    "id": "uc-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "To construct an equilateral triangle on $\\overline{AB}$ you should:",
+    "choices": [
+      "Draw circles centered at $A$ and $B$ each with radius $AB$ and use an intersection as the third vertex",
+      "Draw one circle with radius $\\tfrac12 AB$",
+      "Bisect $\\overline{AB}$ only",
+      "Copy a $90^\\circ$ angle at $A$"
+    ],
+    "answer": "Draw circles centered at $A$ and $B$ each with radius $AB$ and use an intersection as the third vertex",
+    "hint": "All three sides must equal $AB$.",
+    "solution": "Third vertex is distance $AB$ from both $A$ and $B$.",
+    "explanation": "The radii guarantee equal sides."
+  }
+]

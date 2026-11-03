@@ -1,0 +1,56 @@
+[
+  {
+    "id": "mihm-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "You can spend at most $\\$50$. Each item costs $\\$5$ plus a one-time $\\$12$ fee: $5x+12\\le50$. What is the greatest whole number of items?",
+    "answer": 7,
+    "hint": "Solve and round down.",
+    "solution": "$5x\\le38\\Rightarrow x\\le7.6$, so $7$.",
+    "explanation": "Whole-item contexts require rounding down."
+  },
+  {
+    "id": "mihm-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Which inequality represents \"at least 15 points\"?",
+    "choices": [
+      "p ≥ 15",
+      "p ≤ 15",
+      "p > 15",
+      "p < 15"
+    ],
+    "answer": "p ≥ 15",
+    "hint": "At least includes 15 and anything greater.",
+    "solution": "$p\\ge15$.",
+    "explanation": "\"At least\" means greater than or equal to."
+  },
+  {
+    "id": "mihm-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Solve $-3x+1<10$. What is the smallest integer solution?",
+    "answer": -2,
+    "hint": "Flip the sign when dividing by −3.",
+    "solution": "$-3x<9\\Rightarrow x>-3$; smallest integer is $-2$.",
+    "explanation": "x > −3 does not include −3."
+  },
+  {
+    "id": "mihm-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "A $\\$50$ budget: tickets cost $\\$8$ each plus a $\\$10$ fee. Write an inequality for $t$ tickets. Enter like 5t+2<=30.",
+    "answer": "8t+10<=50",
+    "acceptedAnswers": [
+      "8t+10<=50",
+      "8t+10≤50",
+      "10+8t<=50",
+      "10+8t≤50",
+      "50>=8t+10",
+      "50≥8t+10"
+    ],
+    "hint": "Total cost must be at most 50.",
+    "solution": "$8t+10\\le50$.",
+    "explanation": "Cost expression on one side, budget on the other."
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ct-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Two triangles have two pairs of congruent sides and the congruent angles between them. Which criterion applies?",
+    "choices": [
+      "SSS",
+      "SAS",
+      "ASA",
+      "HL"
+    ],
+    "answer": "SAS",
+    "hint": "The angle is between the two sides.",
+    "solution": "Two sides and the included angle is SAS.",
+    "explanation": "The angle must be included."
+  },
+  {
+    "id": "ct-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Which is NOT a valid triangle congruence criterion?",
+    "choices": [
+      "SSS",
+      "ASA",
+      "AAS",
+      "SSA"
+    ],
+    "answer": "SSA",
+    "hint": "The angle is not between the two sides.",
+    "solution": "SSA can produce two different triangles.",
+    "explanation": "SSA is the ambiguous case."
+  },
+  {
+    "id": "ct-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Two right triangles are congruent by HL with hypotenuse 13 and one leg 5. What is the other leg?",
+    "answer": 12,
+    "hint": "Use the Pythagorean theorem.",
+    "solution": "$\\sqrt{169-25}=12$.",
+    "explanation": "Congruent triangles have equal corresponding legs."
+  },
+  {
+    "id": "ct-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "$\\triangle ABC\\cong\\triangle DEF$, $AB=2x+1$, $DE=11$. Find $x$.",
+    "answer": 5,
+    "hint": "Corresponding sides are equal.",
+    "solution": "$2x+1=11\\Rightarrow x=5$.",
+    "explanation": "Congruent triangles have equal corresponding sides."
+  }
+]

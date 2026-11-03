@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tb-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Which point is a solution of $y\\ge 2x-1$ and $y<-x+6$?",
+    "choices": [
+      "$(0,7)$",
+      "$(1,1)$",
+      "$(3,2)$",
+      "$(4,0)$"
+    ],
+    "answer": "$(1,1)$",
+    "hint": "Test each point in both inequalities.",
+    "solution": "$(1,1)$: $1\\ge1$ and $1<5$. $(0,7)$ fails $7<6$. $(3,2)$ fails $2\\ge5$. $(4,0)$ fails $0\\ge7$.",
+    "explanation": "A point must satisfy every inequality in the system."
+  },
+  {
+    "id": "tb-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A bake sale can have at most 12 items: $x+y\\le 12$. If there are 5 brownies ($x=5$), what is the greatest number of cookies $y$?",
+    "answer": 7,
+    "hint": "Substitute $x=5$.",
+    "solution": "$5+y\\le12 \\Rightarrow y\\le7$, so the max is 7.",
+    "explanation": "One inequality gives an upper limit for the other variable."
+  },
+  {
+    "id": "tb-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Notebooks ($x$) and pens ($y$) must satisfy $x+y\\le12$ and $3x+2y\\le24$. If $y=0$, what is the greatest possible $x$?",
+    "answer": 8,
+    "hint": "Find the limit from each inequality and take the smaller.",
+    "solution": "First: $x\\le12$. Second: $3x\\le24\\Rightarrow x\\le8$. Both must hold, so $x\\le8$.",
+    "explanation": "The tighter constraint controls the solution."
+  },
+  {
+    "id": "tb-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "In a graph of $y\\le 3x+1$, the boundary line should be:",
+    "choices": [
+      "Dashed, shade above",
+      "Solid, shade below",
+      "Dashed, shade below",
+      "Solid, shade above"
+    ],
+    "answer": "Solid, shade below",
+    "hint": "$\\le$ includes the line; $y$ less than means below.",
+    "solution": "$\\le$ gives a solid line and $y\\le\\dots$ shades below the line.",
+    "explanation": "Symbol tells line style; direction tells shading."
+  }
+]

@@ -1,10 +1,12 @@
 "use client";
 
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function PendingActions() {
   const router = useRouter();
+  const { update } = useSession();
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -12,29 +14,24 @@ export function PendingActions() {
     setLoading(true);
     setMessage("");
     try {
-      const response = await fetch("/api/auth/refresh", { method: "POST" });
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || "Could not refresh");
-      }
-      if (data.user.status === "approved") {
-        router.push("/math1");
+      const session = await update();
+      const status = session?.user?.status;
+      if (status === "approved") {
+        router.push("/learning");
         router.refresh();
         return;
       }
-      setMessage(`Still ${data.user.status}. Ask an admin to accept you.`);
+      setMessage(
+        status
+          ? `Still ${status}. Ask an admin to accept you.`
+          : "Could not refresh your status.",
+      );
       router.refresh();
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Could not refresh");
     } finally {
       setLoading(false);
     }
-  }
-
-  async function logout() {
-    await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/");
-    router.refresh();
   }
 
   return (
@@ -50,7 +47,7 @@ export function PendingActions() {
         </button>
         <button
           type="button"
-          onClick={() => void logout()}
+          onClick={() => void signOut({ callbackUrl: "/" })}
           className="rounded-xl border border-line px-4 py-2.5 text-sm hover:bg-paper-deep"
         >
           Sign out

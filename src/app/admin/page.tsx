@@ -12,8 +12,8 @@ export default function AdminPage() {
         Approve access
       </h1>
       <p className="mt-3 text-ink-soft">
-        Students can sign up freely. Accept an account here to unlock Math 1/2
-        lessons and classwork.
+        Students can sign up with email, Google, or GitHub. Accept an account
+        here to unlock Math 1/2 lessons and classwork.
       </p>
       <div className="mt-8">
         <AdminUsersClient />

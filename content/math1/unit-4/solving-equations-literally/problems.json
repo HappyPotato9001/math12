@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sel-1",
+    "label": "Classwork 1",
+    "type": "expression",
+    "prompt": "Solve $P=2\\ell+2w$ for $w$. Enter like $(A-b)/3$.",
+    "answer": "(P-2l)/2",
+    "acceptedAnswers": [
+      "(P-2l)/2",
+      "P/2-l",
+      "w=(P-2l)/2",
+      "w=P/2-l",
+      "(p-2l)/2",
+      "(P-2*l)/2"
+    ],
+    "hint": "Subtract 2ℓ, then divide by 2.",
+    "solution": "$w=\\dfrac{P-2\\ell}{2}$.",
+    "explanation": "Undo the addition, then undo multiplication by 2."
+  },
+  {
+    "id": "sel-2",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Solve $d=rt$ for $t$. Enter like $a/b$.",
+    "answer": "d/r",
+    "acceptedAnswers": [
+      "d/r",
+      "t=d/r"
+    ],
+    "hint": "Divide both sides by r.",
+    "solution": "$t=\\dfrac dr$.",
+    "explanation": "Inverse of multiplication is division."
+  },
+  {
+    "id": "sel-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Solve $3x+2y=12$ for $y$, then find $y$ when $x=2$.",
+    "answer": 3,
+    "hint": "y = (12 − 3x) ÷ 2.",
+    "solution": "$y=\\dfrac{12-3x}{2}$; at $x=2$: $\\dfrac{6}{2}=3$.",
+    "explanation": "Rearranging first makes evaluating easier."
+  },
+  {
+    "id": "sel-4",
+    "label": "Classwork 4",
+    "type": "multiple-choice",
+    "prompt": "Solve $V=\\ell wh$ for $h$.",
+    "choices": [
+      "h = V/(ℓw)",
+      "h = Vℓw",
+      "h = ℓw/V",
+      "h = V − ℓw"
+    ],
+    "answer": "h = V/(ℓw)",
+    "hint": "Divide by the other factors.",
+    "solution": "$h=\\dfrac{V}{\\ell w}$.",
+    "explanation": "Division undoes multiplication by ℓ and w."
+  }
+]

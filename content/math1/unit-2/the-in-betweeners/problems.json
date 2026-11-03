@@ -1,0 +1,48 @@
+[
+  {
+    "id": "itb-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A linear function has $f(0)=10$ and $f(4)=30$. Find $f(1)$.",
+    "answer": 15,
+    "hint": "Slope = 20 ÷ 4.",
+    "solution": "Slope $=5$, so $f(1)=10+5=15$.",
+    "explanation": "Linear change is the same per unit."
+  },
+  {
+    "id": "itb-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "An exponential function with positive values has $f(0)=5$ and $f(2)=45$. Find $f(1)$.",
+    "answer": 15,
+    "hint": "b² = 45 ÷ 5.",
+    "solution": "$b^2=9\\Rightarrow b=3$, so $f(1)=5\\cdot3=15$.",
+    "explanation": "Geometric mean: √(5·45)=15."
+  },
+  {
+    "id": "itb-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "For an exponential function, the output halfway between two inputs is found by:",
+    "choices": [
+      "Taking the geometric mean (square root of the product) of the two outputs",
+      "Averaging the two outputs",
+      "Adding the two outputs",
+      "Subtracting the two outputs"
+    ],
+    "answer": "Taking the geometric mean (square root of the product) of the two outputs",
+    "hint": "Exponentials use multiplication.",
+    "solution": "Equal input steps multiply by equal factors, so the middle output is √(y₁·y₂).",
+    "explanation": "Averaging would only work for linear functions."
+  },
+  {
+    "id": "itb-4",
+    "label": "Classwork 4",
+    "type": "numeric",
+    "prompt": "An exponential function $f(x)=2\\cdot b^x$ has $f(4)=32$. Find $f(3)$.",
+    "answer": 16,
+    "hint": "Solve for b first.",
+    "solution": "$2b^4=32\\Rightarrow b^4=16\\Rightarrow b=2$. So $f(3)=2\\cdot8=16$.",
+    "explanation": "Find b, then evaluate."
+  }
+]

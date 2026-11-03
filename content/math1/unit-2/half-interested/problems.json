@@ -1,0 +1,56 @@
+[
+  {
+    "id": "hi-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A sample of 200 g has half-life 5 days. How many grams remain after 15 days?",
+    "answer": 25,
+    "hint": "15 days is 3 half-lives.",
+    "solution": "$200\\left(\\tfrac12\\right)^3=25$.",
+    "explanation": "Divide by 2 three times: 100, 50, 25."
+  },
+  {
+    "id": "hi-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A drug has 64 mg and half-life 2 hours. How many hours until 8 mg remain?",
+    "answer": 6,
+    "hint": "How many halvings take 64 down to 8?",
+    "solution": "$64\\to32\\to16\\to8$ is 3 halvings, so $3\\cdot2=6$ hours.",
+    "explanation": "Count halvings, then multiply by the half-life."
+  },
+  {
+    "id": "hi-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write a model for 100 units with half-life 4 hours. Enter like $50\\cdot(1/2)^{t/3}$ as 50*(1/2)^(t/3).",
+    "answer": "100*(1/2)^(t/4)",
+    "acceptedAnswers": [
+      "100*(1/2)^(t/4)",
+      "100(1/2)^(t/4)",
+      "100*(0.5)^(t/4)",
+      "100(0.5)^(t/4)",
+      "f(t)=100*(1/2)^(t/4)",
+      "f(t)=100(1/2)^(t/4)"
+    ],
+    "hint": "Start amount times (1/2) raised to t divided by half-life.",
+    "solution": "$f(t)=100\\left(\\tfrac12\\right)^{t/4}$.",
+    "explanation": "The exponent t/4 counts half-lives."
+  },
+  {
+    "id": "hi-4",
+    "label": "Classwork 4",
+    "type": "multiple-choice",
+    "prompt": "Half-life is the time it takes for a quantity to:",
+    "choices": [
+      "Decrease to half its value",
+      "Decrease to zero",
+      "Lose 1 unit",
+      "Double"
+    ],
+    "answer": "Decrease to half its value",
+    "hint": "Think \"half\".",
+    "solution": "Half-life is the time to reach half the current amount.",
+    "explanation": "It does not reach zero; exponential decay approaches zero."
+  }
+]

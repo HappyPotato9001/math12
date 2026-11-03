@@ -1,0 +1,66 @@
+[
+  {
+    "id": "iii-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Solve $x^2=-9$.",
+    "choices": [
+      "$\\pm3i$",
+      "$\\pm3$",
+      "$3i$ only",
+      "No solution in any number system"
+    ],
+    "answer": "$\\pm3i$",
+    "hint": "$\\sqrt{-9}=3i$.",
+    "solution": "$x=\\pm3i$.",
+    "explanation": "Check: $(3i)^2=9i^2=-9$."
+  },
+  {
+    "id": "iii-2",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Solve $x^2+16=0$. Enter like $-4i,4i$.",
+    "answer": "-4i,4i",
+    "acceptedAnswers": [
+      "-4i,4i",
+      "4i,-4i",
+      "-4i, 4i",
+      "±4i"
+    ],
+    "hint": "$x^2=-16$.",
+    "solution": "$x=\\pm4i$.",
+    "explanation": "$\\sqrt{-16}=4i$."
+  },
+  {
+    "id": "iii-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Solve $x^2-2x+5=0$. Enter like $1-2i,1+2i$.",
+    "answer": "1-2i,1+2i",
+    "acceptedAnswers": [
+      "1-2i,1+2i",
+      "1+2i,1-2i",
+      "1-2i, 1+2i",
+      "1±2i"
+    ],
+    "hint": "Use the quadratic formula; $D=-16$.",
+    "solution": "$x=\\frac{2\\pm4i}{2}=1\\pm2i$.",
+    "explanation": "Conjugate pair."
+  },
+  {
+    "id": "iii-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "Which equation has non-real solutions?",
+    "choices": [
+      "$x^2-4=0$",
+      "$x^2+4x+1=0$",
+      "$x^2+4x+5=0$",
+      "$x^2-x-1=0$"
+    ],
+    "answer": "$x^2+4x+5=0$",
+    "hint": "Find which discriminant is negative.",
+    "solution": "$D=16-20=-4<0$ for $x^2+4x+5=0$.",
+    "explanation": "The others have $D=16,12,5$ (positive)."
+  }
+]

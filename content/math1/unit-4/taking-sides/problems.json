@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ts-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "For what $x$ is $5x-2=2x+10$?",
+    "answer": 4,
+    "hint": "Collect x terms.",
+    "solution": "$3x=12\\Rightarrow x=4$.",
+    "explanation": "The solution of the equation is the boundary."
+  },
+  {
+    "id": "ts-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "What is the smallest integer $x$ with $4x+1>2x+9$?",
+    "answer": 5,
+    "hint": "Solve 2x > 8.",
+    "solution": "$x>4$, so the smallest integer is $5$.",
+    "explanation": "x > 4 does not include 4."
+  },
+  {
+    "id": "ts-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Solve $3x+4<2x+10$.",
+    "choices": [
+      "x < 6",
+      "x > 6",
+      "x < 14",
+      "x > 14"
+    ],
+    "answer": "x < 6",
+    "hint": "Subtract 2x and 4.",
+    "solution": "$x<6$.",
+    "explanation": "Check x = 0: 4 < 10."
+  },
+  {
+    "id": "ts-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Solve $7-2x\\ge1$. Enter like $x<5$ or x<5.",
+    "answer": "x<=3",
+    "acceptedAnswers": [
+      "x<=3",
+      "x≤3",
+      "3>=x",
+      "3≥x"
+    ],
+    "hint": "Divide by −2 and flip the sign.",
+    "solution": "$-2x\\ge-6\\Rightarrow x\\le3$.",
+    "explanation": "Dividing by a negative reverses the inequality."
+  }
+]

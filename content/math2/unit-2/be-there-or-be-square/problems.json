@@ -1,0 +1,53 @@
+[
+  {
+    "id": "btb-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Write $y=x^2-8x+3$ as $(x-h)^2+k$. What is $k$?",
+    "answer": -13,
+    "hint": "Add and subtract $(8/2)^2=16$.",
+    "solution": "$(x-4)^2-16+3=(x-4)^2-13$.",
+    "explanation": "So $k=-13$."
+  },
+  {
+    "id": "btb-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "What is the vertex of $y=(x+2)^2-5$?",
+    "choices": [
+      "$(2,-5)$",
+      "$(-2,-5)$",
+      "$(-2,5)$",
+      "$(2,5)$"
+    ],
+    "answer": "$(-2,-5)$",
+    "hint": "$x+2=x-(-2)$.",
+    "solution": "$h=-2$, $k=-5$.",
+    "explanation": "Opposite sign inside, same sign outside."
+  },
+  {
+    "id": "btb-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Complete the square for $y=x^2+10x+4$. Enter like $(x+5)^2-21$.",
+    "answer": "(x+5)^2-21",
+    "acceptedAnswers": [
+      "(x+5)^2-21",
+      "(x+5)^2+-21",
+      "-21+(x+5)^2"
+    ],
+    "hint": "Add and subtract $25$.",
+    "solution": "$(x^2+10x+25)-25+4=(x+5)^2-21$.",
+    "explanation": "Vertex $(-5,-21)$."
+  },
+  {
+    "id": "btb-4",
+    "label": "Takeaways",
+    "type": "numeric",
+    "prompt": "What is the minimum value of $y=x^2-6x+5$?",
+    "answer": -4,
+    "hint": "Complete the square first.",
+    "solution": "$y=(x-3)^2-4$, so the minimum is $-4$.",
+    "explanation": "It occurs at $x=3$."
+  }
+]

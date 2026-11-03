@@ -1,0 +1,56 @@
+[
+  {
+    "id": "wdm-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Insert 3 arithmetic means between $2$ and $18$. What is the common difference?",
+    "answer": 4,
+    "hint": "Number of steps is 4.",
+    "solution": "$d=\\dfrac{18-2}{4}=4$.",
+    "explanation": "k = 3 missing terms means k + 1 = 4 steps."
+  },
+  {
+    "id": "wdm-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Insert 4 arithmetic means between $3$ and $28$. What is the second mean (the third term overall)?",
+    "answer": 13,
+    "hint": "There are 5 steps, so d = (28 − 3) ÷ 5. Then add d twice to the first term.",
+    "solution": "$d=\\dfrac{28-3}{5}=5$. Terms: $3,8,13,18,23,28$. The second mean is $13$.",
+    "explanation": "Five steps from 3 to 28 gives d = 5."
+  },
+  {
+    "id": "wdm-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Fill in the missing terms of the arithmetic sequence $5,\\ \\_,\\ \\_,\\ \\_,\\ 41$.",
+    "choices": [
+      "14, 23, 32",
+      "10, 20, 30",
+      "12, 21, 30",
+      "11, 17, 23"
+    ],
+    "answer": "14, 23, 32",
+    "hint": "d = (41 − 5) ÷ 4.",
+    "solution": "$d=36\\div4=9$, so $5,14,23,32,41$.",
+    "explanation": "Equal steps of 9 reach 41 on the fourth step."
+  },
+  {
+    "id": "wdm-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "An arithmetic sequence has $f(1)=10$ and $f(5)=2$. Write the explicit rule. Enter like $5+3n$.",
+    "answer": "12-2n",
+    "acceptedAnswers": [
+      "12-2n",
+      "-2n+12",
+      "10-2(n-1)",
+      "10-2n+2",
+      "f(n)=12-2n",
+      "f(n)=10-2(n-1)"
+    ],
+    "hint": "Find d using 4 steps from f(1) to f(5).",
+    "solution": "$d=\\dfrac{2-10}{4}=-2$, so $f(n)=10-2(n-1)=12-2n$.",
+    "explanation": "A negative difference gives a decreasing arithmetic sequence."
+  }
+]

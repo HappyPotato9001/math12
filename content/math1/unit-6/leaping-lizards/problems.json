@@ -1,0 +1,48 @@
+[
+  {
+    "id": "ll-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Which is NOT a rigid motion?",
+    "choices": [
+      "Translation",
+      "Reflection",
+      "Rotation",
+      "Dilation by scale factor 2"
+    ],
+    "answer": "Dilation by scale factor 2",
+    "hint": "Which one changes lengths?",
+    "solution": "A dilation by 2 doubles lengths.",
+    "explanation": "Rigid motions preserve distance."
+  },
+  {
+    "id": "ll-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Translate $(3,-2)$ by $(x,y)\\to(x+4,y+5)$. What is the $y$-coordinate of the image?",
+    "answer": 3,
+    "hint": "Add 5 to the $y$-coordinate.",
+    "solution": "$-2+5=3$. The image is $(7,3)$.",
+    "explanation": "Translations add the same amounts to every point."
+  },
+  {
+    "id": "ll-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Segment $AB$ has length 7. After a rotation, what is the length of $A'B'$?",
+    "answer": 7,
+    "hint": "Rotations preserve distance.",
+    "solution": "$A'B'=AB=7$.",
+    "explanation": "Rigid motions are isometries."
+  },
+  {
+    "id": "ll-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "An angle measures $52^\\circ$ and is reflected over a line. What does the image angle measure (in degrees)?",
+    "answer": 52,
+    "hint": "Reflections preserve angle measure.",
+    "solution": "The image angle is $52^\\circ$.",
+    "explanation": "Angle measure is preserved by all rigid motions."
+  }
+]

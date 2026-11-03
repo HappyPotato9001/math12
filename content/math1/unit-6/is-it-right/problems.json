@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ir-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Which rigid motion reverses orientation?",
+    "choices": [
+      "Translation",
+      "Rotation",
+      "Reflection",
+      "None of them"
+    ],
+    "answer": "Reflection",
+    "hint": "Think of a mirror image.",
+    "solution": "A reflection flips the figure so vertex order reverses.",
+    "explanation": "Translations and rotations keep orientation."
+  },
+  {
+    "id": "ir-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "$\\angle ABC=90^\\circ$. After a $90^\\circ$ rotation, what does $\\angle A'B'C'$ measure (in degrees)?",
+    "answer": 90,
+    "hint": "Rotations preserve angles.",
+    "solution": "The measure stays $90^\\circ$.",
+    "explanation": "Right angles are preserved."
+  },
+  {
+    "id": "ir-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "A right triangle has vertices $(0,0),(4,0),(0,3)$. After a rigid motion, what is the length of the hypotenuse of the image?",
+    "answer": 5,
+    "hint": "Find the original hypotenuse.",
+    "solution": "$\\sqrt{4^2+3^2}=5$, and rigid motions preserve length.",
+    "explanation": "Lengths do not change."
+  },
+  {
+    "id": "ir-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "A triangle with sides $6,8,10$ is reflected. Is the image a right triangle?",
+    "choices": [
+      "Yes, side lengths are unchanged so $6^2+8^2=10^2$ still holds",
+      "No, reflections change angles",
+      "No, reflections change side lengths",
+      "Only if it is reflected over the $x$-axis"
+    ],
+    "answer": "Yes, side lengths are unchanged so $6^2+8^2=10^2$ still holds",
+    "hint": "Do reflections change side lengths?",
+    "solution": "Reflections preserve lengths and angles, so it remains a right triangle.",
+    "explanation": "Rigid motions preserve shape."
+  }
+]

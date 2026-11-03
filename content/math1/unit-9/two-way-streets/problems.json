@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tw-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Grade 9: 30 like pizza, 10 do not. Grade 10: 20 like, 40 do not. How many students were surveyed?",
+    "answer": 100,
+    "hint": "Add all four cells.",
+    "solution": "$30+10+20+40=100$.",
+    "explanation": "The grand total is the denominator for joint relative frequencies."
+  },
+  {
+    "id": "tw-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Using the same table, what is the joint relative frequency of \"grade 10 and likes pizza\"? (decimal)",
+    "answer": 0.2,
+    "acceptedAnswers": [
+      "1/5"
+    ],
+    "hint": "Divide the cell by the grand total.",
+    "solution": "$20/100=0.2$.",
+    "explanation": "Joint relative frequency uses the grand total."
+  },
+  {
+    "id": "tw-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Using the same table, what proportion of grade 9 students like pizza? (decimal)",
+    "answer": 0.75,
+    "acceptedAnswers": [
+      "3/4"
+    ],
+    "hint": "Use the grade 9 row total as the denominator.",
+    "solution": "$30/40=0.75$.",
+    "explanation": "Conditional frequency uses the row total."
+  },
+  {
+    "id": "tw-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Using the same table, which statement is best supported?",
+    "choices": [
+      "Grade 9 students are more likely to like pizza (75% vs about 33%)",
+      "Grade 10 students are more likely to like pizza",
+      "There is no association",
+      "Exactly half of all students like pizza in each grade"
+    ],
+    "answer": "Grade 9 students are more likely to like pizza (75% vs about 33%)",
+    "hint": "Compare the conditional percentages.",
+    "solution": "$30/40=75\\%$ for grade 9 and $20/60\\approx33\\%$ for grade 10.",
+    "explanation": "Different conditional rates show association."
+  }
+]

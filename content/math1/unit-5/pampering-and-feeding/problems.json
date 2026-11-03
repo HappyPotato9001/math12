@@ -1,0 +1,52 @@
+[
+  {
+    "id": "pf-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A groomer has 130 minutes for 5 pets. A bath takes 20 min and a trim takes 30 min. How many trims?",
+    "answer": 3,
+    "hint": "Use $b+t=5$ and $20b+30t=130$.",
+    "solution": "$100+10t=130\\Rightarrow t=3$.",
+    "explanation": "Time and count constraints together determine the schedule."
+  },
+  {
+    "id": "pf-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Food A has 8 g protein per cup and Food B has 12 g per cup. A 6-cup mix has 60 g protein. How many cups of Food B?",
+    "answer": 3,
+    "hint": "$a+b=6$ and $8a+12b=60$.",
+    "solution": "$8(6-b)+12b=60\\Rightarrow48+4b=60\\Rightarrow b=3$.",
+    "explanation": "Resource mixes are systems with a count and a total."
+  },
+  {
+    "id": "pf-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Baths take 20 min and trims take 30 min. Write total minutes for $b$ baths and $t$ trims. Enter like $20b+30t$.",
+    "answer": "20b+30t",
+    "acceptedAnswers": [
+      "20b+30t",
+      "30t+20b"
+    ],
+    "hint": "Rate times quantity for each type, then add.",
+    "solution": "$20b+30t$.",
+    "explanation": "Each term is time per pet times number of pets."
+  },
+  {
+    "id": "pf-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "A kennel has 9 dogs and uses 14 cups of food. Each large dog gets 2 cups and each small dog gets 1 cup. How many large dogs?",
+    "choices": [
+      "3",
+      "4",
+      "5",
+      "6"
+    ],
+    "answer": "5",
+    "hint": "$l+s=9$ and $2l+s=14$.",
+    "solution": "Subtract: $l=5$, so $s=4$. Check: $10+4=14$.",
+    "explanation": "Subtracting equations eliminates $s$."
+  }
+]

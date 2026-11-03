@@ -1,0 +1,52 @@
+[
+  {
+    "id": "tng-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the $x$-intercept of $f(x)=2x-6$.",
+    "answer": 3,
+    "hint": "Set f(x) = 0.",
+    "solution": "$2x-6=0\\Rightarrow x=3$.",
+    "explanation": "An x-intercept is where the output is 0."
+  },
+  {
+    "id": "tng-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Find the $y$-intercept of $g(x)=5\\cdot2^x$.",
+    "answer": 5,
+    "hint": "Evaluate at x = 0.",
+    "solution": "$g(0)=5\\cdot2^0=5$.",
+    "explanation": "Any nonzero base to the 0 power is 1."
+  },
+  {
+    "id": "tng-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which describes $f(x)=-3x+4$?",
+    "choices": [
+      "Decreasing for all x",
+      "Increasing for all x",
+      "Increasing then decreasing",
+      "Constant"
+    ],
+    "answer": "Decreasing for all x",
+    "hint": "Look at the sign of the slope.",
+    "solution": "The slope is $-3<0$.",
+    "explanation": "Negative slope means decreasing."
+  },
+  {
+    "id": "tng-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Name the horizontal asymptote of $g(x)=3\\cdot2^x$. Enter like $y=7$.",
+    "answer": "y=0",
+    "acceptedAnswers": [
+      "y=0",
+      "0"
+    ],
+    "hint": "What value does 2^x approach as x becomes very negative?",
+    "solution": "As $x\\to-\\infty$, $2^x\\to0$, so $g(x)\\to0$. Asymptote: $y=0$.",
+    "explanation": "Exponential functions of this form level off at the x-axis on one side."
+  }
+]

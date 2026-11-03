@@ -1,0 +1,59 @@
+[
+  {
+    "id": "luq-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "A parabola opens up with vertex $(2,-3)$. Which equation matches?",
+    "choices": [
+      "$y=(x-2)^2-3$",
+      "$y=(x+2)^2-3$",
+      "$y=-(x-2)^2-3$",
+      "$y=(x-2)^2+3$"
+    ],
+    "answer": "$y=(x-2)^2-3$",
+    "hint": "Vertex form $a(x-h)^2+k$.",
+    "solution": "$h=2,k=-3,a>0$.",
+    "explanation": "Other choices have a wrong sign or direction."
+  },
+  {
+    "id": "luq-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "A parabola opens down with vertex $(-1,4)$. Which equation matches?",
+    "choices": [
+      "$y=-(x+1)^2+4$",
+      "$y=-(x-1)^2+4$",
+      "$y=(x+1)^2+4$",
+      "$y=-(x+1)^2-4$"
+    ],
+    "answer": "$y=-(x+1)^2+4$",
+    "hint": "Down means $a<0$; $h=-1$ gives $x+1$.",
+    "solution": "$y=-(x+1)^2+4$.",
+    "explanation": "The maximum value is 4 at $x=-1$."
+  },
+  {
+    "id": "luq-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "How many $x$-intercepts does $y=(x-2)^2-3$ have?",
+    "answer": 2,
+    "hint": "Up-opening with vertex below the axis.",
+    "solution": "$(x-2)^2=3$ gives $x=2\\pm\\sqrt3$.",
+    "explanation": "Two real solutions."
+  },
+  {
+    "id": "luq-4",
+    "label": "Takeaways",
+    "type": "expression",
+    "prompt": "A parabola has vertex $(1,2)$ and passes through $(2,5)$. Write its equation in vertex form. Enter like $3(x-1)^2+2$.",
+    "answer": "3(x-1)^2+2",
+    "acceptedAnswers": [
+      "3(x-1)^2+2",
+      "3x^2-6x+5",
+      "2+3(x-1)^2"
+    ],
+    "hint": "Substitute the point into $a(x-1)^2+2$.",
+    "solution": "$5=a(1)^2+2$ so $a=3$: $y=3(x-1)^2+2$.",
+    "explanation": "Expanded: $y=3x^2-6x+5$."
+  }
+]

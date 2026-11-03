@@ -1,0 +1,60 @@
+[
+  {
+    "id": "cs-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Most efficient way to solve $x^2-49=0$?",
+    "choices": [
+      "Square roots (isolate $x^2$)",
+      "Quadratic formula",
+      "Graphing",
+      "Completing the square"
+    ],
+    "answer": "Square roots (isolate $x^2$)",
+    "hint": "No $x$ term.",
+    "solution": "$x^2=49$, $x=\\pm7$.",
+    "explanation": "Isolating $x^2$ takes one step."
+  },
+  {
+    "id": "cs-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Most efficient way to solve $x^2-5x+6=0$?",
+    "choices": [
+      "Factoring",
+      "Quadratic formula",
+      "Graphing",
+      "Square roots"
+    ],
+    "answer": "Factoring",
+    "hint": "Find numbers with product 6 and sum $-5$.",
+    "solution": "$(x-2)(x-3)=0$.",
+    "explanation": "$-2$ and $-3$ work."
+  },
+  {
+    "id": "cs-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Solve $3x^2-12=0$. Enter solutions like $-2,2$ (smaller first).",
+    "answer": "-2,2",
+    "acceptedAnswers": [
+      "-2,2",
+      "-2, 2",
+      "2,-2",
+      "±2"
+    ],
+    "hint": "Isolate $x^2$.",
+    "solution": "$x^2=4$, so $x=\\pm2$.",
+    "explanation": "Divide by 3, then take square roots."
+  },
+  {
+    "id": "cs-4",
+    "label": "Takeaways",
+    "type": "numeric",
+    "prompt": "Solve $2x^2+3x-5=0$. What is the larger solution?",
+    "answer": 1,
+    "hint": "Factor as $(2x+5)(x-1)$ or use the formula.",
+    "solution": "$x=1$ or $x=-\\frac52$.",
+    "explanation": "Discriminant $9+40=49$, $x=\\frac{-3\\pm7}{4}$."
+  }
+]

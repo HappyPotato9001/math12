@@ -1,0 +1,56 @@
+[
+  {
+    "id": "ww-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Tank fills 4 gal/min for 10 min, then 2 gal/min. How many gallons at $t=15$ minutes?",
+    "answer": 50,
+    "hint": "40 gallons at t = 10; then 5 more minutes at 2 gal/min.",
+    "solution": "$40+2(5)=50$.",
+    "explanation": "Add contributions from each rate."
+  },
+  {
+    "id": "ww-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Same tank. At what time $t$ (minutes) does it contain 80 gallons?",
+    "answer": 30,
+    "hint": "After t = 10, solve 40 + 2(t − 10) = 80.",
+    "solution": "$2(t-10)=40\\Rightarrow t=30$.",
+    "explanation": "Use the second piece since 80 > 40."
+  },
+  {
+    "id": "ww-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "The graph of this tank's volume, after $t=10$:",
+    "choices": [
+      "Keeps increasing but is less steep",
+      "Starts decreasing",
+      "Becomes horizontal",
+      "Becomes steeper"
+    ],
+    "answer": "Keeps increasing but is less steep",
+    "hint": "Compare the slopes 4 and 2.",
+    "solution": "Water is still being added, just more slowly.",
+    "explanation": "A positive but smaller slope gives a less steep rise."
+  },
+  {
+    "id": "ww-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "For $t\\ge10$, write $V(t)$ (it equals 40 at $t=10$ and then adds 2 gal/min). Enter like $5+3(t-1)$.",
+    "answer": "40+2(t-10)",
+    "acceptedAnswers": [
+      "40+2(t-10)",
+      "2t+20",
+      "20+2t",
+      "40+2t-20",
+      "v(t)=40+2(t-10)",
+      "V(t)=2t+20"
+    ],
+    "hint": "Start from V(10)=40.",
+    "solution": "$V(t)=40+2(t-10)=2t+20$.",
+    "explanation": "Point-slope style: previous value plus new rate times elapsed time."
+  }
+]

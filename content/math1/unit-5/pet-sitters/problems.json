@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ps-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A sitter makes 10 visits and earns 96 dollars. Dog walks pay 12 dollars and cat visits pay 8 dollars. How many dog walks did she do?",
+    "answer": 4,
+    "hint": "Use $w+c=10$ and $12w+8c=96$.",
+    "solution": "Substitute $c=10-w$: $12w+8(10-w)=96$, so $4w=16$ and $w=4$.",
+    "explanation": "Count and money constraints together form a system with one solution."
+  },
+  {
+    "id": "ps-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Sitter A charges 15 dollars plus 6 dollars per hour. Sitter B charges 5 dollars plus 8 dollars per hour. After how many hours do they cost the same?",
+    "answer": 5,
+    "hint": "Set $15+6h=5+8h$.",
+    "solution": "$15+6h=5+8h \\Rightarrow 10=2h \\Rightarrow h=5$. Both cost 45 dollars.",
+    "explanation": "The solution of the system is where the two cost lines intersect."
+  },
+  {
+    "id": "ps-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "A sitter charges a 20-dollar fee plus 7 dollars per day. Write the total cost $C$ for $d$ days. Enter like $20+7d$.",
+    "answer": "20+7d",
+    "acceptedAnswers": [
+      "20+7d",
+      "7d+20",
+      "C=20+7d",
+      "C=7d+20"
+    ],
+    "hint": "Fixed fee plus rate times days.",
+    "solution": "$C=20+7d$.",
+    "explanation": "Flat fee is the intercept; per-day rate is the slope."
+  },
+  {
+    "id": "ps-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "A sitter cares for 6 pets: dogs ($d$) at 15 dollars each and cats ($c$) at 10 dollars each, for 75 dollars total. Which system models this?",
+    "choices": [
+      "$d+c=6$ and $15d+10c=75$",
+      "$d+c=75$ and $15d+10c=6$",
+      "$d+c=6$ and $10d+15c=75$",
+      "$d\\cdot c=6$ and $15d+10c=75$"
+    ],
+    "answer": "$d+c=6$ and $15d+10c=75$",
+    "hint": "One equation counts pets, the other adds money.",
+    "solution": "Counts: $d+c=6$. Money: $15d+10c=75$ (solution $d=3,c=3$).",
+    "explanation": "Match each coefficient with the correct price."
+  }
+]

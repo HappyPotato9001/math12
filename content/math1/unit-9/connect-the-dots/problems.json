@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cd-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "As hours studied increase, test scores tend to increase. This is:",
+    "choices": [
+      "Positive association",
+      "Negative association",
+      "No association",
+      "Nonlinear only"
+    ],
+    "answer": "Positive association",
+    "hint": "Both variables move upward together.",
+    "solution": "Increasing together means positive association.",
+    "explanation": "Direction is read from the trend."
+  },
+  {
+    "id": "cd-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A line of best fit is $\\hat y=2.5x+40$. Predict $y$ when $x=8$.",
+    "answer": 60,
+    "hint": "Substitute $x=8$.",
+    "solution": "$2.5(8)+40=60$.",
+    "explanation": "The line is used to make predictions."
+  },
+  {
+    "id": "cd-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which correlation coefficient describes the strongest negative linear relationship?",
+    "choices": [
+      "$r=0.95$",
+      "$r=-0.92$",
+      "$r=-0.15$",
+      "$r=0$"
+    ],
+    "answer": "$r=-0.92$",
+    "hint": "Negative sign, size near 1.",
+    "solution": "$-0.92$ is negative and close to $-1$.",
+    "explanation": "Strength is $|r|$."
+  },
+  {
+    "id": "cd-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "A student's actual score is 72. The line predicts 68. What is the residual?",
+    "answer": 4,
+    "hint": "Residual = actual $-$ predicted.",
+    "solution": "$72-68=4$.",
+    "explanation": "A positive residual means the point is above the line."
+  }
+]

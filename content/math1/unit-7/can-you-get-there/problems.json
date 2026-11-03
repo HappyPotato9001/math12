@@ -1,0 +1,54 @@
+[
+  {
+    "id": "cg-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Two figures are congruent if:",
+    "choices": [
+      "A sequence of rigid motions maps one onto the other",
+      "They have the same perimeter only",
+      "A dilation maps one onto the other",
+      "They look similar"
+    ],
+    "answer": "A sequence of rigid motions maps one onto the other",
+    "hint": "Which transformations keep size and shape?",
+    "solution": "That is the definition of congruence.",
+    "explanation": "Rigid motions preserve size and shape."
+  },
+  {
+    "id": "cg-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "$\\triangle ABC\\cong\\triangle DEF$ and $m\\angle B=48^\\circ$. What is $m\\angle E$ (degrees)?",
+    "answer": 48,
+    "hint": "$B$ corresponds to $E$.",
+    "solution": "Corresponding angles are equal: $48^\\circ$.",
+    "explanation": "Congruence preserves angle measure."
+  },
+  {
+    "id": "cg-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "$A(0,0),B(3,0),C(0,4)$ is translated by $(x+5,y+2)$. What is the perimeter of the image?",
+    "answer": 12,
+    "hint": "Find the original side lengths.",
+    "solution": "Sides $3,4,5$; perimeter $12$, unchanged.",
+    "explanation": "Rigid motions preserve perimeter."
+  },
+  {
+    "id": "cg-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Is a triangle with sides $3,4,5$ congruent to one with sides $6,8,10$?",
+    "choices": [
+      "Yes, both are right triangles",
+      "No, a dilation is needed, not a rigid motion",
+      "Yes, they have the same angles",
+      "Only if rotated"
+    ],
+    "answer": "No, a dilation is needed, not a rigid motion",
+    "hint": "Compare corresponding side lengths.",
+    "solution": "Corresponding sides differ, so no rigid motion maps one onto the other.",
+    "explanation": "Same shape but different size means similar, not congruent."
+  }
+]

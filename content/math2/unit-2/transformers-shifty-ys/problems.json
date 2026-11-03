@@ -1,0 +1,54 @@
+[
+  {
+    "id": "sys-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "What is the vertex of $y=(x-3)^2+2$?",
+    "choices": [
+      "$(3,2)$",
+      "$(-3,2)$",
+      "$(3,-2)$",
+      "$(2,3)$"
+    ],
+    "answer": "$(3,2)$",
+    "hint": "Vertex form is $(h,k)$ with $(x-h)$.",
+    "solution": "$h=3,k=2$.",
+    "explanation": "$x-3$ means right 3, $+2$ means up 2."
+  },
+  {
+    "id": "sys-2",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Write the equation of $y=x^2$ shifted left 4 and down 1. Enter like $(x+4)^2-1$.",
+    "answer": "(x+4)^2-1",
+    "acceptedAnswers": [
+      "(x+4)^2-1",
+      "(x+4)^2+-1",
+      "-1+(x+4)^2",
+      "(x+4)^2 - 1"
+    ],
+    "hint": "Left 4 means replace $x$ with $x+4$.",
+    "solution": "$y=(x+4)^2-1$.",
+    "explanation": "Vertex is $(-4,-1)$."
+  },
+  {
+    "id": "sys-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "The parabola $y=(x+5)^2-7$ has axis of symmetry $x=?$",
+    "answer": -5,
+    "hint": "Axis is $x=h$.",
+    "solution": "$x+5=x-(-5)$, so $h=-5$.",
+    "explanation": "Vertex $(-5,-7)$."
+  },
+  {
+    "id": "sys-4",
+    "label": "Takeaways",
+    "type": "numeric",
+    "prompt": "Find the $y$-intercept of $y=(x-3)^2+2$.",
+    "answer": 11,
+    "hint": "Set $x=0$.",
+    "solution": "$(0-3)^2+2=9+2=11$.",
+    "explanation": "The $y$-intercept is $(0,11)$."
+  }
+]

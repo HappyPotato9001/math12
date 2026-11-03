@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tbd-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the discriminant of $2x^2-3x-5=0$.",
+    "answer": 49,
+    "hint": "$a=2,b=-3,c=-5$.",
+    "solution": "$9-4(2)(-5)=9+40=49$.",
+    "explanation": "Positive perfect square: two rational solutions."
+  },
+  {
+    "id": "tbd-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "If $D=0$, how many real solutions are there?",
+    "choices": [
+      "0",
+      "1 (repeated)",
+      "2",
+      "Infinitely many"
+    ],
+    "answer": "1 (repeated)",
+    "hint": "The $\\pm\\sqrt D$ term vanishes.",
+    "solution": "$x=\\frac{-b}{2a}$ only.",
+    "explanation": "The vertex touches the $x$-axis."
+  },
+  {
+    "id": "tbd-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "For what value of $k$ does $x^2+6x+k=0$ have exactly one real solution?",
+    "answer": 9,
+    "hint": "Set $36-4k=0$.",
+    "solution": "$k=9$.",
+    "explanation": "Then $x^2+6x+9=(x+3)^2$."
+  },
+  {
+    "id": "tbd-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "What does $x^2+2x+5=0$ have?",
+    "choices": [
+      "Two real solutions",
+      "One real solution",
+      "No real solutions",
+      "Infinitely many"
+    ],
+    "answer": "No real solutions",
+    "hint": "Compute $D$.",
+    "solution": "$D=4-20=-16<0$.",
+    "explanation": "Negative discriminant means no real roots."
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "mu-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A regular hexagon is inscribed in a circle of radius 6. What is its side length?",
+    "answer": 6,
+    "hint": "Center and two adjacent vertices form an equilateral triangle.",
+    "solution": "Each side equals the radius: 6.",
+    "explanation": "Central angle is $360^\\circ/6=60^\\circ$."
+  },
+  {
+    "id": "mu-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "The circumcenter of a triangle is found as the intersection of:",
+    "choices": [
+      "Angle bisectors",
+      "Perpendicular bisectors of the sides",
+      "Altitudes only",
+      "Medians"
+    ],
+    "answer": "Perpendicular bisectors of the sides",
+    "hint": "It is equidistant from all three vertices.",
+    "solution": "Points on each perpendicular bisector are equidistant from two vertices; the intersection is equidistant from all three.",
+    "explanation": "The circumcenter is the center of the circumscribed circle."
+  },
+  {
+    "id": "mu-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "A transversal makes a $65^\\circ$ angle with line $\\ell$. To construct a parallel line through $P$ by copying a corresponding angle, what angle measure (degrees) must you copy?",
+    "answer": 65,
+    "hint": "Corresponding angles are congruent for parallel lines.",
+    "solution": "Copy the same $65^\\circ$ angle at $P$.",
+    "explanation": "Congruent corresponding angles mean parallel lines."
+  },
+  {
+    "id": "mu-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "The incenter of a triangle is the intersection of:",
+    "choices": [
+      "Perpendicular bisectors",
+      "Angle bisectors",
+      "Parallel lines",
+      "Midsegments"
+    ],
+    "answer": "Angle bisectors",
+    "hint": "It is the center of the inscribed circle.",
+    "solution": "Points on an angle bisector are equidistant from the angle's sides.",
+    "explanation": "The incenter is equidistant from all three sides."
+  }
+]

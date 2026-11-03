@@ -1,0 +1,57 @@
+[
+  {
+    "id": "bg-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Class A has mean 78 and Class B has mean 71. What is the difference in means?",
+    "answer": 7,
+    "hint": "Subtract.",
+    "solution": "$78-71=7$.",
+    "explanation": "State which is greater in context."
+  },
+  {
+    "id": "bg-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "Which measure of spread is usually paired with the median?",
+    "choices": [
+      "Standard deviation",
+      "IQR",
+      "Mean",
+      "Mode"
+    ],
+    "answer": "IQR",
+    "hint": "Both are resistant to outliers.",
+    "solution": "Median goes with IQR; mean goes with standard deviation.",
+    "explanation": "Pair center with its matching spread."
+  },
+  {
+    "id": "bg-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Team A has median 14 and Team B median 20; both have IQR 4. The gap between medians is how many IQRs?",
+    "answer": 1.5,
+    "acceptedAnswers": [
+      "3/2"
+    ],
+    "hint": "Gap $=6$; divide by IQR.",
+    "solution": "$6/4=1.5$.",
+    "explanation": "Measuring the gap in spreads shows how much the distributions overlap."
+  },
+  {
+    "id": "bg-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Data set A: $10,10,10,10,10$. Data set B: $0,5,10,15,20$. Which is true?",
+    "choices": [
+      "Same mean, B has greater spread",
+      "Same mean, A has greater spread",
+      "A has the greater mean",
+      "B has the smaller range"
+    ],
+    "answer": "Same mean, B has greater spread",
+    "hint": "Compute both means and ranges.",
+    "solution": "Both means are 10; the range of A is 0 and of B is 20.",
+    "explanation": "Centers can match while spreads differ."
+  }
+]

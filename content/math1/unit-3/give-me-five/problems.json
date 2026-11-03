@@ -1,0 +1,61 @@
+[
+  {
+    "id": "gm5-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A table has $x=0,1,2,3$ and $y=4,7,10,13$. Find $y$ when $x=10$.",
+    "answer": 34,
+    "hint": "Rate 3, start 4.",
+    "solution": "$y=3(10)+4=34$.",
+    "explanation": "Use the equation rather than extending the table."
+  },
+  {
+    "id": "gm5-2",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Write the equation for the same table ($x=0,1,2,3$; $y=4,7,10,13$). Enter like $y=2x+1$.",
+    "answer": "y=3x+4",
+    "acceptedAnswers": [
+      "y=3x+4",
+      "y=4+3x",
+      "3x+4",
+      "4+3x",
+      "f(x)=3x+4"
+    ],
+    "hint": "Starting value and constant difference.",
+    "solution": "$y=3x+4$.",
+    "explanation": "Intercept 4 and slope 3."
+  },
+  {
+    "id": "gm5-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which equation has $y$-intercept $5$ and passes through $(2,11)$?",
+    "choices": [
+      "y=3x+5",
+      "y=5x+3",
+      "y=6x+5",
+      "y=x+9"
+    ],
+    "answer": "y=3x+5",
+    "hint": "Slope = (11 − 5) ÷ 2.",
+    "solution": "Slope $=3$, so $y=3x+5$.",
+    "explanation": "Check: 3(2)+5 = 11."
+  },
+  {
+    "id": "gm5-4",
+    "label": "Classwork 4",
+    "type": "multiple-choice",
+    "prompt": "Which table shows exponential growth?",
+    "choices": [
+      "x: 0,1,2,3 → y: 2,6,18,54",
+      "x: 0,1,2,3 → y: 2,4,6,8",
+      "x: 0,1,2,3 → y: 5,10,15,20",
+      "x: 0,1,2,3 → y: 1,2,4,7"
+    ],
+    "answer": "x: 0,1,2,3 → y: 2,6,18,54",
+    "hint": "Look for a constant ratio.",
+    "solution": "$6/2=18/6=54/18=3$.",
+    "explanation": "The others have constant differences or neither pattern."
+  }
+]

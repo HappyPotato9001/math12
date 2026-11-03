@@ -1,0 +1,48 @@
+[
+  {
+    "id": "lf-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Translate $(2,1)$ by $(x+3,y)$, then by $(x,y-4)$. What is the $y$-coordinate of the final image?",
+    "answer": -3,
+    "hint": "Apply the first move, then the second.",
+    "solution": "$(2,1)\\to(5,1)\\to(5,-3)$.",
+    "explanation": "Translations compose by adding their shifts."
+  },
+  {
+    "id": "lf-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Reflect $(3,5)$ over the $x$-axis, then over the $y$-axis. What is the sum of the coordinates of the final image?",
+    "answer": -8,
+    "hint": "$(3,5)\\to(3,-5)\\to(-3,-5)$.",
+    "solution": "The final image is $(-3,-5)$, with sum $-8$.",
+    "explanation": "Two perpendicular reflections equal a $180^\\circ$ rotation."
+  },
+  {
+    "id": "lf-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Reflect over the $y$-axis ($x=0$), then over the line $x=4$. The composition is a translation of how many units?",
+    "answer": 8,
+    "hint": "It is twice the distance between the parallel lines.",
+    "solution": "$2\\cdot4=8$ units right.",
+    "explanation": "Two parallel reflections give a translation of twice the gap."
+  },
+  {
+    "id": "lf-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Reflecting over the $x$-axis and then the $y$-axis is the same as:",
+    "choices": [
+      "A translation",
+      "A $180^\\circ$ rotation about the origin",
+      "A $90^\\circ$ rotation about the origin",
+      "A reflection over $y=x$"
+    ],
+    "answer": "A $180^\\circ$ rotation about the origin",
+    "hint": "$(x,y)\\to(x,-y)\\to(-x,-y)$.",
+    "solution": "The composition sends $(x,y)$ to $(-x,-y)$.",
+    "explanation": "Perpendicular reflections compose to a half-turn."
+  }
+]

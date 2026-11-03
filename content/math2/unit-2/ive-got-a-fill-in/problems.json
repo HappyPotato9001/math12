@@ -1,0 +1,47 @@
+[
+  {
+    "id": "fif-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "$y=2(x-3)^2+k$ passes through $(4,5)$. Find $k$.",
+    "answer": 3,
+    "hint": "Substitute $x=4$, $y=5$.",
+    "solution": "$5=2(1)^2+k$ so $k=3$.",
+    "explanation": "$2+k=5$."
+  },
+  {
+    "id": "fif-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "$y=(x-2)^2+1$ equals $x^2+bx+c$. Find $c$.",
+    "answer": 5,
+    "hint": "Expand $(x-2)^2$.",
+    "solution": "$x^2-4x+4+1=x^2-4x+5$, so $c=5$.",
+    "explanation": "Here $b=-4$ and $c=5$."
+  },
+  {
+    "id": "fif-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write $y=(x-1)(x-5)$ in vertex form. Enter like $(x-3)^2-4$.",
+    "answer": "(x-3)^2-4",
+    "acceptedAnswers": [
+      "(x-3)^2-4",
+      "(x-3)^2+-4",
+      "-4+(x-3)^2"
+    ],
+    "hint": "Vertex $x$ is the midpoint of the roots.",
+    "solution": "$x^2-6x+5=(x-3)^2-4$.",
+    "explanation": "Midpoint of 1 and 5 is 3; $y(3)=(2)(-2)=-4$."
+  },
+  {
+    "id": "fif-4",
+    "label": "Takeaways",
+    "type": "numeric",
+    "prompt": "$y=a(x-1)(x-5)$ passes through $(0,10)$. Find $a$.",
+    "answer": 2,
+    "hint": "Set $x=0$.",
+    "solution": "$10=a(-1)(-5)=5a$, so $a=2$.",
+    "explanation": "The $y$-intercept equals $5a$."
+  }
+]

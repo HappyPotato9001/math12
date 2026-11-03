@@ -1,0 +1,59 @@
+[
+  {
+    "id": "sl-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the slope of the line through $(1,2)$ and $(5,10)$.",
+    "answer": 2,
+    "hint": "Rise over run.",
+    "solution": "$(10-2)/(5-1)=2$.",
+    "explanation": "Slope is the rate of change."
+  },
+  {
+    "id": "sl-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "What is the slope of a line parallel to $y=-3x+4$?",
+    "answer": -3,
+    "hint": "Parallel lines share a slope.",
+    "solution": "The slope is $-3$.",
+    "explanation": "Equal slopes mean parallel (different intercepts)."
+  },
+  {
+    "id": "sl-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "What is the slope of a line perpendicular to $y=\\frac23x-1$?",
+    "answer": -1.5,
+    "acceptedAnswers": [
+      "-3/2"
+    ],
+    "hint": "Flip and negate: $-\\frac32$.",
+    "solution": "$-\\frac{3}{2}=-1.5$.",
+    "explanation": "Perpendicular slopes multiply to $-1$."
+  },
+  {
+    "id": "sl-4",
+    "label": "Check",
+    "type": "expression",
+    "prompt": "Write the line through $(0,5)$ perpendicular to $y=2x+1$ in slope-intercept form.",
+    "answer": "y=-1/2x+5",
+    "acceptedAnswers": [
+      "y=-1/2x+5",
+      "y=-x/2+5",
+      "y=-0.5x+5",
+      "y=5-x/2",
+      "y=5-0.5x",
+      "-x/2+5",
+      "-0.5x+5",
+      "-1/2x+5",
+      "y=(-1/2)x+5",
+      "y=-(1/2)x+5",
+      "5-x/2",
+      "5-0.5x"
+    ],
+    "hint": "Perpendicular slope is $-\\frac12$; $(0,5)$ is the intercept.",
+    "solution": "$y=-\\frac12x+5$.",
+    "explanation": "Slope is $-\\frac12$ and the $y$-intercept is $5$."
+  }
+]

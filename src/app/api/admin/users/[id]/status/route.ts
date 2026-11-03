@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getSessionUser, setSessionCookie } from "@/lib/server/session";
-import { getUserById, setUserStatus, type UserStatus } from "@/lib/server/users";
+import { getSessionUser } from "@/lib/server/session";
+import { setUserStatus, type UserStatus } from "@/lib/server/users";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,11 +24,6 @@ export async function POST(request: Request, { params }: Params) {
     const updated = setUserStatus(id, status);
     if (!updated) {
       return NextResponse.json({ error: "User not found." }, { status: 404 });
-    }
-    // If admin somehow edits themselves, refresh cookie.
-    if (admin.id === id) {
-      const fresh = getUserById(id);
-      if (fresh) await setSessionCookie(fresh);
     }
     return NextResponse.json({ user: updated });
   } catch (error) {

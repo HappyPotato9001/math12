@@ -8,7 +8,13 @@ export function CourseView({ course }: { course: CourseMeta }) {
   return (
     <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:py-14">
       <div className="max-w-2xl">
-        <p className="text-sm font-medium uppercase tracking-[0.18em] text-accent">
+        <Link
+          href="/learning"
+          className="text-sm font-medium text-accent hover:underline"
+        >
+          ← Learning
+        </Link>
+        <p className="mt-3 text-sm font-medium uppercase tracking-[0.18em] text-accent">
           Textbook pathway
         </p>
         <h1 className="mt-2 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink sm:text-5xl">

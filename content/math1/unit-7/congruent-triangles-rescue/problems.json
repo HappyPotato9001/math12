@@ -1,0 +1,48 @@
+[
+  {
+    "id": "cr-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "$\\triangle ABC\\cong\\triangle DEF$, $m\\angle A=(3x+5)^\\circ$, $m\\angle D=50^\\circ$. Find $x$.",
+    "answer": 15,
+    "hint": "$A$ corresponds to $D$.",
+    "solution": "$3x+5=50\\Rightarrow x=15$.",
+    "explanation": "CPCTC lets you set corresponding angles equal."
+  },
+  {
+    "id": "cr-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "An isosceles triangle has a $40^\\circ$ apex angle. What is each base angle (degrees)?",
+    "answer": 70,
+    "hint": "Angles sum to $180^\\circ$ and base angles are equal.",
+    "solution": "$(180-40)/2=70$.",
+    "explanation": "Base angles of an isosceles triangle are congruent."
+  },
+  {
+    "id": "cr-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Why do we use CPCTC?",
+    "choices": [
+      "To prove triangles are congruent",
+      "To conclude corresponding parts are congruent after proving the triangles congruent",
+      "To show triangles are similar",
+      "To find area"
+    ],
+    "answer": "To conclude corresponding parts are congruent after proving the triangles congruent",
+    "hint": "Congruence comes first.",
+    "solution": "CPCTC is used after the triangles are shown congruent.",
+    "explanation": "It is a conclusion, not a method of proving congruence."
+  },
+  {
+    "id": "cr-4",
+    "label": "Check",
+    "type": "numeric",
+    "prompt": "To find the width of a lake, a surveyor builds a triangle on land congruent to one spanning the lake (by ASA). The matching side on land is 48 m. What is the lake width (m)?",
+    "answer": 48,
+    "hint": "Corresponding sides of congruent triangles are equal.",
+    "solution": "By CPCTC the lake width equals 48 m.",
+    "explanation": "Congruence lets you measure indirectly."
+  }
+]

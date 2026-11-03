@@ -1,38 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-
-type AuthUser = {
-  id: string;
-  name: string;
-  email: string;
-  role: "student" | "admin";
-  status: "pending" | "approved" | "rejected";
-};
+import { signOut, useSession } from "next-auth/react";
 
 export function AuthButtons() {
-  const router = useRouter();
-  const [user, setUser] = useState<AuthUser | null | undefined>(undefined);
+  const { data, status } = useSession();
 
-  useEffect(() => {
-    void fetch("/api/auth/me")
-      .then((response) => response.json())
-      .then((data) => setUser(data.user ?? null))
-      .catch(() => setUser(null));
-  }, []);
-
-  async function logout() {
-    await fetch("/api/auth/logout", { method: "POST" });
-    setUser(null);
-    router.push("/");
-    router.refresh();
-  }
-
-  if (user === undefined) {
+  if (status === "loading") {
     return <div className="h-9 w-24 rounded-md bg-paper-deep/60" />;
   }
+
+  const user = data?.user;
 
   if (!user) {
     return (
@@ -68,7 +46,7 @@ export function AuthButtons() {
       </span>
       <button
         type="button"
-        onClick={() => void logout()}
+        onClick={() => void signOut({ callbackUrl: "/" })}
         className="rounded-md px-2.5 py-2 text-ink-soft transition hover:bg-paper-deep hover:text-ink sm:px-3"
       >
         Sign out

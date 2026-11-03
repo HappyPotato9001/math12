@@ -1,0 +1,54 @@
+[
+  {
+    "id": "fdr-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A distance–time graph passes through $(1,4)$ and $(3,12)$ (hours, miles). What is the speed in mph?",
+    "answer": 4,
+    "hint": "Rise over run.",
+    "solution": "$\\dfrac{12-4}{3-1}=4$.",
+    "explanation": "Speed is the slope of the distance–time graph."
+  },
+  {
+    "id": "fdr-2",
+    "label": "Classwork 2",
+    "type": "multiple-choice",
+    "prompt": "On a distance-from-start vs. time graph, a horizontal segment means:",
+    "choices": [
+      "The object is not moving",
+      "The object is moving at constant speed",
+      "The object is speeding up",
+      "The object is returning to start"
+    ],
+    "answer": "The object is not moving",
+    "hint": "Distance isn't changing.",
+    "solution": "Slope zero means zero speed.",
+    "explanation": "Flat segments mean stopped."
+  },
+  {
+    "id": "fdr-3",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "A raft floats 3 mph for 2 hours, rests 1 hour, then floats 2 mph for 3 hours. What total distance does it travel (miles)?",
+    "answer": 12,
+    "hint": "Add distance for each segment.",
+    "solution": "$6+0+6=12$.",
+    "explanation": "Distance = rate × time for each piece."
+  },
+  {
+    "id": "fdr-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "A raft starts $5$ miles from the dock and drifts away at $2$ mph. Write $d(t)$ for its distance from the dock. Enter like $1+3t$.",
+    "answer": "5+2t",
+    "acceptedAnswers": [
+      "5+2t",
+      "2t+5",
+      "d(t)=5+2t",
+      "d(t)=2t+5"
+    ],
+    "hint": "Starting distance plus speed times time.",
+    "solution": "$d(t)=5+2t$.",
+    "explanation": "Initial position plus rate × time."
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "btc-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Find the average rate of change of $f(x)=x^2$ from $x=1$ to $x=3$.",
+    "answer": 4,
+    "hint": "Compute $\\frac{f(3)-f(1)}{3-1}$.",
+    "solution": "$\\frac{9-1}{2}=4$.",
+    "explanation": "Also $2a+h=2(1)+2=4$."
+  },
+  {
+    "id": "btc-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Find the average rate of change of $f(x)=2x^2+3x$ from $x=1$ to $x=3$.",
+    "answer": 11,
+    "hint": "$f(1)=5$ and $f(3)=27$.",
+    "solution": "$\\frac{27-5}{2}=11$.",
+    "explanation": "$f(3)=18+9=27$, $f(1)=2+3=5$."
+  },
+  {
+    "id": "btc-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Simplify the average rate of change of $f(x)=x^2$ from $x=a$ to $x=a+h$. Enter like $2a+h$.",
+    "answer": "2a+h",
+    "acceptedAnswers": [
+      "2a+h",
+      "h+2a",
+      "a*2+h",
+      "2*a+h"
+    ],
+    "hint": "Expand $(a+h)^2-a^2$ and divide by $h$.",
+    "solution": "$\\frac{2ah+h^2}{h}=2a+h$.",
+    "explanation": "As $h$ gets small, the rate approaches $2a$."
+  },
+  {
+    "id": "btc-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "$f(x)=x^2-4x$ has average rate of change $0$ from $x=0$ to $x=4$. What does this mean?",
+    "choices": [
+      "$f$ is constant on the interval",
+      "$f(0)=f(4)$, so the net change is zero",
+      "The vertex is at $x=0$",
+      "$f$ has no $x$-intercepts"
+    ],
+    "answer": "$f(0)=f(4)$, so the net change is zero",
+    "hint": "Compute $f(0)$ and $f(4)$.",
+    "solution": "$f(0)=0$ and $f(4)=16-16=0$.",
+    "explanation": "The function goes down then back up (vertex at $x=2$), but the endpoints match."
+  }
+]

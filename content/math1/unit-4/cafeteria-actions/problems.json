@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ca-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Solve $4x-3=2x+9$.",
+    "answer": 6,
+    "hint": "Subtract 2x, then add 3.",
+    "solution": "$2x-3=9\\Rightarrow2x=12\\Rightarrow x=6$.",
+    "explanation": "Collect variables on one side."
+  },
+  {
+    "id": "ca-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "Solve $5(x-2)=3x+4$.",
+    "answer": 7,
+    "hint": "Distribute first.",
+    "solution": "$5x-10=3x+4\\Rightarrow2x=14\\Rightarrow x=7$.",
+    "explanation": "Distribution then balance."
+  },
+  {
+    "id": "ca-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which step keeps $2x+6=14$ balanced and moves toward solving?",
+    "choices": [
+      "Subtract 6 from both sides",
+      "Subtract 6 from the left side only",
+      "Add 6 to both sides",
+      "Multiply the left side by 2"
+    ],
+    "answer": "Subtract 6 from both sides",
+    "hint": "Undo the +6 on both sides.",
+    "solution": "$2x=8$.",
+    "explanation": "Operations must be applied to both sides."
+  },
+  {
+    "id": "ca-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Subtract $3x$ from both sides of $7x+1=3x+13$. Enter the new equation like $2x+1=5$.",
+    "answer": "4x+1=13",
+    "acceptedAnswers": [
+      "4x+1=13",
+      "13=4x+1"
+    ],
+    "hint": "7x − 3x = 4x.",
+    "solution": "$4x+1=13$.",
+    "explanation": "Subtracting the same term from both sides gathers variables."
+  }
+]

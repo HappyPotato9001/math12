@@ -1,0 +1,54 @@
+[
+  {
+    "id": "sq-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "How many lines of symmetry does a square have?",
+    "answer": 4,
+    "hint": "Two diagonals and two lines through midpoints of opposite sides.",
+    "solution": "$2+2=4$.",
+    "explanation": "The square is the most symmetric quadrilateral."
+  },
+  {
+    "id": "sq-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "What is the smallest positive angle (in degrees) of rotation that maps a square onto itself?",
+    "answer": 90,
+    "hint": "A square has 4 equal positions in a full turn.",
+    "solution": "$360/4=90$.",
+    "explanation": "Rotational symmetry angle is $360^\\circ/n$."
+  },
+  {
+    "id": "sq-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "Which quadrilateral generally has NO line of symmetry?",
+    "choices": [
+      "Square",
+      "Rhombus",
+      "Rectangle",
+      "Parallelogram that is not a rectangle or rhombus"
+    ],
+    "answer": "Parallelogram that is not a rectangle or rhombus",
+    "hint": "Try flipping a slanted parallelogram.",
+    "solution": "A general parallelogram does not map onto itself under any reflection.",
+    "explanation": "It only has $180^\\circ$ rotational symmetry."
+  },
+  {
+    "id": "sq-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Which has exactly one line of symmetry?",
+    "choices": [
+      "Rectangle",
+      "Rhombus",
+      "Isosceles trapezoid",
+      "Square"
+    ],
+    "answer": "Isosceles trapezoid",
+    "hint": "The line passes through the midpoints of the parallel sides.",
+    "solution": "An isosceles trapezoid has one line, through the midpoints of its bases.",
+    "explanation": "Rectangles and rhombi have 2; squares have 4."
+  }
+]

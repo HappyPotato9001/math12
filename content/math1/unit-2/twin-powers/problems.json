@@ -1,0 +1,54 @@
+[
+  {
+    "id": "tp-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A culture doubles every hour. By what factor does it grow in 2 hours?",
+    "answer": 4,
+    "hint": "Multiply 2 by itself for each hour.",
+    "solution": "$2\\cdot2=4$.",
+    "explanation": "Two hours means two doublings."
+  },
+  {
+    "id": "tp-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "If $4^x=2^{kx}$ for all $x$, what is $k$?",
+    "answer": 2,
+    "hint": "Write 4 as a power of 2.",
+    "solution": "$4^x=(2^2)^x=2^{2x}$, so $k=2$.",
+    "explanation": "Power of a power: multiply exponents."
+  },
+  {
+    "id": "tp-3",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "How is the graph of $g(x)=\\left(\\tfrac12\\right)^x$ related to $f(x)=2^x$?",
+    "choices": [
+      "Reflection across the y-axis",
+      "Reflection across the x-axis",
+      "Shifted up 1 unit",
+      "They are identical"
+    ],
+    "answer": "Reflection across the y-axis",
+    "hint": "Rewrite $g(x)$ using base 2.",
+    "solution": "$g(x)=2^{-x}=f(-x)$.",
+    "explanation": "Replacing x with −x reflects across the y-axis."
+  },
+  {
+    "id": "tp-4",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Rewrite $\\left(\\tfrac13\\right)^x$ using base $3$. Enter like $5^{-x}$ as 5^(-x).",
+    "answer": "3^(-x)",
+    "acceptedAnswers": [
+      "3^(-x)",
+      "3^-x",
+      "1/3^x",
+      "3^(-1*x)"
+    ],
+    "hint": "One over 3 equals 3 to the −1.",
+    "solution": "$\\left(\\tfrac13\\right)^x=(3^{-1})^x=3^{-x}$.",
+    "explanation": "A reciprocal base becomes a negative exponent."
+  }
+]
