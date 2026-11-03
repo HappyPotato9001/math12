@@ -316,10 +316,6 @@ if (!me.user || me.user.status !== "approved") {
           continue;
         }
         const link = await checkAuthed(`${BASE}${pathOnly}`);
-        const linkOk =
-          link.status === 200 ||
-          ((link.status === 307 || link.status === 302) &&
-            !(link.location || "").includes("/login?"));
         // Allow redirects to other in-app pages
         const softOk =
           link.status === 200 ||

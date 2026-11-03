@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { Problem } from "@/lib/types";
 import { answersMatch } from "@/lib/answers";
@@ -29,16 +29,7 @@ export function PracticeDrill({
   const [feedback, setFeedback] = useState<FeedbackState>(null);
   const [revealed, setRevealed] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [progress, setProgress] = useState({
-    attempted: 0,
-    correct: 0,
-    streak: 0,
-    bestStreak: 0,
-  });
-
-  useEffect(() => {
-    setProgress(readTopicProgress(topicKey));
-  }, [topicKey]);
+  const [progress, setProgress] = useState(() => readTopicProgress(topicKey));
 
   const problem = problems[index];
   const answerValue = useMemo(() => {

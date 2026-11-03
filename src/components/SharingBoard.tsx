@@ -38,23 +38,29 @@ export function SharingBoard({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function load() {
-    const response = await fetch("/api/shares");
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Failed to load");
-    setPosts(Array.isArray(data.posts) ? data.posts : []);
-  }
-
   useEffect(() => {
     if (sessionStatus === "loading") return;
-    if (sessionStatus !== "authenticated") {
-      setPosts([]);
-      return;
+    if (sessionStatus !== "authenticated") return;
+    let cancelled = false;
+
+    async function load() {
+      try {
+        const response = await fetch("/api/shares");
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Failed to load");
+        if (!cancelled) setPosts(Array.isArray(data.posts) ? data.posts : []);
+      } catch (err) {
+        if (!cancelled) {
+          setPosts([]);
+          setError(err instanceof Error ? err.message : "Could not load posts");
+        }
+      }
     }
-    void load().catch((err) => {
-      setPosts([]);
-      setError(err instanceof Error ? err.message : "Could not load posts");
-    });
+
+    void load();
+    return () => {
+      cancelled = true;
+    };
   }, [sessionStatus]);
 
   async function onSubmit(event: FormEvent) {

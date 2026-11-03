@@ -31,10 +31,7 @@ function LiveAuthButtons() {
   const [me, setMe] = useState<MeUser | null>(null);
 
   useEffect(() => {
-    if (status !== "authenticated") {
-      setMe(null);
-      return;
-    }
+    if (status !== "authenticated") return;
     let cancelled = false;
     void fetch("/api/auth/me")
       .then((res) => res.json())
@@ -73,8 +70,9 @@ function LiveAuthButtons() {
     );
   }
 
-  const role = me?.role ?? user.role;
-  const userStatus = me?.status ?? user.status;
+  const role = status === "authenticated" ? (me?.role ?? user.role) : user.role;
+  const userStatus =
+    status === "authenticated" ? (me?.status ?? user.status) : user.status;
   const isAdmin = role === "admin" && userStatus === "approved";
 
   return (

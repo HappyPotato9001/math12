@@ -70,7 +70,8 @@ function adminEmails() {
 }
 
 export function toPublicUser(user: User): PublicUser {
-  const { passwordHash: _passwordHash, ...rest } = user;
+  const { passwordHash, ...rest } = user;
+  void passwordHash;
   return rest;
 }
 

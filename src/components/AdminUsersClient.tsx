@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type UserRow = {
   id: string;
@@ -23,26 +23,33 @@ export function AdminUsersClient() {
   const [loading, setLoading] = useState(true);
   const [busyId, setBusyId] = useState<string | null>(null);
 
-  const reload = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const response = await fetch("/api/admin/users");
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || "Could not load users");
-      }
-      setUsers(data.users);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not load users");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
   useEffect(() => {
-    void reload();
-  }, [reload]);
+    let cancelled = false;
+
+    async function loadUsers() {
+      setLoading(true);
+      setError("");
+      try {
+        const response = await fetch("/api/admin/users");
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "Could not load users");
+        }
+        if (!cancelled) setUsers(data.users);
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Could not load users");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+
+    void loadUsers();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const sorted = useMemo(
     () =>

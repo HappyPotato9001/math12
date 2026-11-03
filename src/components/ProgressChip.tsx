@@ -1,18 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { accuracyPercent, readTopicProgress } from "@/lib/progress";
 
 export function ProgressChip({ topicKey }: { topicKey: string }) {
-  const [label, setLabel] = useState("Not started");
-
-  useEffect(() => {
+  const label = useMemo(() => {
     const progress = readTopicProgress(topicKey);
-    if (progress.attempted === 0) {
-      setLabel("Not started");
-      return;
-    }
-    setLabel(`${accuracyPercent(progress)}% · ${progress.attempted} tries`);
+    return progress.attempted === 0
+      ? "Not started"
+      : `${accuracyPercent(progress)}% · ${progress.attempted} tries`;
   }, [topicKey]);
 
   return (
