@@ -16,7 +16,7 @@ type Props = {
 export function AuthForm({ mode, oauth }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get("next") || "/learning";
+  const nextPath = searchParams.get("next") || "/";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
