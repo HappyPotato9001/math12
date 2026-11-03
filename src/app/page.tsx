@@ -29,21 +29,21 @@ export default function Home() {
             Math 1/2
           </h1>
           <p className="animate-rise max-w-xl text-lg text-ink-soft sm:text-xl">
-            Follow the same units and lesson titles from class. Open the packet
-            PDF and do textbook-style classwork with instant feedback.
+            Sign up to request access. Once an admin accepts you, unlock the
+            same units and classwork from class with instant feedback.
           </p>
           <div className="animate-rise flex flex-wrap gap-3">
             <Link
-              href="/math1"
+              href="/signup"
               className="rounded-xl bg-accent px-5 py-3 text-sm font-medium text-white transition hover:bg-accent-deep"
             >
-              Math 1 units
+              Sign up
             </Link>
             <Link
-              href="/math2"
+              href="/login"
               className="rounded-xl border border-ink/15 bg-surface/80 px-5 py-3 text-sm font-medium text-ink transition hover:bg-paper-deep"
             >
-              Math 2 units
+              Sign in
             </Link>
           </div>
         </div>

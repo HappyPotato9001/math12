@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
+    "jose": "^6.2.15",
     "katex": "^0.19.1",
     "nanoid": "^6.0.2",
     "next": "16.4.4",

@@ -1,0 +1,167 @@
+import fs from "fs";
+import path from "path";
+import { randomBytes, scryptSync, timingSafeEqual } from "crypto";
+import { nanoid } from "nanoid";
+
+export type UserStatus = "pending" | "approved" | "rejected";
+export type UserRole = "student" | "admin";
+
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+  passwordHash: string;
+  status: UserStatus;
+  role: UserRole;
+  createdAt: string;
+};
+
+export type PublicUser = Omit<User, "passwordHash">;
+
+type Store = { users: User[] };
+
+const dataDir = path.join(process.cwd(), "data");
+const storePath = path.join(dataDir, "users.json");
+
+function emptyStore(): Store {
+  return { users: [] };
+}
+
+function ensureStore(): Store {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  if (!fs.existsSync(storePath)) {
+    const initial = emptyStore();
+    fs.writeFileSync(storePath, JSON.stringify(initial, null, 2));
+    return initial;
+  }
+  return JSON.parse(fs.readFileSync(storePath, "utf8")) as Store;
+}
+
+function writeStore(store: Store) {
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+  }
+  fs.writeFileSync(storePath, JSON.stringify(store, null, 2));
+}
+
+function normalizeEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
+function hashPassword(password: string) {
+  const salt = randomBytes(16).toString("hex");
+  const hash = scryptSync(password, salt, 64).toString("hex");
+  return `${salt}:${hash}`;
+}
+
+function verifyPassword(password: string, stored: string) {
+  const [salt, hash] = stored.split(":");
+  if (!salt || !hash) return false;
+  const next = scryptSync(password, salt, 64);
+  const prev = Buffer.from(hash, "hex");
+  if (next.length !== prev.length) return false;
+  return timingSafeEqual(next, prev);
+}
+
+export function toPublicUser(user: User): PublicUser {
+  const { passwordHash: _passwordHash, ...rest } = user;
+  return rest;
+}
+
+export function ensureAdminSeed() {
+  const store = ensureStore();
+  const adminEmail = normalizeEmail(
+    process.env.ADMIN_EMAIL || "admin@math12.local",
+  );
+  const adminPassword = process.env.ADMIN_PASSWORD || "changeme";
+  const existing = store.users.find((user) => user.email === adminEmail);
+  if (existing) {
+    if (existing.role !== "admin" || existing.status !== "approved") {
+      existing.role = "admin";
+      existing.status = "approved";
+      writeStore(store);
+    }
+    return;
+  }
+  store.users.push({
+    id: nanoid(12),
+    name: "Admin",
+    email: adminEmail,
+    passwordHash: hashPassword(adminPassword),
+    status: "approved",
+    role: "admin",
+    createdAt: new Date().toISOString(),
+  });
+  writeStore(store);
+}
+
+export function createUser(input: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  ensureAdminSeed();
+  const store = ensureStore();
+  const email = normalizeEmail(input.email);
+  if (!email || !input.password || input.password.length < 6) {
+    throw new Error("Use a valid email and a password with at least 6 characters.");
+  }
+  if (store.users.some((user) => user.email === email)) {
+    throw new Error("An account with that email already exists.");
+  }
+  const adminEmail = normalizeEmail(
+    process.env.ADMIN_EMAIL || "admin@math12.local",
+  );
+  const isAdmin = email === adminEmail;
+  const user: User = {
+    id: nanoid(12),
+    name: input.name.trim() || "Student",
+    email,
+    passwordHash: hashPassword(input.password),
+    status: isAdmin ? "approved" : "pending",
+    role: isAdmin ? "admin" : "student",
+    createdAt: new Date().toISOString(),
+  };
+  store.users.push(user);
+  writeStore(store);
+  return toPublicUser(user);
+}
+
+export function authenticateUser(email: string, password: string) {
+  ensureAdminSeed();
+  const store = ensureStore();
+  const user = store.users.find(
+    (item) => item.email === normalizeEmail(email),
+  );
+  if (!user || !verifyPassword(password, user.passwordHash)) {
+    return null;
+  }
+  return toPublicUser(user);
+}
+
+export function getUserById(id: string) {
+  ensureAdminSeed();
+  const user = ensureStore().users.find((item) => item.id === id);
+  return user ? toPublicUser(user) : null;
+}
+
+export function listUsers() {
+  ensureAdminSeed();
+  return ensureStore()
+    .users.map(toPublicUser)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export function setUserStatus(userId: string, status: UserStatus) {
+  const store = ensureStore();
+  const user = store.users.find((item) => item.id === userId);
+  if (!user) return null;
+  if (user.role === "admin" && status !== "approved") {
+    throw new Error("Admin accounts must stay approved.");
+  }
+  user.status = status;
+  writeStore(store);
+  return toPublicUser(user);
+}

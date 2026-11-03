@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AuthButtons } from "./AuthButtons";
 
 export function SiteHeader() {
   return (
@@ -19,10 +20,11 @@ export function SiteHeader() {
           </Link>
           <Link
             href="/math2"
-            className="rounded-md bg-accent px-2.5 py-2 text-white transition hover:bg-accent-deep sm:px-3"
+            className="rounded-md px-2.5 py-2 text-ink-soft transition hover:bg-paper-deep hover:text-ink sm:px-3"
           >
             Math 2
           </Link>
+          <AuthButtons />
         </nav>
       </div>
     </header>
