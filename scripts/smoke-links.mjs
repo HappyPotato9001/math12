@@ -126,6 +126,7 @@ const publicRoutes = ["/", "/login", "/signup", "/pending"];
 const protectedRoutes = [
   "/learning",
   "/sharing",
+  "/notebook",
   "/practice-tests",
   "/admin",
   "/math1",
@@ -251,6 +252,7 @@ while (pageQueue.size) {
       "/math2",
       "/learning",
       "/sharing",
+      "/notebook",
       "/practice-tests",
       "/admin",
     ].some((p) => pathOnly === p || pathOnly.startsWith(`${p}/`));
@@ -297,6 +299,7 @@ if (!me.user || me.user.status !== "approved") {
   const authedPages = [
     "/learning",
     "/sharing",
+    "/notebook",
     "/practice-tests",
     "/admin",
     "/math1",
