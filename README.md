@@ -20,17 +20,21 @@ Default admin (created automatically):
 
 Override with `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `AUTH_SECRET` (see `.env.example`).
 
-## GitHub Pages
+## Live site (APIs + GitHub Pages)
 
-Pushes to `master`/`main` build a static export and deploy to:
+GitHub Pages is **static** — it cannot execute Next.js API routes. The full app (auth, admin, sharing, practice tests, notebooks) runs on **Vercel**. The Pages URL forwards there so bookmarks like `/math12/math1/` keep working.
 
-[https://happypotato9001.github.io/math12/](https://happypotato9001.github.io/math12/)
+1. Import this repo at [vercel.com/new](https://vercel.com/new) (Next.js defaults are fine).
+2. In Vercel → Project → Settings → Environment Variables, copy values from `.env.example` / `.env.local` (`AUTH_SECRET`, OAuth, `ADMIN_EMAIL`, …).
+3. Add OAuth callback URLs for `https://YOUR_PROJECT.vercel.app/api/auth/callback/google` (and GitHub).
+4. In GitHub → Settings → Secrets and variables → Actions → **Variables**, set `LIVE_APP_URL` to `https://YOUR_PROJECT.vercel.app` (no trailing slash).
+5. Optional CI deploy: add secrets `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` (from `npx vercel link` / Vercel tokens).
+
+After the Pages workflow runs, [https://happypotato9001.github.io/math12/math1/](https://happypotato9001.github.io/math12/math1/) opens the live API-backed app.
 
 ```bash
-npm run build:pages
+npm run build:pages   # requires LIVE_APP_URL
 ```
-
-Lessons, classwork, and PDFs work on Pages. Sign-in, admin approval, sharing uploads, and practice-test uploads need the Node server (`npm run dev` / `npm start`).
 
 ## Access flow (Node server)
 

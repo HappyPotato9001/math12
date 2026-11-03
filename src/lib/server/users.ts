@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { randomBytes, scryptSync, timingSafeEqual } from "crypto";
 import { nanoid } from "nanoid";
+import { getDataDir } from "./data-dir";
 
 export type UserStatus = "pending" | "approved" | "rejected";
 export type UserRole = "student" | "admin";
@@ -21,30 +22,26 @@ export type PublicUser = Omit<User, "passwordHash">;
 
 type Store = { users: User[] };
 
-const dataDir = path.join(process.cwd(), "data");
-const storePath = path.join(dataDir, "users.json");
+function storePath() {
+  return path.join(getDataDir(), "users.json");
+}
 
 function emptyStore(): Store {
   return { users: [] };
 }
 
 function ensureStore(): Store {
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  if (!fs.existsSync(storePath)) {
+  const file = storePath();
+  if (!fs.existsSync(file)) {
     const initial = emptyStore();
-    fs.writeFileSync(storePath, JSON.stringify(initial, null, 2));
+    fs.writeFileSync(file, JSON.stringify(initial, null, 2));
     return initial;
   }
-  return JSON.parse(fs.readFileSync(storePath, "utf8")) as Store;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as Store;
 }
 
 function writeStore(store: Store) {
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  fs.writeFileSync(storePath, JSON.stringify(store, null, 2));
+  fs.writeFileSync(storePath(), JSON.stringify(store, null, 2));
 }
 
 function normalizeEmail(email: string) {

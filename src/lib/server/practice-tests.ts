@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
+import { getDataDir } from "./data-dir";
 
 export type PracticeCourse = "math1" | "math2" | "both";
 export type PracticeSource = "ai" | "teacher" | "student" | "other";
@@ -23,9 +24,13 @@ export type PracticeTest = {
 
 type Store = { tests: PracticeTest[] };
 
-const dataDir = path.join(process.cwd(), "data");
-const storePath = path.join(dataDir, "practice-tests.json");
-const filesDir = path.join(dataDir, "practice-test-files");
+function storePath() {
+  return path.join(getDataDir(), "practice-tests.json");
+}
+
+function filesDir() {
+  return path.join(getDataDir(), "practice-test-files");
+}
 
 const ALLOWED_MIME = new Set([
   "application/pdf",
@@ -38,28 +43,28 @@ const ALLOWED_MIME = new Set([
 const MAX_BYTES = 8 * 1024 * 1024;
 
 function ensureDirs() {
-  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
-  if (!fs.existsSync(filesDir)) fs.mkdirSync(filesDir, { recursive: true });
+  fs.mkdirSync(filesDir(), { recursive: true });
 }
 
 function ensureStore(): Store {
   ensureDirs();
-  if (!fs.existsSync(storePath)) {
+  const file = storePath();
+  if (!fs.existsSync(file)) {
     const initial: Store = { tests: [] };
-    fs.writeFileSync(storePath, JSON.stringify(initial, null, 2));
+    fs.writeFileSync(file, JSON.stringify(initial, null, 2));
     return initial;
   }
-  return JSON.parse(fs.readFileSync(storePath, "utf8")) as Store;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as Store;
 }
 
 function writeStore(store: Store) {
   ensureDirs();
-  fs.writeFileSync(storePath, JSON.stringify(store, null, 2));
+  fs.writeFileSync(storePath(), JSON.stringify(store, null, 2));
 }
 
 function filePathFor(id: string, fileName: string) {
   const safeExt = path.extname(fileName).slice(0, 12) || ".bin";
-  return path.join(filesDir, `${id}${safeExt}`);
+  return path.join(filesDir(), `${id}${safeExt}`);
 }
 
 export function listPracticeTests() {

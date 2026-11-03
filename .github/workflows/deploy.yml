@@ -1,4 +1,7 @@
-name: Deploy to GitHub Pages
+name: Deploy GitHub Pages bridge
+
+# Pages cannot host API routes. This workflow publishes a static bridge that
+# sends visitors from https://….github.io/math12/… to the live Vercel app.
 
 on:
   push:
@@ -18,11 +21,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
@@ -30,7 +31,9 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build static site
+      - name: Build Pages bridge
+        env:
+          LIVE_APP_URL: ${{ vars.LIVE_APP_URL }}
         run: npm run build:pages
 
       - name: Upload Pages artifact
