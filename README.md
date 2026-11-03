@@ -20,7 +20,19 @@ Default admin (created automatically):
 
 Override with `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `AUTH_SECRET` (see `.env.example`).
 
-## Access flow
+## GitHub Pages
+
+Pushes to `master`/`main` build a static export and deploy to:
+
+[https://happypotato9001.github.io/math12/](https://happypotato9001.github.io/math12/)
+
+```bash
+npm run build:pages
+```
+
+Lessons, classwork, and PDFs work on Pages. Sign-in, admin approval, sharing uploads, and practice-test uploads need the Node server (`npm run dev` / `npm start`).
+
+## Access flow (Node server)
 
 1. Student signs up → status `pending`
 2. Admin signs in → `/admin` → Accept
@@ -31,4 +43,5 @@ Override with `ADMIN_EMAIL`, `ADMIN_PASSWORD`, and `AUTH_SECRET` (see `.env.exam
 - Math 1 (Units 1–9) and Math 2 (Units 1–3) mapped to your class packets
 - Unit PDFs in `public/textbook/`
 - Digitized classwork drills on selected lessons
-- Approval-gated accounts stored in `data/users.json`
+- Approval-gated accounts stored in `data/users.json` (server mode)
+

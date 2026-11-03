@@ -1,10 +1,27 @@
 import { redirect } from "next/navigation";
 import { AdminUsersClient } from "@/components/AdminUsersClient";
+import { StaticFeatureNotice } from "@/components/StaticFeatureNotice";
+import { isStaticExport } from "@/lib/runtime";
 import { getSessionUser } from "@/lib/server/session";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminPage() {
+  if (isStaticExport()) {
+    return (
+      <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
+        <p className="text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          Admin
+        </p>
+        <h1 className="mt-2 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
+          Approve access
+        </h1>
+        <StaticFeatureNotice
+          title="Admin tools need the live server"
+          description="Account approval runs on the Node app (local or hosted), not on GitHub Pages."
+        />
+      </div>
+    );
+  }
+
   const user = await getSessionUser();
   if (!user) redirect("/login?next=/admin");
   if (user.role !== "admin" || user.status !== "approved") {

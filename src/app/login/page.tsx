@@ -1,8 +1,21 @@
 import { Suspense } from "react";
 import { AuthForm } from "@/components/AuthForm";
+import { StaticFeatureNotice } from "@/components/StaticFeatureNotice";
 import { oauthProvidersEnabled } from "@/lib/oauth";
+import { isStaticExport } from "@/lib/runtime";
 
 export default function LoginPage() {
+  if (isStaticExport()) {
+    return (
+      <div className="mx-auto w-full max-w-lg px-5 py-10 sm:py-14">
+        <StaticFeatureNotice
+          title="Sign-in needs the live server"
+          description="On GitHub Pages you can open every Math 1/2 lesson and classwork drill without an account."
+        />
+      </div>
+    );
+  }
+
   const oauth = oauthProvidersEnabled();
   return (
     <div className="mx-auto w-full max-w-md px-5 py-10 sm:py-14">

@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { isStaticExport } from "@/lib/runtime";
 
 export default function Home() {
+  const staticSite = isStaticExport();
+
   return (
     <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2">
       <section className="relative min-h-[calc(100vh-4.5rem)] overflow-hidden">
@@ -42,28 +45,39 @@ export default function Home() {
             Math 1/2
           </h1>
           <p className="animate-rise delay-2 mt-6 max-w-xl text-lg text-ink-soft sm:text-xl">
-            Lessons, class sharing, and practice tests for Integrated Math—sign
-            up, get approved, then dive in.
+            {staticSite
+              ? "Lessons, classwork drills, and textbook PDFs for Integrated Math 1 and 2—open a course and start studying."
+              : "Lessons, class sharing, and practice tests for Integrated Math—sign up, get approved, then dive in."}
           </p>
           <div className="animate-rise delay-3 mt-8 flex flex-wrap gap-3">
             <Link
-              href="/signup"
-              className="rounded-xl bg-accent px-5 py-3 text-sm font-medium text-white transition hover:bg-accent-deep"
-            >
-              Sign up
-            </Link>
-            <Link
-              href="/login"
-              className="rounded-xl border border-ink/15 bg-surface/75 px-5 py-3 text-sm font-medium text-ink backdrop-blur-sm transition hover:bg-paper-deep"
-            >
-              Sign in
-            </Link>
-            <Link
               href="/learning"
-              className="rounded-xl px-5 py-3 text-sm font-medium text-accent transition hover:bg-accent-soft"
+              className="rounded-xl bg-accent px-5 py-3 text-sm font-medium text-white transition hover:bg-accent-deep"
             >
               Go to Learning
             </Link>
+            <Link
+              href="/math1"
+              className="rounded-xl border border-ink/15 bg-surface/75 px-5 py-3 text-sm font-medium text-ink backdrop-blur-sm transition hover:bg-paper-deep"
+            >
+              Open Math 1
+            </Link>
+            {!staticSite && (
+              <>
+                <Link
+                  href="/signup"
+                  className="rounded-xl px-5 py-3 text-sm font-medium text-accent transition hover:bg-accent-soft"
+                >
+                  Sign up
+                </Link>
+                <Link
+                  href="/login"
+                  className="rounded-xl px-5 py-3 text-sm font-medium text-accent transition hover:bg-accent-soft"
+                >
+                  Sign in
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </section>

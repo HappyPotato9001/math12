@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { isStaticExport } from "@/lib/runtime";
 
 type MeUser = {
   name?: string | null;
@@ -11,6 +12,21 @@ type MeUser = {
 };
 
 export function AuthButtons() {
+  if (isStaticExport()) {
+    return (
+      <Link
+        href="/learning"
+        className="rounded-md px-2.5 py-2 text-ink-soft transition hover:bg-paper-deep hover:text-ink sm:px-3"
+      >
+        Open courses
+      </Link>
+    );
+  }
+
+  return <LiveAuthButtons />;
+}
+
+function LiveAuthButtons() {
   const { data, status } = useSession();
   const [me, setMe] = useState<MeUser | null>(null);
 

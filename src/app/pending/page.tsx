@@ -1,17 +1,26 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { PendingActions } from "@/components/PendingActions";
 import { SessionSync } from "@/components/SessionSync";
+import { StaticFeatureNotice } from "@/components/StaticFeatureNotice";
+import { isStaticExport } from "@/lib/runtime";
 import { getSessionUser } from "@/lib/server/session";
-import { redirect } from "next/navigation";
-
-export const dynamic = "force-dynamic";
 
 export default async function PendingPage() {
+  if (isStaticExport()) {
+    return (
+      <div className="mx-auto w-full max-w-lg px-5 py-10 sm:py-14">
+        <StaticFeatureNotice
+          title="No approval gate on GitHub Pages"
+          description="This static site opens Math 1/2 lessons directly. Account approval is only used on the live Node server."
+        />
+      </div>
+    );
+  }
+
   const user = await getSessionUser();
   if (!user) redirect("/login");
 
-  // DB already approved (e.g. admin Accept) but JWT may still say pending —
-  // sync the session cookie instead of bouncing with middleware.
   if (user.status === "approved") {
     return (
       <div className="mx-auto w-full max-w-lg px-5 py-10 sm:py-14">
