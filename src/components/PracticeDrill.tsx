@@ -6,12 +6,9 @@ import type { Problem } from "@/lib/types";
 import { answersMatch } from "@/lib/answers";
 import { accuracyPercent, readTopicProgress, recordAttempt } from "@/lib/progress";
 import { MathText } from "./MathText";
-import { ShareWorkPanel } from "./ShareWorkPanel";
 
 type PracticeDrillProps = {
   topicKey: string;
-  topicTitle: string;
-  topicPath: string;
   lessonHref: string;
   problems: Problem[];
 };
@@ -23,8 +20,6 @@ type FeedbackState = {
 
 export function PracticeDrill({
   topicKey,
-  topicTitle,
-  topicPath,
   lessonHref,
   problems,
 }: PracticeDrillProps) {
@@ -227,22 +222,6 @@ export function PracticeDrill({
           </div>
         )}
       </div>
-
-      {feedback && (
-        <ShareWorkPanel
-          topicKey={topicKey}
-          topicTitle={topicTitle}
-          topicPath={topicPath}
-          problem={problem}
-          answer={answerValue}
-          workDefault={
-            problem.type === "multiple-choice"
-              ? `I chose ${answerValue}.`
-              : `My answer: ${answerValue}`
-          }
-          isCorrect={feedback.correct}
-        />
-      )}
     </div>
   );
 }

@@ -30,8 +30,7 @@ export default function Home() {
           </h1>
           <p className="animate-rise max-w-xl text-lg text-ink-soft sm:text-xl">
             Follow the same units and lesson titles from class. Open the packet
-            PDF, do textbook-style classwork with instant feedback, and share
-            photos of your work.
+            PDF and do textbook-style classwork with instant feedback.
           </p>
           <div className="animate-rise flex flex-wrap gap-3">
             <Link
@@ -45,12 +44,6 @@ export default function Home() {
               className="rounded-xl border border-ink/15 bg-surface/80 px-5 py-3 text-sm font-medium text-ink transition hover:bg-paper-deep"
             >
               Math 2 units
-            </Link>
-            <Link
-              href="/class"
-              className="rounded-xl border border-ink/15 bg-surface/80 px-5 py-3 text-sm font-medium text-ink transition hover:bg-paper-deep"
-            >
-              Class room
             </Link>
           </div>
         </div>

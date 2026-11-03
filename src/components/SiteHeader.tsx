@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ClassSessionBadge } from "./ClassSessionBadge";
 
 export function SiteHeader() {
   return (
@@ -12,7 +11,6 @@ export function SiteHeader() {
           <span className="hidden text-sm text-ink-soft sm:inline">study lab</span>
         </Link>
         <nav className="flex items-center gap-1 text-sm font-medium sm:gap-2">
-          <ClassSessionBadge />
           <Link
             href="/math1"
             className="rounded-md px-2.5 py-2 text-ink-soft transition hover:bg-paper-deep hover:text-ink sm:px-3"
@@ -21,15 +19,9 @@ export function SiteHeader() {
           </Link>
           <Link
             href="/math2"
-            className="rounded-md px-2.5 py-2 text-ink-soft transition hover:bg-paper-deep hover:text-ink sm:px-3"
-          >
-            Math 2
-          </Link>
-          <Link
-            href="/class"
             className="rounded-md bg-accent px-2.5 py-2 text-white transition hover:bg-accent-deep sm:px-3"
           >
-            Class
+            Math 2
           </Link>
         </nav>
       </div>

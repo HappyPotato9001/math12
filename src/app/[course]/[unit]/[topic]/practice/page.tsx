@@ -48,8 +48,7 @@ export default async function PracticePage({ params }: PageProps) {
         {topic.title}
       </h1>
       <p className="mt-2 text-ink-soft">
-        Textbook-style prompts with instant feedback. Stuck? Share a photo of
-        your work with the class room.
+        Textbook-style prompts with instant feedback — check, hint, and reveal.
       </p>
 
       <div className="mt-4">
@@ -87,8 +86,6 @@ export default async function PracticePage({ params }: PageProps) {
         ) : (
           <PracticeDrill
             topicKey={key}
-            topicTitle={`Lesson ${topic.lessonNumber}: ${topic.title}`}
-            topicPath={lessonHref}
             lessonHref={lessonHref}
             problems={problems}
           />

@@ -19,7 +19,7 @@ const plex = IBM_Plex_Sans({
 export const metadata: Metadata = {
   title: "Math 1/2 Study Lab",
   description:
-    "Integrated Math 1 and 2 class textbook units, digitized classwork with feedback, and rooms for sharing work photos.",
+    "Integrated Math 1 and 2 class textbook units with digitized classwork and instant feedback.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
