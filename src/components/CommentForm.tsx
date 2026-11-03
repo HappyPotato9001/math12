@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { createComment } from "@/lib/db";
 import { readClassSession } from "@/lib/session";
 
 export function CommentForm({
@@ -17,7 +16,7 @@ export function CommentForm({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function onSubmit(event: FormEvent) {
+  async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setError("");
     const session = readClassSession();
@@ -26,24 +25,31 @@ export function CommentForm({
       return;
     }
     setLoading(true);
-    const comment = createComment({
-      roomCode,
-      postId,
-      authorId: session.memberId,
-      body,
-    });
-    if (!comment) {
-      setError("Could not add comment.");
+    try {
+      const response = await fetch(
+        `/api/rooms/${roomCode}/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ authorId: session.memberId, body }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Could not comment");
+      }
+      setBody("");
+      onCommented?.();
+      void data;
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not comment");
+    } finally {
       setLoading(false);
-      return;
     }
-    setBody("");
-    setLoading(false);
-    onCommented?.();
   }
 
   return (
-    <form onSubmit={onSubmit} className="mt-4 space-y-2">
+    <form onSubmit={(event) => void onSubmit(event)} className="mt-4 space-y-2">
       <textarea
         required
         value={body}

@@ -6,44 +6,63 @@ import { useSearchParams } from "next/navigation";
 import { MathText } from "@/components/MathText";
 import { PhotoWorkForm } from "@/components/PhotoWorkForm";
 import { WorkImage } from "@/components/WorkImage";
-import { exportRoomData, getRoom, listPosts } from "@/lib/db";
 
-type FeedPost = ReturnType<typeof listPosts>[number];
+type FeedPost = {
+  id: string;
+  authorName: string;
+  topicTitle: string;
+  problemPrompt: string;
+  workText: string;
+  isCorrect: boolean;
+  imageId?: string;
+  commentCount: number;
+  createdAt: string;
+};
 
 export function ClassFeedClient() {
   const searchParams = useSearchParams();
   const code = (searchParams.get("code") || "").toUpperCase();
   const [roomName, setRoomName] = useState<string | null>(null);
   const [posts, setPosts] = useState<FeedPost[]>([]);
-  const [copied, setCopied] = useState(false);
   const [missing, setMissing] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const reload = useCallback(() => {
+  const reload = useCallback(async () => {
     if (!code) {
       setMissing(true);
+      setLoading(false);
       return;
     }
-    const room = getRoom(code);
-    if (!room) {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/rooms/${code}`);
+      if (!response.ok) {
+        setMissing(true);
+        setRoomName(null);
+        setPosts([]);
+        return;
+      }
+      const data = await response.json();
+      setMissing(false);
+      setRoomName(data.room.name);
+      setPosts(data.posts);
+    } catch {
       setMissing(true);
-      setRoomName(null);
-      setPosts([]);
-      return;
+    } finally {
+      setLoading(false);
     }
-    setMissing(false);
-    setRoomName(room.name);
-    setPosts(listPosts(room.code));
   }, [code]);
 
   useEffect(() => {
-    reload();
+    void reload();
   }, [reload]);
 
-  async function copyExport() {
-    const payload = await exportRoomData(code);
-    await navigator.clipboard.writeText(JSON.stringify(payload));
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-3xl px-5 py-14 text-ink-soft">
+        Loading room…
+      </div>
+    );
   }
 
   if (missing) {
@@ -53,11 +72,11 @@ export function ClassFeedClient() {
           Room not found
         </h1>
         <p className="mt-3 text-ink-soft">
-          This browser does not have that class room yet. Join the code on the
-          class page, or import room JSON from a classmate.
+          Create or join that code on the class page. Shared work is stored on
+          the server.
         </p>
         <Link
-          href="/class/"
+          href="/class"
           className="mt-5 inline-block rounded-xl bg-accent px-4 py-2 text-sm text-white"
         >
           Go to class rooms
@@ -77,20 +96,20 @@ export function ClassFeedClient() {
             {roomName}
           </h1>
           <p className="mt-2 text-sm text-ink-soft">
-            Code <span className="font-medium text-ink">{code}</span> — share it
-            with classmates
+            Code <span className="font-medium text-ink">{code}</span> — shared
+            server storage
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => void copyExport()}
+            onClick={() => void reload()}
             className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
           >
-            {copied ? "Copied export" : "Export room"}
+            Refresh
           </button>
           <Link
-            href="/class/"
+            href="/class"
             className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
           >
             Switch room
@@ -99,13 +118,13 @@ export function ClassFeedClient() {
       </div>
 
       <div className="mt-8">
-        <PhotoWorkForm roomCode={code} onPosted={reload} />
+        <PhotoWorkForm roomCode={code} onPosted={() => void reload()} />
       </div>
 
       <div className="mt-8 space-y-4">
         {posts.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-line bg-surface p-8 text-ink-soft">
-            No shared work yet. Post a photo above, or share from practice.
+            No shared work yet. Post a photo above, or share from classwork.
           </div>
         ) : (
           posts.map((post) => (

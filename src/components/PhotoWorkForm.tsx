@@ -1,9 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import { nanoid } from "nanoid";
-import { createPost } from "@/lib/db";
-import { compressImageFile, saveImage } from "@/lib/images";
+import { compressImageFile, uploadImageDataUrl } from "@/lib/compressImage";
 import { readClassSession } from "@/lib/session";
 
 export function PhotoWorkForm({
@@ -48,26 +46,32 @@ export function PhotoWorkForm({
     }
     setLoading(true);
     try {
-      const imageId = nanoid(12);
-      await saveImage(imageId, preview);
-      const post = createPost({
-        roomCode,
-        authorId: session.memberId,
-        topicPath: "/class/",
-        topicTitle: title.trim() || "Photo of my work",
-        problemId: `photo-${imageId}`,
-        problemPrompt: title.trim() || "Photo of handwritten / worksheet work",
-        workText: note.trim() || "Shared a photo of my work.",
-        answer: "",
-        isCorrect: false,
-        imageId,
+      const imageId = await uploadImageDataUrl(preview);
+      const response = await fetch(`/api/rooms/${roomCode}/posts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: session.memberId,
+          topicPath: "/class",
+          topicTitle: title.trim() || "Photo of my work",
+          problemId: `photo-${imageId}`,
+          problemPrompt: title.trim() || "Photo of handwritten / worksheet work",
+          workText: note.trim() || "Shared a photo of my work.",
+          answer: "",
+          isCorrect: false,
+          imageId,
+        }),
       });
-      if (!post) throw new Error("Could not create post.");
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Could not create post.");
+      }
       setTitle("");
       setNote("");
       setPreview(null);
       if (fileRef.current) fileRef.current.value = "";
       onPosted();
+      void data;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not post photo.");
     } finally {
@@ -84,7 +88,7 @@ export function PhotoWorkForm({
         Post a photo of your work
       </h2>
       <p className="mt-1 text-sm text-ink-soft">
-        Snap a notebook page or worksheet so others can review your steps.
+        Photos upload to the server so everyone in the room can open them.
       </p>
       <input
         value={title}

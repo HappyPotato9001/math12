@@ -2,10 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { nanoid } from "nanoid";
 import type { Problem } from "@/lib/types";
-import { createPost } from "@/lib/db";
-import { compressImageFile, saveImage } from "@/lib/images";
+import { compressImageFile, uploadImageDataUrl } from "@/lib/compressImage";
 import { readClassSession } from "@/lib/session";
 
 type ShareWorkPanelProps = {
@@ -51,8 +49,7 @@ export function ShareWorkPanel({
       return;
     }
     try {
-      const dataUrl = await compressImageFile(file);
-      setPreview(dataUrl);
+      setPreview(await compressImageFile(file));
       setMessage("");
     } catch (err) {
       setPreview(null);
@@ -77,23 +74,26 @@ export function ShareWorkPanel({
     try {
       let imageId: string | undefined;
       if (preview) {
-        imageId = nanoid(12);
-        await saveImage(imageId, preview);
+        imageId = await uploadImageDataUrl(preview);
       }
-      const post = createPost({
-        roomCode: session.roomCode,
-        authorId: session.memberId,
-        topicPath,
-        topicTitle,
-        problemId: problem.id,
-        problemPrompt: problem.prompt,
-        workText,
-        answer,
-        isCorrect,
-        imageId,
+      const response = await fetch(`/api/rooms/${session.roomCode}/posts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: session.memberId,
+          topicPath,
+          topicTitle,
+          problemId: problem.id,
+          problemPrompt: problem.prompt,
+          workText,
+          answer,
+          isCorrect,
+          imageId,
+        }),
       });
-      if (!post) {
-        throw new Error("Could not share. Re-join the class room and try again.");
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Share failed");
       }
       setStatus("done");
       setMessage(
@@ -102,6 +102,7 @@ export function ShareWorkPanel({
           : `Shared to ${session.roomCode}.`,
       );
       setSessionCode(session.roomCode);
+      void data;
     } catch (err) {
       setStatus("error");
       setMessage(err instanceof Error ? err.message : "Could not share right now.");
@@ -114,8 +115,8 @@ export function ShareWorkPanel({
         Share my work
       </h3>
       <p className="mt-1 text-sm text-ink-soft">
-        Add a photo of your notebook or worksheet so classmates can see your
-        steps.
+        Add a photo of your notebook or worksheet. Classmates see it from the
+        server room feed.
       </p>
       <textarea
         value={workText}
@@ -170,7 +171,7 @@ export function ShareWorkPanel({
           {status === "saving" ? "Sharing…" : "Share with class"}
         </button>
         {!sessionCode && (
-          <Link href="/class/" className="text-sm text-accent underline">
+          <Link href="/class" className="text-sm text-accent underline">
             Join a class room
           </Link>
         )}

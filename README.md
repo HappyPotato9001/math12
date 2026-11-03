@@ -1,12 +1,8 @@
 # Math 1/2 Study Lab
 
-Study site for Integrated Math 1 and 2: short lessons, topic drills with instant feedback, and class rooms for sharing worked attempts.
+Study site for Integrated Math 1 and 2, centered on your class textbook units, with digitized classwork and a **server-backed class room** for sharing notes and work photos.
 
-## Live site
-
-https://happypotato9001.github.io/math12/
-
-## Run locally
+## Run locally (with server storage)
 
 ```bash
 npm install
@@ -15,23 +11,35 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-For a GitHub Pages-style build with the `/math12` base path:
+Shared class data is written under:
+
+- `data/store.json` — rooms, members, posts, comments
+- `data/images/` — uploaded work photos
+
+Production:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/math12 npm run build
+npm run build
+npm run start
 ```
 
-Static files are written to `out/`.
+## What’s included
 
-## What's included
-
-- Math 1 (Units 1–9) and Math 2 (Units 1–3) mapped to your class textbook lessons
+- Math 1 (Units 1–9) and Math 2 (Units 1–3) mapped to your class packets
 - Unit PDFs in `public/textbook/`
-- Digitized classwork drills on selected lessons (Jump Start / Classwork style)
-- Class rooms with photo sharing (browser storage + export/import)
+- Digitized classwork on selected lessons
+- Server APIs for rooms / posts / comments / images so classmates share one feed
 
-## Deploy
+## API
 
-Pushes to `master`/`main` build and publish to GitHub Pages via `.github/workflows/deploy.yml`.
+- `POST /api/rooms` — create or join
+- `GET /api/rooms/:code` — room + posts
+- `POST /api/rooms/:code/posts` — share work
+- `GET /api/rooms/:code/posts/:id` — one post + comments
+- `POST /api/rooms/:code/posts/:id/comments`
+- `POST /api/images` — upload compressed image data URL
+- `GET /api/images/:id` — fetch image bytes
 
-In the repo settings, set **Pages → Source** to **GitHub Actions**.
+## Deploy note
+
+GitHub Pages is static-only, so this app needs a Node host (`npm run start`) such as Railway, Render, Fly.io, or a school VPS with a persistent disk for the `data/` folder.

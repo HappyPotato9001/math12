@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { nanoid } from "nanoid";
 
 export type Room = {
@@ -42,28 +44,35 @@ type Store = {
   comments: Comment[];
 };
 
-const STORE_KEY = "math12-class-store-v1";
+const dataDir = path.join(process.cwd(), "data");
+const storePath = path.join(dataDir, "store.json");
+const imagesDir = path.join(dataDir, "images");
 
 function emptyStore(): Store {
   return { rooms: [], members: [], posts: [], comments: [] };
 }
 
+function ensureDirs() {
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+  if (!fs.existsSync(imagesDir)) fs.mkdirSync(imagesDir, { recursive: true });
+}
+
 function readStore(): Store {
-  if (typeof window === "undefined") return emptyStore();
-  try {
-    const raw = window.localStorage.getItem(STORE_KEY);
-    if (!raw) return emptyStore();
-    return JSON.parse(raw) as Store;
-  } catch {
-    return emptyStore();
+  ensureDirs();
+  if (!fs.existsSync(storePath)) {
+    const initial = emptyStore();
+    fs.writeFileSync(storePath, JSON.stringify(initial, null, 2));
+    return initial;
   }
+  return JSON.parse(fs.readFileSync(storePath, "utf8")) as Store;
 }
 
 function writeStore(store: Store) {
-  window.localStorage.setItem(STORE_KEY, JSON.stringify(store));
+  ensureDirs();
+  fs.writeFileSync(storePath, JSON.stringify(store, null, 2));
 }
 
-function makeRoomCode(): string {
+function makeRoomCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let suffix = "";
   for (let i = 0; i < 4; i += 1) {
@@ -97,12 +106,8 @@ export function createRoom(name: string, displayName: string) {
 export function joinRoom(code: string, displayName: string) {
   const store = readStore();
   const normalized = code.trim().toUpperCase();
-  if (!normalized) return null;
-
   let room = store.rooms.find((item) => item.code === normalized);
   if (!room) {
-    // Same code on another browser starts a local room shell so classmates can
-    // still use one shared code on a lab computer / after importing room data.
     room = {
       code: normalized,
       name: `Room ${normalized}`,
@@ -110,7 +115,6 @@ export function joinRoom(code: string, displayName: string) {
     };
     store.rooms.push(room);
   }
-
   const member: Member = {
     id: nanoid(10),
     roomCode: room.code,
@@ -122,8 +126,9 @@ export function joinRoom(code: string, displayName: string) {
 }
 
 export function getRoom(code: string) {
-  const store = readStore();
-  return store.rooms.find((room) => room.code === code.toUpperCase()) ?? null;
+  return (
+    readStore().rooms.find((room) => room.code === code.toUpperCase()) ?? null
+  );
 }
 
 export function listPosts(roomCode: string) {
@@ -134,10 +139,11 @@ export function listPosts(roomCode: string) {
     .map((post) => ({
       ...post,
       authorName:
-        store.members.find((member) => member.id === post.authorId)?.displayName ??
-        "Student",
-      commentCount: store.comments.filter((comment) => comment.postId === post.id)
-        .length,
+        store.members.find((member) => member.id === post.authorId)
+          ?.displayName ?? "Student",
+      commentCount: store.comments.filter(
+        (comment) => comment.postId === post.id,
+      ).length,
     }));
 }
 
@@ -159,8 +165,8 @@ export function getPost(roomCode: string, postId: string) {
   return {
     ...post,
     authorName:
-      store.members.find((member) => member.id === post.authorId)?.displayName ??
-      "Student",
+      store.members.find((member) => member.id === post.authorId)
+        ?.displayName ?? "Student",
     comments,
   };
 }
@@ -182,9 +188,8 @@ export function createPost(input: {
     (item) => item.code === input.roomCode.toUpperCase(),
   );
   const member = store.members.find((item) => item.id === input.authorId);
-  if (!room || !member || member.roomCode !== room.code) {
-    return null;
-  }
+  if (!room || !member || member.roomCode !== room.code) return null;
+
   const post: Post = {
     id: nanoid(12),
     roomCode: room.code,
@@ -213,13 +218,13 @@ export function createComment(input: {
   const store = readStore();
   const post = store.posts.find(
     (item) =>
-      item.id === input.postId && item.roomCode === input.roomCode.toUpperCase(),
+      item.id === input.postId &&
+      item.roomCode === input.roomCode.toUpperCase(),
   );
   const member = store.members.find((item) => item.id === input.authorId);
-  if (!post || !member || member.roomCode !== post.roomCode) {
-    return null;
-  }
+  if (!post || !member || member.roomCode !== post.roomCode) return null;
   if (!input.body.trim()) return null;
+
   const comment: Comment = {
     id: nanoid(12),
     postId: post.id,
@@ -229,63 +234,47 @@ export function createComment(input: {
   };
   store.comments.push(comment);
   writeStore(store);
-  return {
-    ...comment,
-    authorName: member.displayName,
-  };
+  return { ...comment, authorName: member.displayName };
 }
 
-export async function exportRoomData(roomCode: string) {
-  const { getImages } = await import("./images");
-  const store = readStore();
-  const code = roomCode.toUpperCase();
-  const posts = store.posts.filter((post) => post.roomCode === code);
-  const imageIds = posts
-    .map((post) => post.imageId)
-    .filter((id): id is string => Boolean(id));
-  const images = await getImages(imageIds);
-  return {
-    room: store.rooms.find((room) => room.code === code) ?? null,
-    members: store.members.filter((member) => member.roomCode === code),
-    posts,
-    comments: store.comments.filter((comment) =>
-      posts.some((post) => post.id === comment.postId),
-    ),
-    images,
-  };
-}
-
-export async function importRoomData(payload: {
-  room: Room | null;
-  members: Member[];
-  posts: Post[];
-  comments: Comment[];
-  images?: Record<string, string>;
-}) {
-  if (!payload.room) return false;
-  const { saveImages } = await import("./images");
-  const store = readStore();
-  const code = payload.room.code.toUpperCase();
-  store.rooms = [
-    ...store.rooms.filter((room) => room.code !== code),
-    { ...payload.room, code },
-  ];
-  store.members = [
-    ...store.members.filter((member) => member.roomCode !== code),
-    ...payload.members,
-  ];
-  store.posts = [
-    ...store.posts.filter((post) => post.roomCode !== code),
-    ...payload.posts,
-  ];
-  const postIds = new Set(payload.posts.map((post) => post.id));
-  store.comments = [
-    ...store.comments.filter((comment) => !postIds.has(comment.postId)),
-    ...payload.comments,
-  ];
-  writeStore(store);
-  if (payload.images && Object.keys(payload.images).length > 0) {
-    await saveImages(payload.images);
+export function saveImageDataUrl(dataUrl: string) {
+  ensureDirs();
+  const match = dataUrl.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/);
+  if (!match) {
+    throw new Error("Invalid image data.");
   }
-  return true;
+  const mime = match[1];
+  const ext = mime.includes("png")
+    ? "png"
+    : mime.includes("webp")
+      ? "webp"
+      : "jpg";
+  const id = nanoid(12);
+  const buffer = Buffer.from(match[2], "base64");
+  if (buffer.length > 4_500_000) {
+    throw new Error("Image is too large. Try a smaller photo.");
+  }
+  fs.writeFileSync(path.join(imagesDir, `${id}.${ext}`), buffer);
+  fs.writeFileSync(
+    path.join(imagesDir, `${id}.meta.json`),
+    JSON.stringify({ id, mime, ext, createdAt: new Date().toISOString() }),
+  );
+  return id;
+}
+
+export function readImage(id: string) {
+  ensureDirs();
+  const metaPath = path.join(imagesDir, `${id}.meta.json`);
+  if (!fs.existsSync(metaPath)) return null;
+  const meta = JSON.parse(fs.readFileSync(metaPath, "utf8")) as {
+    id: string;
+    mime: string;
+    ext: string;
+  };
+  const filePath = path.join(imagesDir, `${id}.${meta.ext}`);
+  if (!fs.existsSync(filePath)) return null;
+  return {
+    mime: meta.mime,
+    buffer: fs.readFileSync(filePath),
+  };
 }

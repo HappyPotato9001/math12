@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getImage } from "@/lib/images";
+import { imageUrl } from "@/lib/paths";
 
 export function WorkImage({
   imageId,
@@ -12,28 +11,12 @@ export function WorkImage({
   alt: string;
   className?: string;
 }) {
-  const [src, setSrc] = useState<string | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-    if (!imageId) {
-      setSrc(null);
-      return;
-    }
-    void getImage(imageId).then((value) => {
-      if (!cancelled) setSrc(value);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [imageId]);
-
-  if (!imageId || !src) return null;
+  if (!imageId) return null;
 
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src={imageUrl(imageId)}
       alt={alt}
       className={
         className ??

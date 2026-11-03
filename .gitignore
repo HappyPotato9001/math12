@@ -40,7 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local class room data
+# server storage (rooms, posts, images)
 /data/
 
 # local PDF extraction scratch

@@ -1,14 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CommentForm } from "@/components/CommentForm";
 import { MathText } from "@/components/MathText";
 import { WorkImage } from "@/components/WorkImage";
-import { getPost, getRoom } from "@/lib/db";
 
-type PostView = NonNullable<ReturnType<typeof getPost>>;
+type Comment = {
+  id: string;
+  authorName: string;
+  body: string;
+  createdAt: string;
+};
+
+type PostView = {
+  id: string;
+  authorName: string;
+  topicPath: string;
+  topicTitle: string;
+  problemPrompt: string;
+  workText: string;
+  answer: string;
+  isCorrect: boolean;
+  imageId?: string;
+  createdAt: string;
+  comments: Comment[];
+};
 
 export function ClassPostClient() {
   const searchParams = useSearchParams();
@@ -17,28 +35,49 @@ export function ClassPostClient() {
   const [roomName, setRoomName] = useState("");
   const [post, setPost] = useState<PostView | null>(null);
   const [missing, setMissing] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  function reload() {
+  const reload = useCallback(async () => {
     if (!code || !id) {
       setMissing(true);
+      setLoading(false);
       return;
     }
-    const room = getRoom(code);
-    const next = getPost(code, id);
-    if (!room || !next) {
+    setLoading(true);
+    try {
+      const [roomRes, postRes] = await Promise.all([
+        fetch(`/api/rooms/${code}`),
+        fetch(`/api/rooms/${code}/posts/${id}`),
+      ]);
+      if (!roomRes.ok || !postRes.ok) {
+        setMissing(true);
+        setPost(null);
+        return;
+      }
+      const roomData = await roomRes.json();
+      const postData = await postRes.json();
+      setMissing(false);
+      setRoomName(roomData.room.name);
+      setPost(postData.post);
+    } catch {
       setMissing(true);
       setPost(null);
-      return;
+    } finally {
+      setLoading(false);
     }
-    setMissing(false);
-    setRoomName(room.name);
-    setPost(next);
-  }
+  }, [code, id]);
 
   useEffect(() => {
-    reload();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, id]);
+    void reload();
+  }, [reload]);
+
+  if (loading) {
+    return (
+      <div className="mx-auto max-w-3xl px-5 py-14 text-ink-soft">
+        Loading post…
+      </div>
+    );
+  }
 
   if (missing || !post) {
     return (
@@ -46,7 +85,7 @@ export function ClassPostClient() {
         <h1 className="font-[family-name:var(--font-fraunces)] text-3xl text-ink">
           Post not found
         </h1>
-        <Link href="/class/" className="mt-4 inline-block text-accent underline">
+        <Link href="/class" className="mt-4 inline-block text-accent underline">
           Back to class rooms
         </Link>
       </div>
@@ -118,7 +157,11 @@ export function ClassPostClient() {
             ))
           )}
         </div>
-        <CommentForm roomCode={code} postId={post.id} onCommented={reload} />
+        <CommentForm
+          roomCode={code}
+          postId={post.id}
+          onCommented={() => void reload()}
+        />
       </section>
     </div>
   );
