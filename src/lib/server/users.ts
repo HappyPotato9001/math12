@@ -53,8 +53,20 @@ function verifyPassword(password: string, stored: string) {
   return timingSafeEqual(next, prev);
 }
 
-function adminEmail() {
-  return normalizeEmail(process.env.ADMIN_EMAIL || "admin@math12.local");
+function adminEmails() {
+  const configured = [
+    process.env.ADMIN_EMAIL,
+    ...(process.env.ADMIN_EMAILS?.split(",") || []),
+  ];
+  return new Set(
+    [
+      "admin@math12.local",
+      "yuii30@ausdk12.org",
+      ...configured,
+    ]
+      .filter(Boolean)
+      .map((email) => normalizeEmail(email as string)),
+  );
 }
 
 export function toPublicUser(user: User): PublicUser {
@@ -64,28 +76,32 @@ export function toPublicUser(user: User): PublicUser {
 
 export async function ensureAdminSeed() {
   const store = await ensureStore();
-  const email = adminEmail();
+  const emails = adminEmails();
   const adminPassword = process.env.ADMIN_PASSWORD || "changeme";
-  const existing = store.users.find((user) => user.email === email);
-  if (existing) {
-    if (existing.role !== "admin" || existing.status !== "approved") {
-      existing.role = "admin";
-      existing.status = "approved";
-      await writeStore(store);
+  let changed = false;
+  for (const email of emails) {
+    const existing = store.users.find((user) => user.email === email);
+    if (existing) {
+      if (existing.role !== "admin" || existing.status !== "approved") {
+        existing.role = "admin";
+        existing.status = "approved";
+        changed = true;
+      }
+      continue;
     }
-    return;
+    store.users.push({
+      id: nanoid(12),
+      name: "Admin",
+      email,
+      passwordHash: hashPassword(adminPassword),
+      status: "approved",
+      role: "admin",
+      provider: "credentials",
+      createdAt: new Date().toISOString(),
+    });
+    changed = true;
   }
-  store.users.push({
-    id: nanoid(12),
-    name: "Admin",
-    email,
-    passwordHash: hashPassword(adminPassword),
-    status: "approved",
-    role: "admin",
-    provider: "credentials",
-    createdAt: new Date().toISOString(),
-  });
-  await writeStore(store);
+  if (changed) await writeStore(store);
 }
 
 export async function createUser(input: {
@@ -102,7 +118,7 @@ export async function createUser(input: {
   if (store.users.some((user) => user.email === email)) {
     throw new Error("An account with that email already exists.");
   }
-  const isAdmin = email === adminEmail();
+  const isAdmin = adminEmails().has(email);
   const user: User = {
     id: nanoid(12),
     name: input.name.trim() || "Student",
@@ -137,7 +153,7 @@ export async function upsertOAuthUser(input: {
     }
     return toPublicUser(existing);
   }
-  const isAdmin = email === adminEmail();
+  const isAdmin = adminEmails().has(email);
   const user: User = {
     id: nanoid(12),
     name: input.name?.trim() || email.split("@")[0] || "Student",
