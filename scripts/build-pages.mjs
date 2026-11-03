@@ -1,7 +1,6 @@
 /**
  * GitHub Pages cannot run Next.js API routes.
- * This emits a static bridge that forwards /math12/… to the live Heroku app
- * (GitHub Student Developer Pack).
+ * This emits a static bridge that forwards /math12/… to the live Vercel app.
  */
 import fs from "fs";
 import path from "path";
@@ -25,7 +24,7 @@ if (!live) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Math 1/2 — Student Pack setup</title>
+  <title>Math 1/2 — Vercel setup</title>
   <style>
     body { margin: 0; min-height: 100vh; display: grid; place-items: center;
       font-family: "Segoe UI", system-ui, sans-serif; background: #f7fbf8; color: #152018; }
@@ -36,14 +35,14 @@ if (!live) {
 </head>
 <body>
   <main>
-    <h1>Use the GitHub Student Developer Pack</h1>
-    <p>Pages is static. APIs run on <strong>Heroku</strong> + <strong>MongoDB Atlas</strong> from the pack.</p>
+    <h1>Connect Vercel</h1>
+    <p>GitHub Pages is static. APIs run on <strong>Vercel</strong>.</p>
     <ol>
-      <li>Open <a href="https://education.github.com/pack">education.github.com/pack</a> and redeem <strong>Heroku</strong> + <strong>MongoDB Atlas</strong>.</li>
-      <li>Create a free Atlas cluster and copy the connection string.</li>
-      <li>Create a Heroku app from this repo (Deploy → GitHub, or <code>heroku create</code>).</li>
-      <li>Set Heroku config vars: <code>AUTH_SECRET</code>, <code>AUTH_URL</code>, <code>MONGODB_URI</code>, <code>ADMIN_EMAIL</code>, OAuth keys.</li>
-      <li>In GitHub → Settings → Variables → Actions, set <code>LIVE_APP_URL</code> to <code>https://YOUR_APP.herokuapp.com</code>.</li>
+      <li>Import this repo at <a href="https://vercel.com/new">vercel.com/new</a>.</li>
+      <li>Add env vars: <code>AUTH_SECRET</code>, <code>AUTH_URL</code>, <code>ADMIN_EMAIL</code>, OAuth keys.
+        Optionally <code>MONGODB_URI</code> so accounts persist.</li>
+      <li>In GitHub → Settings → Variables → Actions, set
+        <code>LIVE_APP_URL</code> to <code>https://YOUR_PROJECT.vercel.app</code>.</li>
       <li>Re-run <strong>Deploy GitHub Pages bridge</strong>.</li>
     </ol>
   </main>
@@ -51,7 +50,7 @@ if (!live) {
 </html>`;
   write("index.html", setup);
   write("404.html", setup);
-  console.log("LIVE_APP_URL unset — published Student Pack setup page.");
+  console.log("LIVE_APP_URL unset — published Vercel setup page.");
   process.exit(0);
 }
 
