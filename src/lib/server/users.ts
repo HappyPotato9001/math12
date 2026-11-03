@@ -1,8 +1,6 @@
-import fs from "fs";
-import path from "path";
 import { randomBytes, scryptSync, timingSafeEqual } from "crypto";
 import { nanoid } from "nanoid";
-import { getDataDir } from "./data-dir";
+import { readJson, writeJson } from "./persist";
 
 export type UserStatus = "pending" | "approved" | "rejected";
 export type UserRole = "student" | "admin";
@@ -22,26 +20,18 @@ export type PublicUser = Omit<User, "passwordHash">;
 
 type Store = { users: User[] };
 
-function storePath() {
-  return path.join(getDataDir(), "users.json");
-}
+const STORE = "users.json";
 
 function emptyStore(): Store {
   return { users: [] };
 }
 
-function ensureStore(): Store {
-  const file = storePath();
-  if (!fs.existsSync(file)) {
-    const initial = emptyStore();
-    fs.writeFileSync(file, JSON.stringify(initial, null, 2));
-    return initial;
-  }
-  return JSON.parse(fs.readFileSync(file, "utf8")) as Store;
+async function ensureStore(): Promise<Store> {
+  return readJson<Store>(STORE, emptyStore());
 }
 
-function writeStore(store: Store) {
-  fs.writeFileSync(storePath(), JSON.stringify(store, null, 2));
+async function writeStore(store: Store) {
+  await writeJson(STORE, store);
 }
 
 function normalizeEmail(email: string) {
@@ -72,8 +62,8 @@ export function toPublicUser(user: User): PublicUser {
   return rest;
 }
 
-export function ensureAdminSeed() {
-  const store = ensureStore();
+export async function ensureAdminSeed() {
+  const store = await ensureStore();
   const email = adminEmail();
   const adminPassword = process.env.ADMIN_PASSWORD || "changeme";
   const existing = store.users.find((user) => user.email === email);
@@ -81,7 +71,7 @@ export function ensureAdminSeed() {
     if (existing.role !== "admin" || existing.status !== "approved") {
       existing.role = "admin";
       existing.status = "approved";
-      writeStore(store);
+      await writeStore(store);
     }
     return;
   }
@@ -95,16 +85,16 @@ export function ensureAdminSeed() {
     provider: "credentials",
     createdAt: new Date().toISOString(),
   });
-  writeStore(store);
+  await writeStore(store);
 }
 
-export function createUser(input: {
+export async function createUser(input: {
   name: string;
   email: string;
   password: string;
 }) {
-  ensureAdminSeed();
-  const store = ensureStore();
+  await ensureAdminSeed();
+  const store = await ensureStore();
   const email = normalizeEmail(input.email);
   if (!email || !input.password || input.password.length < 6) {
     throw new Error("Use a valid email and a password with at least 6 characters.");
@@ -124,17 +114,17 @@ export function createUser(input: {
     createdAt: new Date().toISOString(),
   };
   store.users.push(user);
-  writeStore(store);
+  await writeStore(store);
   return toPublicUser(user);
 }
 
-export function upsertOAuthUser(input: {
+export async function upsertOAuthUser(input: {
   email: string;
   name?: string | null;
   provider: "google" | "github";
 }) {
-  ensureAdminSeed();
-  const store = ensureStore();
+  await ensureAdminSeed();
+  const store = await ensureStore();
   const email = normalizeEmail(input.email);
   if (!email) {
     throw new Error("OAuth account is missing an email.");
@@ -143,7 +133,7 @@ export function upsertOAuthUser(input: {
   if (existing) {
     if (!existing.provider) {
       existing.provider = input.provider;
-      writeStore(store);
+      await writeStore(store);
     }
     return toPublicUser(existing);
   }
@@ -158,13 +148,13 @@ export function upsertOAuthUser(input: {
     createdAt: new Date().toISOString(),
   };
   store.users.push(user);
-  writeStore(store);
+  await writeStore(store);
   return toPublicUser(user);
 }
 
-export function authenticateUser(email: string, password: string) {
-  ensureAdminSeed();
-  const store = ensureStore();
+export async function authenticateUser(email: string, password: string) {
+  await ensureAdminSeed();
+  const store = await ensureStore();
   const user = store.users.find(
     (item) => item.email === normalizeEmail(email),
   );
@@ -174,35 +164,35 @@ export function authenticateUser(email: string, password: string) {
   return toPublicUser(user);
 }
 
-export function getUserById(id: string) {
-  ensureAdminSeed();
-  const user = ensureStore().users.find((item) => item.id === id);
+export async function getUserById(id: string) {
+  await ensureAdminSeed();
+  const user = (await ensureStore()).users.find((item) => item.id === id);
   return user ? toPublicUser(user) : null;
 }
 
-export function getUserByEmail(email: string) {
-  ensureAdminSeed();
-  const user = ensureStore().users.find(
+export async function getUserByEmail(email: string) {
+  await ensureAdminSeed();
+  const user = (await ensureStore()).users.find(
     (item) => item.email === normalizeEmail(email),
   );
   return user ? toPublicUser(user) : null;
 }
 
-export function listUsers() {
-  ensureAdminSeed();
-  return ensureStore()
+export async function listUsers() {
+  await ensureAdminSeed();
+  return (await ensureStore())
     .users.map(toPublicUser)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-export function setUserStatus(userId: string, status: UserStatus) {
-  const store = ensureStore();
+export async function setUserStatus(userId: string, status: UserStatus) {
+  const store = await ensureStore();
   const user = store.users.find((item) => item.id === userId);
   if (!user) return null;
   if (user.role === "admin" && status !== "approved") {
     throw new Error("Admin accounts must stay approved.");
   }
   user.status = status;
-  writeStore(store);
+  await writeStore(store);
   return toPublicUser(user);
 }

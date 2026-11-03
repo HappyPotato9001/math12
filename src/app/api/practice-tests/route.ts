@@ -15,7 +15,7 @@ export async function GET() {
   if (!user || user.status !== "approved") {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
-  return NextResponse.json({ tests: listPracticeTests() });
+  return NextResponse.json({ tests: await listPracticeTests() });
 }
 
 export async function POST(request: Request) {
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       };
     }
 
-    const test = createPracticeTest({
+    const test = await createPracticeTest({
       title: String(form.get("title") || ""),
       description: String(form.get("description") || ""),
       course: String(form.get("course") || "both") as PracticeCourse,

@@ -21,7 +21,7 @@ export async function POST(request: Request, { params }: Params) {
   }
 
   try {
-    const updated = setUserStatus(id, status);
+    const updated = await setUserStatus(id, status);
     if (!updated) {
       return NextResponse.json({ error: "User not found." }, { status: 404 });
     }

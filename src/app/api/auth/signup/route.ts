@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const user = createUser({
+    const user = await createUser({
       name: String(body.name || ""),
       email: String(body.email || ""),
       password: String(body.password || ""),

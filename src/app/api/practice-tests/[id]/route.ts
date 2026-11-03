@@ -15,7 +15,7 @@ export async function DELETE(_request: Request, { params }: Params) {
 
   const { id } = await params;
   try {
-    const ok = deletePracticeTest(id, { id: user.id, role: user.role });
+    const ok = await deletePracticeTest(id, { id: user.id, role: user.role });
     if (!ok) {
       return NextResponse.json({ error: "Not found." }, { status: 404 });
     }

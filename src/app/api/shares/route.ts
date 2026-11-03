@@ -14,7 +14,7 @@ export async function GET() {
   if (!user || user.status !== "approved") {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
-  return NextResponse.json({ posts: listShares() });
+  return NextResponse.json({ posts: await listShares() });
 }
 
 export async function POST(request: Request) {
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json();
-    const post = createShare({
+    const post = await createShare({
       title: String(body.title || ""),
       body: String(body.body || ""),
       course: String(body.course || "general") as ShareCourse,

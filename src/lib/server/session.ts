@@ -5,5 +5,5 @@ export async function getSessionUser(): Promise<PublicUser | null> {
   const session = await auth();
   const id = session?.user?.id;
   if (!id) return null;
-  return getUserById(id);
+  return await getUserById(id);
 }

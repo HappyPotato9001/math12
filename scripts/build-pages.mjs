@@ -1,8 +1,7 @@
 /**
- * GitHub Pages cannot run Next.js API routes / auth / middleware.
- * This build emits a tiny static site that forwards every path to the
- * live Node app (Vercel), so https://….github.io/math12/… still works
- * with full APIs.
+ * GitHub Pages cannot run Next.js API routes.
+ * This emits a static bridge that forwards /math12/… to the live Heroku app
+ * (GitHub Student Developer Pack).
  */
 import fs from "fs";
 import path from "path";
@@ -26,33 +25,33 @@ if (!live) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Math 1/2 — setup needed</title>
+  <title>Math 1/2 — Student Pack setup</title>
   <style>
     body { margin: 0; min-height: 100vh; display: grid; place-items: center;
       font-family: "Segoe UI", system-ui, sans-serif; background: #f7fbf8; color: #152018; }
-    main { max-width: 36rem; padding: 2rem; }
+    main { max-width: 40rem; padding: 2rem; }
     code { background: #e8f1eb; padding: 0.1em 0.35em; border-radius: 4px; }
     a { color: #1f7a4d; }
   </style>
 </head>
 <body>
   <main>
-    <h1>Connect the live API app</h1>
-    <p>GitHub Pages is static and cannot run sign-in, admin, sharing, or uploads by itself.</p>
+    <h1>Use the GitHub Student Developer Pack</h1>
+    <p>Pages is static. APIs run on <strong>Heroku</strong> + <strong>MongoDB Atlas</strong> from the pack.</p>
     <ol>
-      <li>Import this repo on <a href="https://vercel.com/new">Vercel</a> (Framework: Next.js).</li>
-      <li>Add env vars from <code>.env.example</code> (<code>AUTH_SECRET</code>, OAuth, admin…).</li>
-      <li>In the GitHub repo → Settings → Secrets and variables → Actions → Variables, set
-        <code>LIVE_APP_URL</code> to your Vercel URL (e.g. <code>https://math12.vercel.app</code>).</li>
-      <li>Re-run the <strong>Deploy GitHub Pages bridge</strong> workflow.</li>
+      <li>Open <a href="https://education.github.com/pack">education.github.com/pack</a> and redeem <strong>Heroku</strong> + <strong>MongoDB Atlas</strong>.</li>
+      <li>Create a free Atlas cluster and copy the connection string.</li>
+      <li>Create a Heroku app from this repo (Deploy → GitHub, or <code>heroku create</code>).</li>
+      <li>Set Heroku config vars: <code>AUTH_SECRET</code>, <code>AUTH_URL</code>, <code>MONGODB_URI</code>, <code>ADMIN_EMAIL</code>, OAuth keys.</li>
+      <li>In GitHub → Settings → Variables → Actions, set <code>LIVE_APP_URL</code> to <code>https://YOUR_APP.herokuapp.com</code>.</li>
+      <li>Re-run <strong>Deploy GitHub Pages bridge</strong>.</li>
     </ol>
-    <p>After that, <code>/math12/math1/</code> opens the full app with working APIs.</p>
   </main>
 </body>
 </html>`;
   write("index.html", setup);
   write("404.html", setup);
-  console.log("LIVE_APP_URL unset — published setup instructions on Pages.");
+  console.log("LIVE_APP_URL unset — published Student Pack setup page.");
   process.exit(0);
 }
 
@@ -89,7 +88,7 @@ const html = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <p>Opening the live Math 1/2 app with APIs… <a href="${live}/">Continue</a></p>
+  <p>Opening the live Math 1/2 app… <a href="${live}/">Continue</a></p>
 </body>
 </html>
 `;

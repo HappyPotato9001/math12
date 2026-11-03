@@ -15,7 +15,7 @@ export async function DELETE(_request: Request, { params }: Params) {
 
   const { id } = await params;
   try {
-    const ok = deleteShare(id, { id: user.id, role: user.role });
+    const ok = await deleteShare(id, { id: user.id, role: user.role });
     if (!ok) {
       return NextResponse.json({ error: "Post not found." }, { status: 404 });
     }

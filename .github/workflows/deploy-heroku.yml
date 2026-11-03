@@ -1,0 +1,44 @@
+name: Deploy app (APIs) to Heroku
+
+# Uses GitHub Student Developer Pack Heroku credit ($13/mo for 24 months).
+# Pair with MongoDB Atlas ($50 student credits) via MONGODB_URI.
+#
+# One-time:
+# 1. Redeem Heroku + MongoDB Atlas from https://education.github.com/pack
+# 2. Create Heroku app, enable GitHub deploy or set secrets below
+# 3. Set config: AUTH_SECRET, AUTH_URL, MONGODB_URI, ADMIN_EMAIL, OAuth…
+# 4. Set GitHub Actions variable LIVE_APP_URL=https://YOUR_APP.herokuapp.com
+
+on:
+  push:
+    branches: ["master", "main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Heroku secrets
+        id: check
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+        run: |
+          if [ -z "$HEROKU_API_KEY" ] || [ -z "$HEROKU_APP_NAME" ] || [ -z "$HEROKU_EMAIL" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Skipping Heroku deploy — add HEROKU_API_KEY, HEROKU_APP_NAME, HEROKU_EMAIL secrets."
+            echo "Or connect the repo under Heroku → Deploy → GitHub."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy to Heroku
+        if: steps.check.outputs.skip == 'false'
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}

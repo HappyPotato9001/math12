@@ -3,10 +3,12 @@ import path from "path";
 
 /**
  * Local: ./data
- * Vercel/serverless: /tmp (writable). Seeded empty; ensureAdminSeed recreates admin.
+ * Ephemeral hosts (Heroku dyno / Vercel): /tmp when no MongoDB URI is set.
+ * Prefer MONGODB_URI (MongoDB Atlas via GitHub Student Pack) in production.
  */
 export function getDataDir() {
-  const dir = process.env.VERCEL
+  const ephemeral = Boolean(process.env.DYNO || process.env.VERCEL);
+  const dir = ephemeral
     ? path.join("/tmp", "math12-data")
     : path.join(process.cwd(), "data");
   fs.mkdirSync(dir, { recursive: true });

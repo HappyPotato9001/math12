@@ -10,5 +10,5 @@ export async function GET() {
   if (!user || user.role !== "admin" || user.status !== "approved") {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
-  return NextResponse.json({ users: listUsers() });
+  return NextResponse.json({ users: await listUsers() });
 }

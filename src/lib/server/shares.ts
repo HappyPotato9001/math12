@@ -1,7 +1,5 @@
-import fs from "fs";
-import path from "path";
 import { nanoid } from "nanoid";
-import { getDataDir } from "./data-dir";
+import { readJson, writeJson } from "./persist";
 
 export type ShareCourse = "math1" | "math2" | "general";
 
@@ -18,31 +16,23 @@ export type SharePost = {
 
 type Store = { posts: SharePost[] };
 
-function storePath() {
-  return path.join(getDataDir(), "shares.json");
+const STORE = "shares.json";
+
+async function ensureStore(): Promise<Store> {
+  return readJson<Store>(STORE, { posts: [] });
 }
 
-function ensureStore(): Store {
-  const file = storePath();
-  if (!fs.existsSync(file)) {
-    const initial: Store = { posts: [] };
-    fs.writeFileSync(file, JSON.stringify(initial, null, 2));
-    return initial;
-  }
-  return JSON.parse(fs.readFileSync(file, "utf8")) as Store;
+async function writeStore(store: Store) {
+  await writeJson(STORE, store);
 }
 
-function writeStore(store: Store) {
-  fs.writeFileSync(storePath(), JSON.stringify(store, null, 2));
-}
-
-export function listShares() {
-  return ensureStore()
+export async function listShares() {
+  return (await ensureStore())
     .posts.slice()
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-export function createShare(input: {
+export async function createShare(input: {
   title: string;
   body: string;
   course: ShareCourse;
@@ -74,7 +64,7 @@ export function createShare(input: {
     }
   }
 
-  const store = ensureStore();
+  const store = await ensureStore();
   const post: SharePost = {
     id: nanoid(12),
     title,
@@ -86,12 +76,15 @@ export function createShare(input: {
     createdAt: new Date().toISOString(),
   };
   store.posts.unshift(post);
-  writeStore(store);
+  await writeStore(store);
   return post;
 }
 
-export function deleteShare(id: string, requester: { id: string; role: string }) {
-  const store = ensureStore();
+export async function deleteShare(
+  id: string,
+  requester: { id: string; role: string },
+) {
+  const store = await ensureStore();
   const index = store.posts.findIndex((post) => post.id === id);
   if (index < 0) return false;
   const post = store.posts[index];
@@ -99,6 +92,6 @@ export function deleteShare(id: string, requester: { id: string; role: string })
     throw new Error("You can only delete your own posts.");
   }
   store.posts.splice(index, 1);
-  writeStore(store);
+  await writeStore(store);
   return true;
 }

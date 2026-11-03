@@ -1,7 +1,6 @@
-import fs from "fs";
 import path from "path";
 import { nanoid } from "nanoid";
-import { getDataDir } from "./data-dir";
+import { deleteBinary, readBinary, readJson, writeBinary, writeJson } from "./persist";
 
 export type PracticeCourse = "math1" | "math2" | "both";
 export type PracticeSource = "ai" | "teacher" | "student" | "other";
@@ -24,13 +23,7 @@ export type PracticeTest = {
 
 type Store = { tests: PracticeTest[] };
 
-function storePath() {
-  return path.join(getDataDir(), "practice-tests.json");
-}
-
-function filesDir() {
-  return path.join(getDataDir(), "practice-test-files");
-}
+const STORE = "practice-tests.json";
 
 const ALLOWED_MIME = new Set([
   "application/pdf",
@@ -42,55 +35,43 @@ const ALLOWED_MIME = new Set([
 
 const MAX_BYTES = 8 * 1024 * 1024;
 
-function ensureDirs() {
-  fs.mkdirSync(filesDir(), { recursive: true });
+async function ensureStore(): Promise<Store> {
+  return readJson<Store>(STORE, { tests: [] });
 }
 
-function ensureStore(): Store {
-  ensureDirs();
-  const file = storePath();
-  if (!fs.existsSync(file)) {
-    const initial: Store = { tests: [] };
-    fs.writeFileSync(file, JSON.stringify(initial, null, 2));
-    return initial;
-  }
-  return JSON.parse(fs.readFileSync(file, "utf8")) as Store;
+async function writeStore(store: Store) {
+  await writeJson(STORE, store);
 }
 
-function writeStore(store: Store) {
-  ensureDirs();
-  fs.writeFileSync(storePath(), JSON.stringify(store, null, 2));
-}
-
-function filePathFor(id: string, fileName: string) {
+function binaryKey(id: string, fileName: string) {
   const safeExt = path.extname(fileName).slice(0, 12) || ".bin";
-  return path.join(filesDir(), `${id}${safeExt}`);
+  return path.posix.join("practice-test-files", `${id}${safeExt}`);
 }
 
-export function listPracticeTests() {
-  return ensureStore()
+export async function listPracticeTests() {
+  return (await ensureStore())
     .tests.slice()
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-export function getPracticeTest(id: string) {
-  return ensureStore().tests.find((test) => test.id === id) ?? null;
+export async function getPracticeTest(id: string) {
+  return (await ensureStore()).tests.find((test) => test.id === id) ?? null;
 }
 
-export function getPracticeTestFile(id: string) {
-  const test = getPracticeTest(id);
+export async function getPracticeTestFile(id: string) {
+  const test = await getPracticeTest(id);
   if (!test?.hasFile || !test.fileName) return null;
-  const filePath = filePathFor(id, test.fileName);
-  if (!fs.existsSync(filePath)) return null;
+  const buffer = await readBinary(binaryKey(id, test.fileName));
+  if (!buffer) return null;
   return {
     test,
-    buffer: fs.readFileSync(filePath),
+    buffer,
     fileName: test.fileName,
     mime: test.fileMime || "application/octet-stream",
   };
 }
 
-export function createPracticeTest(input: {
+export async function createPracticeTest(input: {
   title: string;
   description: string;
   course: PracticeCourse;
@@ -144,14 +125,13 @@ export function createPracticeTest(input: {
   let hasFile = false;
 
   if (input.file) {
-    ensureDirs();
     fileName = input.file.name.slice(0, 180);
     fileMime = input.file.mime || "application/octet-stream";
     hasFile = true;
-    fs.writeFileSync(filePathFor(id, fileName), input.file.buffer);
+    await writeBinary(binaryKey(id, fileName), input.file.buffer);
   }
 
-  const store = ensureStore();
+  const store = await ensureStore();
   const test: PracticeTest = {
     id,
     title,
@@ -168,15 +148,15 @@ export function createPracticeTest(input: {
     createdAt: new Date().toISOString(),
   };
   store.tests.unshift(test);
-  writeStore(store);
+  await writeStore(store);
   return test;
 }
 
-export function deletePracticeTest(
+export async function deletePracticeTest(
   id: string,
   requester: { id: string; role: string },
 ) {
-  const store = ensureStore();
+  const store = await ensureStore();
   const index = store.tests.findIndex((test) => test.id === id);
   if (index < 0) return false;
   const test = store.tests[index];
@@ -184,10 +164,9 @@ export function deletePracticeTest(
     throw new Error("You can only delete your own practice tests.");
   }
   if (test.hasFile && test.fileName) {
-    const filePath = filePathFor(id, test.fileName);
-    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+    await deleteBinary(binaryKey(id, test.fileName));
   }
   store.tests.splice(index, 1);
-  writeStore(store);
+  await writeStore(store);
   return true;
 }

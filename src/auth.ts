@@ -41,7 +41,7 @@ providers.push(
     async authorize(credentials) {
       const email = String(credentials?.email || "");
       const password = String(credentials?.password || "");
-      const user = authenticateUser(email, password);
+      const user = await authenticateUser(email, password);
       if (!user) return null;
       return {
         id: user.id,
@@ -75,7 +75,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           (account.provider === "google" || account.provider === "github") &&
           user.email
         ) {
-          const dbUser = upsertOAuthUser({
+          const dbUser = await upsertOAuthUser({
             email: user.email,
             name: user.name,
             provider: account.provider,
@@ -91,7 +91,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // Keep role/status in sync so admin Accept on the site takes effect
       // without requiring students (or newly promoted admins) to sign out.
       if (token.userId) {
-        const fresh = getUserById(token.userId as string);
+        const fresh = await getUserById(token.userId as string);
         if (fresh) {
           token.role = fresh.role;
           token.status = fresh.status;

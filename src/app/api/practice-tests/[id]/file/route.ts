@@ -14,7 +14,7 @@ export async function GET(_request: Request, { params }: Params) {
   }
 
   const { id } = await params;
-  const file = getPracticeTestFile(id);
+  const file = await getPracticeTestFile(id);
   if (!file) {
     return NextResponse.json({ error: "File not found." }, { status: 404 });
   }
