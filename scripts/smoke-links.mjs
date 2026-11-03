@@ -280,6 +280,20 @@ console.log("session user:", me.user?.email || me.user || null, me.user?.status)
 if (!me.user || me.user.status !== "approved") {
   broken.push({ type: "auth-login-failed", me, loginStatus });
 } else {
+  const loginPage = await checkAuthed(`${BASE}/login?next=%2Fpractice-tests`);
+  const loginRedirectOk =
+    (loginPage.status === 307 || loginPage.status === 308) &&
+    (loginPage.location || "").includes("/practice-tests");
+  console.log(
+    loginRedirectOk ? "OK" : "FAIL",
+    loginPage.status,
+    "/login?next=/practice-tests",
+    loginPage.location || "",
+  );
+  if (!loginRedirectOk) {
+    broken.push({ type: "authenticated-login-page", ...loginPage });
+  }
+
   const authedPages = [
     "/learning",
     "/sharing",
