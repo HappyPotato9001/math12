@@ -33,7 +33,8 @@ jobs:
 
       - name: Build Pages bridge
         env:
-          LIVE_APP_URL: ${{ vars.LIVE_APP_URL }}
+          # Override with repo variable LIVE_APP_URL if the Vercel URL changes.
+          LIVE_APP_URL: ${{ vars.LIVE_APP_URL || 'https://math12-nu.vercel.app' }}
         run: npm run build:pages
 
       - name: Upload Pages artifact

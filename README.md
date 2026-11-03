@@ -26,26 +26,22 @@ GitHub Pages is **static** and cannot run API routes. The full app (auth, admin,
 
 ### Setup
 
-1. Import this repo at [vercel.com/new](https://vercel.com/new/import?s=https://github.com/HappyPotato9001/math12) (Next.js defaults are fine).
-2. In Vercel → Project → **Settings → Environment Variables**, add (Production + Preview):
-   - `AUTH_SECRET` — long random string
-   - `AUTH_URL` — `https://YOUR_PROJECT.vercel.app`
-   - `ADMIN_EMAIL` — e.g. `yui.inadome@gmail.com`
-   - `ADMIN_PASSWORD` — if using email/password admin
-   - `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` (optional)
-   - `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` (optional)
-   - **Recommended:** `MONGODB_URI` + `MONGODB_DB=math12` so accounts survive cold starts (Atlas free tier is fine)
-3. Add OAuth callback URLs:
-   - `https://YOUR_PROJECT.vercel.app/api/auth/callback/google`
-   - `https://YOUR_PROJECT.vercel.app/api/auth/callback/github`
-4. Deploy (Vercel deploys on every push to `master`).
-5. In GitHub → **Settings → Secrets and variables → Actions → Variables**, set:
-   - `LIVE_APP_URL` = `https://YOUR_PROJECT.vercel.app` (no trailing slash)
-6. Re-run the **Deploy GitHub Pages bridge** workflow (or push again).
+Live app: [https://math12-nu.vercel.app/](https://math12-nu.vercel.app/)  
+GitHub Pages: [https://happypotato9001.github.io/math12/](https://happypotato9001.github.io/math12/) → forwards to Vercel.
 
-Then [https://happypotato9001.github.io/math12/math1/](https://happypotato9001.github.io/math12/math1/) opens the Vercel app with working APIs.
+In Vercel → **Settings → Environment Variables**, make sure these are set (Production):
 
-Optional CI deploy secrets (if you use the Vercel Actions workflow): `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+- `AUTH_SECRET` — long random string  
+- `AUTH_URL` — `https://math12-nu.vercel.app`  
+- `ADMIN_EMAIL` — e.g. `yui.inadome@gmail.com`  
+- OAuth keys if you use Google/GitHub sign-in  
+- **Recommended:** `MONGODB_URI` + `MONGODB_DB=math12` so accounts survive cold starts  
+
+OAuth callbacks:
+
+- `https://math12-nu.vercel.app/api/auth/callback/google`
+- `https://math12-nu.vercel.app/api/auth/callback/github`
+
 
 ## Access flow (Node server)
 
