@@ -3,11 +3,16 @@ import { notFound } from "next/navigation";
 import { PracticeDrill } from "@/components/PracticeDrill";
 import { getProblems, topicKey } from "@/lib/content";
 import { getCourse, getTopic, getUnit } from "@/lib/curriculum";
+import { allTopicParams } from "@/lib/staticParams";
 import type { CourseId } from "@/lib/types";
 
 type PageProps = {
   params: Promise<{ course: string; unit: string; topic: string }>;
 };
+
+export function generateStaticParams() {
+  return allTopicParams();
+}
 
 export default async function PracticePage({ params }: PageProps) {
   const { course: courseId, unit: unitSlug, topic: topicSlug } = await params;

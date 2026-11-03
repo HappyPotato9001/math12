@@ -1,19 +1,64 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { MathText } from "@/components/MathText";
-import { getRoom, listPosts } from "@/lib/db";
+import { exportRoomData, getRoom, listPosts } from "@/lib/db";
 
-export const dynamic = "force-dynamic";
+type FeedPost = ReturnType<typeof listPosts>[number];
 
-type PageProps = {
-  params: Promise<{ code: string }>;
-};
+export function ClassFeedClient() {
+  const searchParams = useSearchParams();
+  const code = (searchParams.get("code") || "").toUpperCase();
+  const [roomName, setRoomName] = useState<string | null>(null);
+  const [posts, setPosts] = useState<FeedPost[]>([]);
+  const [copied, setCopied] = useState(false);
+  const [missing, setMissing] = useState(false);
 
-export default async function ClassFeedPage({ params }: PageProps) {
-  const { code } = await params;
-  const room = getRoom(code);
-  if (!room) notFound();
-  const posts = listPosts(room.code);
+  useEffect(() => {
+    if (!code) {
+      setMissing(true);
+      return;
+    }
+    const room = getRoom(code);
+    if (!room) {
+      setMissing(true);
+      setRoomName(null);
+      setPosts([]);
+      return;
+    }
+    setMissing(false);
+    setRoomName(room.name);
+    setPosts(listPosts(room.code));
+  }, [code]);
+
+  function copyExport() {
+    const payload = exportRoomData(code);
+    void navigator.clipboard.writeText(JSON.stringify(payload));
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  }
+
+  if (missing) {
+    return (
+      <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
+        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl text-ink">
+          Room not found
+        </h1>
+        <p className="mt-3 text-ink-soft">
+          This browser does not have that class room yet. Join the code on the
+          class page, or import room JSON from a classmate.
+        </p>
+        <Link
+          href="/class/"
+          className="mt-5 inline-block rounded-xl bg-accent px-4 py-2 text-sm text-white"
+        >
+          Go to class rooms
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
@@ -23,19 +68,28 @@ export default async function ClassFeedPage({ params }: PageProps) {
             Class room
           </p>
           <h1 className="mt-2 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
-            {room.name}
+            {roomName}
           </h1>
           <p className="mt-2 text-sm text-ink-soft">
-            Code <span className="font-medium text-ink">{room.code}</span> — share
-            it with classmates
+            Code <span className="font-medium text-ink">{code}</span> — share it
+            with classmates
           </p>
         </div>
-        <Link
-          href="/class"
-          className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
-        >
-          Switch room
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={copyExport}
+            className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
+          >
+            {copied ? "Copied export" : "Export room"}
+          </button>
+          <Link
+            href="/class/"
+            className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
+          >
+            Switch room
+          </Link>
+        </div>
       </div>
 
       <div className="mt-8 space-y-4">
@@ -48,7 +102,7 @@ export default async function ClassFeedPage({ params }: PageProps) {
           posts.map((post) => (
             <Link
               key={post.id}
-              href={`/class/${room.code}/posts/${post.id}`}
+              href={`/class/post/?code=${code}&id=${post.id}`}
               className="block animate-rise rounded-2xl border border-line bg-surface p-5 shadow-[var(--shadow)] transition hover:border-accent/40"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">

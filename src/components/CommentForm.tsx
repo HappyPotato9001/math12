@@ -1,22 +1,23 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { createComment } from "@/lib/db";
 import { readClassSession } from "@/lib/session";
 
 export function CommentForm({
   roomCode,
   postId,
+  onCommented,
 }: {
   roomCode: string;
   postId: string;
+  onCommented?: () => void;
 }) {
-  const router = useRouter();
   const [body, setBody] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function onSubmit(event: FormEvent) {
+  function onSubmit(event: FormEvent) {
     event.preventDefault();
     setError("");
     const session = readClassSession();
@@ -25,26 +26,20 @@ export function CommentForm({
       return;
     }
     setLoading(true);
-    try {
-      const response = await fetch(
-        `/api/rooms/${roomCode}/posts/${postId}/comments`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ authorId: session.memberId, body }),
-        },
-      );
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Could not comment");
-      }
-      setBody("");
-      router.refresh();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not comment");
-    } finally {
+    const comment = createComment({
+      roomCode,
+      postId,
+      authorId: session.memberId,
+      body,
+    });
+    if (!comment) {
+      setError("Could not add comment.");
       setLoading(false);
+      return;
     }
+    setBody("");
+    setLoading(false);
+    onCommented?.();
   }
 
   return (

@@ -1,29 +1,64 @@
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { CommentForm } from "@/components/CommentForm";
 import { MathText } from "@/components/MathText";
 import { getPost, getRoom } from "@/lib/db";
 
-export const dynamic = "force-dynamic";
+type PostView = NonNullable<ReturnType<typeof getPost>>;
 
-type PageProps = {
-  params: Promise<{ code: string; id: string }>;
-};
+export function ClassPostClient() {
+  const searchParams = useSearchParams();
+  const code = (searchParams.get("code") || "").toUpperCase();
+  const id = searchParams.get("id") || "";
+  const [roomName, setRoomName] = useState("");
+  const [post, setPost] = useState<PostView | null>(null);
+  const [missing, setMissing] = useState(false);
 
-export default async function PostPage({ params }: PageProps) {
-  const { code, id } = await params;
-  const room = getRoom(code);
-  if (!room) notFound();
-  const post = getPost(room.code, id);
-  if (!post) notFound();
+  function reload() {
+    if (!code || !id) {
+      setMissing(true);
+      return;
+    }
+    const room = getRoom(code);
+    const next = getPost(code, id);
+    if (!room || !next) {
+      setMissing(true);
+      setPost(null);
+      return;
+    }
+    setMissing(false);
+    setRoomName(room.name);
+    setPost(next);
+  }
+
+  useEffect(() => {
+    reload();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, id]);
+
+  if (missing || !post) {
+    return (
+      <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
+        <h1 className="font-[family-name:var(--font-fraunces)] text-3xl text-ink">
+          Post not found
+        </h1>
+        <Link href="/class/" className="mt-4 inline-block text-accent underline">
+          Back to class rooms
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
       <Link
-        href={`/class/${room.code}`}
+        href={`/class/room/?code=${code}`}
         className="text-sm text-ink-soft hover:text-accent"
       >
-        ← Back to {room.name}
+        ← Back to {roomName}
       </Link>
 
       <article className="mt-5 rounded-2xl border border-line bg-surface p-6 shadow-[var(--shadow)] sm:p-8">
@@ -45,11 +80,7 @@ export default async function PostPage({ params }: PageProps) {
           <p className="mt-3 text-ink-soft">
             Answer submitted: <span className="text-ink">{post.answer || "—"}</span>
           </p>
-          <p
-            className={`mt-2 text-sm ${
-              post.isCorrect ? "text-ok" : "text-warn"
-            }`}
-          >
+          <p className={`mt-2 text-sm ${post.isCorrect ? "text-ok" : "text-warn"}`}>
             {post.isCorrect ? "Marked correct" : "Marked incorrect / needs help"}
           </p>
         </div>
@@ -61,9 +92,7 @@ export default async function PostPage({ params }: PageProps) {
         </h2>
         <div className="mt-4 space-y-3">
           {post.comments.length === 0 ? (
-            <p className="text-sm text-ink-soft">
-              No comments yet. Leave a hint.
-            </p>
+            <p className="text-sm text-ink-soft">No comments yet. Leave a hint.</p>
           ) : (
             post.comments.map((comment) => (
               <div
@@ -71,9 +100,7 @@ export default async function PostPage({ params }: PageProps) {
                 className="rounded-xl border border-line bg-paper/50 px-4 py-3"
               >
                 <div className="flex items-center justify-between gap-2 text-xs text-ink-soft">
-                  <span className="font-medium text-ink">
-                    {comment.authorName}
-                  </span>
+                  <span className="font-medium text-ink">{comment.authorName}</span>
                   <span>{new Date(comment.createdAt).toLocaleString()}</span>
                 </div>
                 <p className="mt-2 text-sm whitespace-pre-wrap">{comment.body}</p>
@@ -81,7 +108,7 @@ export default async function PostPage({ params }: PageProps) {
             ))
           )}
         </div>
-        <CommentForm roomCode={room.code} postId={post.id} />
+        <CommentForm roomCode={code} postId={post.id} onCommented={reload} />
       </section>
     </div>
   );

@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import { nanoid } from "nanoid";
 
 export type Room = {
@@ -43,31 +41,25 @@ type Store = {
   comments: Comment[];
 };
 
-const dataDir = path.join(process.cwd(), "data");
-const storePath = path.join(dataDir, "store.json");
+const STORE_KEY = "math12-class-store-v1";
 
 function emptyStore(): Store {
   return { rooms: [], members: [], posts: [], comments: [] };
 }
 
-function ensureStore(): Store {
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
+function readStore(): Store {
+  if (typeof window === "undefined") return emptyStore();
+  try {
+    const raw = window.localStorage.getItem(STORE_KEY);
+    if (!raw) return emptyStore();
+    return JSON.parse(raw) as Store;
+  } catch {
+    return emptyStore();
   }
-  if (!fs.existsSync(storePath)) {
-    const initial = emptyStore();
-    fs.writeFileSync(storePath, JSON.stringify(initial, null, 2));
-    return initial;
-  }
-  const raw = fs.readFileSync(storePath, "utf8");
-  return JSON.parse(raw) as Store;
 }
 
 function writeStore(store: Store) {
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-  fs.writeFileSync(storePath, JSON.stringify(store, null, 2));
+  window.localStorage.setItem(STORE_KEY, JSON.stringify(store));
 }
 
 function makeRoomCode(): string {
@@ -80,7 +72,7 @@ function makeRoomCode(): string {
 }
 
 export function createRoom(name: string, displayName: string) {
-  const store = ensureStore();
+  const store = readStore();
   let code = makeRoomCode();
   while (store.rooms.some((room) => room.code === code)) {
     code = makeRoomCode();
@@ -102,10 +94,22 @@ export function createRoom(name: string, displayName: string) {
 }
 
 export function joinRoom(code: string, displayName: string) {
-  const store = ensureStore();
+  const store = readStore();
   const normalized = code.trim().toUpperCase();
-  const room = store.rooms.find((item) => item.code === normalized);
-  if (!room) return null;
+  if (!normalized) return null;
+
+  let room = store.rooms.find((item) => item.code === normalized);
+  if (!room) {
+    // Same code on another browser starts a local room shell so classmates can
+    // still use one shared code on a lab computer / after importing room data.
+    room = {
+      code: normalized,
+      name: `Room ${normalized}`,
+      createdAt: new Date().toISOString(),
+    };
+    store.rooms.push(room);
+  }
+
   const member: Member = {
     id: nanoid(10),
     roomCode: room.code,
@@ -117,17 +121,12 @@ export function joinRoom(code: string, displayName: string) {
 }
 
 export function getRoom(code: string) {
-  const store = ensureStore();
+  const store = readStore();
   return store.rooms.find((room) => room.code === code.toUpperCase()) ?? null;
 }
 
-export function getMember(memberId: string) {
-  const store = ensureStore();
-  return store.members.find((member) => member.id === memberId) ?? null;
-}
-
 export function listPosts(roomCode: string) {
-  const store = ensureStore();
+  const store = readStore();
   return store.posts
     .filter((post) => post.roomCode === roomCode.toUpperCase())
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
@@ -142,7 +141,7 @@ export function listPosts(roomCode: string) {
 }
 
 export function getPost(roomCode: string, postId: string) {
-  const store = ensureStore();
+  const store = readStore();
   const post = store.posts.find(
     (item) => item.id === postId && item.roomCode === roomCode.toUpperCase(),
   );
@@ -176,7 +175,7 @@ export function createPost(input: {
   answer: string;
   isCorrect: boolean;
 }) {
-  const store = ensureStore();
+  const store = readStore();
   const room = store.rooms.find(
     (item) => item.code === input.roomCode.toUpperCase(),
   );
@@ -208,7 +207,7 @@ export function createComment(input: {
   authorId: string;
   body: string;
 }) {
-  const store = ensureStore();
+  const store = readStore();
   const post = store.posts.find(
     (item) =>
       item.id === input.postId && item.roomCode === input.roomCode.toUpperCase(),
@@ -217,6 +216,7 @@ export function createComment(input: {
   if (!post || !member || member.roomCode !== post.roomCode) {
     return null;
   }
+  if (!input.body.trim()) return null;
   const comment: Comment = {
     id: nanoid(12),
     postId: post.id,
@@ -230,4 +230,49 @@ export function createComment(input: {
     ...comment,
     authorName: member.displayName,
   };
+}
+
+export function exportRoomData(roomCode: string) {
+  const store = readStore();
+  const code = roomCode.toUpperCase();
+  return {
+    room: store.rooms.find((room) => room.code === code) ?? null,
+    members: store.members.filter((member) => member.roomCode === code),
+    posts: store.posts.filter((post) => post.roomCode === code),
+    comments: store.comments.filter((comment) =>
+      store.posts.some(
+        (post) => post.id === comment.postId && post.roomCode === code,
+      ),
+    ),
+  };
+}
+
+export function importRoomData(payload: {
+  room: Room | null;
+  members: Member[];
+  posts: Post[];
+  comments: Comment[];
+}) {
+  if (!payload.room) return false;
+  const store = readStore();
+  const code = payload.room.code.toUpperCase();
+  store.rooms = [
+    ...store.rooms.filter((room) => room.code !== code),
+    { ...payload.room, code },
+  ];
+  store.members = [
+    ...store.members.filter((member) => member.roomCode !== code),
+    ...payload.members,
+  ];
+  store.posts = [
+    ...store.posts.filter((post) => post.roomCode !== code),
+    ...payload.posts,
+  ];
+  const postIds = new Set(payload.posts.map((post) => post.id));
+  store.comments = [
+    ...store.comments.filter((comment) => !postIds.has(comment.postId)),
+    ...payload.comments,
+  ];
+  writeStore(store);
+  return true;
 }

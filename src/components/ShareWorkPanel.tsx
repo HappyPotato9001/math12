@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Problem } from "@/lib/types";
+import { createPost } from "@/lib/db";
 import { readClassSession } from "@/lib/session";
 
 type ShareWorkPanelProps = {
@@ -38,7 +39,7 @@ export function ShareWorkPanel({
     setMessage("");
   }, [workDefault, problem.id]);
 
-  async function share() {
+  function share() {
     const session = readClassSession();
     if (!session) {
       setStatus("error");
@@ -46,33 +47,25 @@ export function ShareWorkPanel({
       return;
     }
     setStatus("saving");
-    try {
-      const response = await fetch(`/api/rooms/${session.roomCode}/posts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          authorId: session.memberId,
-          topicPath,
-          topicTitle,
-          problemId: problem.id,
-          problemPrompt: problem.prompt,
-          workText,
-          answer,
-          isCorrect,
-        }),
-      });
-      if (!response.ok) {
-        throw new Error("Share failed");
-      }
-      const data = (await response.json()) as { id: string };
-      setStatus("done");
-      setMessage(`Shared to ${session.roomCode}.`);
-      setSessionCode(session.roomCode);
-      void data;
-    } catch {
+    const post = createPost({
+      roomCode: session.roomCode,
+      authorId: session.memberId,
+      topicPath,
+      topicTitle,
+      problemId: problem.id,
+      problemPrompt: problem.prompt,
+      workText,
+      answer,
+      isCorrect,
+    });
+    if (!post) {
       setStatus("error");
-      setMessage("Could not share right now. Try again.");
+      setMessage("Could not share. Re-join the class room and try again.");
+      return;
     }
+    setStatus("done");
+    setMessage(`Shared to ${session.roomCode}.`);
+    setSessionCode(session.roomCode);
   }
 
   return (
@@ -99,13 +92,13 @@ export function ShareWorkPanel({
           {status === "saving" ? "Sharing…" : "Share with class"}
         </button>
         {!sessionCode && (
-          <Link href="/class" className="text-sm text-accent underline">
+          <Link href="/class/" className="text-sm text-accent underline">
             Join a class room
           </Link>
         )}
         {sessionCode && (
           <Link
-            href={`/class/${sessionCode}`}
+            href={`/class/room/?code=${sessionCode}`}
             className="text-sm text-accent underline"
           >
             Open {sessionCode}

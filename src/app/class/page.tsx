@@ -11,7 +11,8 @@ export default function ClassPage() {
       </h1>
       <p className="mt-3 text-ink-soft">
         Create a room, share the code, and post worked attempts from practice so
-        classmates can help.
+        classmates can help. On GitHub Pages, rooms live in this browser — use
+        Export/Import to share across devices.
       </p>
       <div className="mt-8">
         <ClassRoomClient />

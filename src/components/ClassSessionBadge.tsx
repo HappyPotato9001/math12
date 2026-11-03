@@ -18,7 +18,7 @@ export function ClassSessionBadge() {
 
   return (
     <Link
-      href={`/class/${session.roomCode}`}
+      href={`/class/room/?code=${session.roomCode}`}
       className="hidden rounded-full border border-accent/30 bg-accent-soft px-3 py-1.5 text-xs font-medium text-accent-deep md:inline-flex"
       title={`Signed into ${session.roomName} as ${session.displayName}`}
     >
