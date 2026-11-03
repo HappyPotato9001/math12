@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ineq-1",
+    "type": "multiple-choice",
+    "prompt": "Solve $x + 4 \\le 9$. Which solution set is correct?",
+    "choices": ["$x \\le 5$", "$x \\ge 5$", "$x < 5$", "$x > 13$"],
+    "answer": "$x \\le 5$",
+    "acceptedAnswers": ["x<=5", "x ≤ 5"],
+    "hint": "Subtract 4 from both sides. The inequality direction stays the same.",
+    "solution": "$x \\le 5$.",
+    "explanation": "Subtracting a positive number does not flip the inequality."
+  },
+  {
+    "id": "ineq-2",
+    "type": "multiple-choice",
+    "prompt": "Solve $-3x > 12$. Which is correct?",
+    "choices": ["$x > -4$", "$x < -4$", "$x > 4$", "$x < 4$"],
+    "answer": "$x < -4$",
+    "acceptedAnswers": ["x<-4"],
+    "hint": "Divide by $-3$ and flip the inequality.",
+    "solution": "$x < -4$.",
+    "explanation": "Dividing by a negative reverses the comparison."
+  },
+  {
+    "id": "ineq-3",
+    "type": "numeric",
+    "prompt": "What is the boundary value for $2x - 5 \\ge 7$? Enter the number where the circle sits.",
+    "answer": 6,
+    "hint": "Solve the related equation $2x-5=7$.",
+    "solution": "$2x=12$, so the boundary is $x=6$ (closed circle).",
+    "explanation": "The inequality becomes $x \\ge 6$, so 6 is included."
+  },
+  {
+    "id": "ineq-4",
+    "type": "multiple-choice",
+    "prompt": "Which number is a solution to $5 - x < 2$?",
+    "choices": ["$0$", "$2$", "$4$", "$-1$"],
+    "answer": "$4$",
+    "acceptedAnswers": ["4"],
+    "hint": "Solve the inequality first: isolate $x$, then test options.",
+    "solution": "$x > 3$, so $4$ works.",
+    "explanation": "From $5-x<2$, subtract 5 to get $-x<-3$, then multiply by $-1$ and flip: $x>3$."
+  }
+]

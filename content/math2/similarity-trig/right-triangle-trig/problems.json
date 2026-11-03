@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rtt-1",
+    "type": "expression",
+    "prompt": "Opposite $= 3$, hypotenuse $= 5$. Enter $\\sin \\theta$ as a fraction like $3/5$.",
+    "answer": "3/5",
+    "acceptedAnswers": ["3/5", "0.6"],
+    "hint": "Sine is opposite over hypotenuse.",
+    "solution": "$\\sin \\theta = 3/5$.",
+    "explanation": "SOH: opposite/hypotenuse."
+  },
+  {
+    "id": "rtt-2",
+    "type": "expression",
+    "prompt": "Adjacent $= 8$, opposite $= 15$. Enter $\\tan \\theta$ as a fraction.",
+    "answer": "15/8",
+    "acceptedAnswers": ["15/8", "1.875"],
+    "hint": "Tangent is opposite over adjacent.",
+    "solution": "$\\tan \\theta = 15/8$.",
+    "explanation": "TOA: opposite/adjacent."
+  },
+  {
+    "id": "rtt-3",
+    "type": "numeric",
+    "prompt": "A right triangle has legs 6 and 8. What is the hypotenuse?",
+    "answer": 10,
+    "hint": "Use $a^2+b^2=c^2$.",
+    "solution": "$\\sqrt{36+64}=10$.",
+    "explanation": "Classic 6-8-10 triple (scaled 3-4-5)."
+  },
+  {
+    "id": "rtt-4",
+    "type": "multiple-choice",
+    "prompt": "If $\\cos \\theta = \\dfrac{12}{13}$ in a right triangle, what is $\\sin \\theta$?",
+    "choices": ["$5/13$", "$12/5$", "$13/12$", "$5/12$"],
+    "answer": "$5/13$",
+    "acceptedAnswers": ["5/13"],
+    "hint": "Find the missing side with Pythagoras, then use SOH.",
+    "solution": "Missing side is 5, so $\\sin \\theta = 5/13$.",
+    "explanation": "$13^2-12^2=25$, so opposite $=5$."
+  }
+]

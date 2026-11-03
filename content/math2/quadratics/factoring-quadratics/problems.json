@@ -1,0 +1,42 @@
+[
+  {
+    "id": "fq-1",
+    "type": "expression",
+    "prompt": "Factor $x^2 + 7x + 12$. Enter your answer like $(x+3)(x+4)$.",
+    "answer": "(x+3)(x+4)",
+    "acceptedAnswers": ["(x+4)(x+3)", "(x+3)(x+4)"],
+    "hint": "Find two numbers that multiply to 12 and add to 7.",
+    "solution": "$(x+3)(x+4)$.",
+    "explanation": "$3+4=7$ and $3\\cdot4=12$."
+  },
+  {
+    "id": "fq-2",
+    "type": "multiple-choice",
+    "prompt": "Which is a factor of $x^2 - 5x + 6$?",
+    "choices": ["$(x-2)$", "$(x+2)$", "$(x-6)$", "$(x+3)$"],
+    "answer": "$(x-2)$",
+    "acceptedAnswers": ["(x-2)", "x-2"],
+    "hint": "Numbers that multiply to 6 and add to $-5$.",
+    "solution": "$(x-2)(x-3)$, so $(x-2)$ is a factor.",
+    "explanation": "$-2$ and $-3$ multiply to 6 and add to $-5$."
+  },
+  {
+    "id": "fq-3",
+    "type": "numeric",
+    "prompt": "One root of $x^2 - 9x + 20 = 0$ is $4$. What is the other root?",
+    "answer": 5,
+    "hint": "Factor as $(x-4)(x-\\_\\_)=0$.",
+    "solution": "$(x-4)(x-5)=0$, so the other root is $5$.",
+    "explanation": "The constant 20 and sum 9 point to 4 and 5."
+  },
+  {
+    "id": "fq-4",
+    "type": "expression",
+    "prompt": "Factor $x^2 - 16$. Enter like $(x-4)(x+4)$.",
+    "answer": "(x-4)(x+4)",
+    "acceptedAnswers": ["(x+4)(x-4)", "(x-4)(x+4)"],
+    "hint": "Difference of squares: $a^2-b^2=(a-b)(a+b)$.",
+    "solution": "$(x-4)(x+4)$.",
+    "explanation": "$x^2-16 = x^2-4^2$."
+  }
+]

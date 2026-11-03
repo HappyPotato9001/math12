@@ -1,0 +1,41 @@
+[
+  {
+    "id": "si-1",
+    "type": "multiple-choice",
+    "prompt": "In $y = -2x + 5$, what is the slope?",
+    "choices": ["$-2$", "$5$", "$2$", "$-5$"],
+    "answer": "$-2$",
+    "acceptedAnswers": ["-2"],
+    "hint": "In $y=mx+b$, the coefficient of $x$ is the slope.",
+    "solution": "Slope $m = -2$.",
+    "explanation": "The $x$-coefficient is $m$; the constant term is $b$."
+  },
+  {
+    "id": "si-2",
+    "type": "numeric",
+    "prompt": "A line has slope $4$ and $y$-intercept $-1$. What is $y$ when $x=3$?",
+    "answer": 11,
+    "hint": "Write $y=4x-1$, then substitute $x=3$.",
+    "solution": "$y=4(3)-1=11$.",
+    "explanation": "Plug the $x$-value into the slope-intercept equation."
+  },
+  {
+    "id": "si-3",
+    "type": "expression",
+    "prompt": "Write the equation of the line with slope $\\dfrac{1}{2}$ and $y$-intercept $3$. Use the form $y=mx+b$.",
+    "answer": "y=(1/2)x+3",
+    "acceptedAnswers": ["y=0.5x+3", "y=(1/2)x+3", "y=1/2x+3"],
+    "hint": "Replace $m$ and $b$ in $y=mx+b$.",
+    "solution": "$y = \\dfrac{1}{2}x + 3$.",
+    "explanation": "Slope goes in front of $x$; intercept is the constant."
+  },
+  {
+    "id": "si-4",
+    "type": "numeric",
+    "prompt": "Find the slope of the line through $(1, 2)$ and $(3, 8)$.",
+    "answer": 3,
+    "hint": "Use $m = \\dfrac{y_2-y_1}{x_2-x_1}$.",
+    "solution": "$m = \\dfrac{8-2}{3-1} = 3$.",
+    "explanation": "Rise over run between the two points."
+  }
+]
