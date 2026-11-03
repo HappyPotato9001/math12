@@ -12,6 +12,8 @@ export type Problem = {
   hint: string;
   solution: string;
   explanation: string;
+  /** Textbook-style label, e.g. "Jump Start" or "Classwork 3" */
+  label?: string;
 };
 
 export type TopicMeta = {
@@ -19,12 +21,14 @@ export type TopicMeta = {
   title: string;
   summary: string;
   status: "ready" | "stub";
+  lessonNumber: number;
 };
 
 export type UnitMeta = {
   slug: string;
   title: string;
   description: string;
+  pdf: string;
   topics: TopicMeta[];
 };
 

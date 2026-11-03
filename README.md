@@ -25,10 +25,10 @@ Static files are written to `out/`.
 
 ## What's included
 
-- Math 1 & Math 2 unit maps with ready topics and stubs
-- Lesson notes with KaTeX math
-- Practice drills (check / hint / reveal) and local progress
-- Class rooms saved in the browser (export/import JSON to move between devices)
+- Math 1 (Units 1–9) and Math 2 (Units 1–3) mapped to your class textbook lessons
+- Unit PDFs in `public/textbook/`
+- Digitized classwork drills on selected lessons (Jump Start / Classwork style)
+- Class rooms with photo sharing (browser storage + export/import)
 
 ## Deploy
 

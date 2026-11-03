@@ -1,0 +1,54 @@
+[
+  {
+    "id": "fj-1",
+    "label": "Jump Start",
+    "type": "multiple-choice",
+    "prompt": "Which table represents a function?",
+    "choices": [
+      "Inputs 1,1,2 with outputs 4,5,6",
+      "Inputs 1,2,3 with outputs 4,4,6",
+      "Inputs 2,2,3 with outputs 7,8,9",
+      "Inputs 0,0,1 with outputs 2,3,4"
+    ],
+    "answer": "Inputs 1,2,3 with outputs 4,4,6",
+    "hint": "Repeated inputs are OK only if the outputs match.",
+    "solution": "Each input appears once (outputs may repeat).",
+    "explanation": "A function can send different inputs to the same output, but not one input to two outputs."
+  },
+  {
+    "id": "fj-2",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "If $f(x)=2x-5$, what is $f(8)$?",
+    "answer": 11,
+    "hint": "Substitute 8 for $x$.",
+    "solution": "$2\\cdot8-5=11$.",
+    "explanation": "Function notation means evaluate the rule at that input."
+  },
+  {
+    "id": "fj-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "For $f(x)=2x-5$, what input gives $f(x)=9$?",
+    "answer": 7,
+    "hint": "Solve $2x-5=9$.",
+    "solution": "$2x=14$, so $x=7$.",
+    "explanation": "Sometimes we solve for the input that produces a target output."
+  },
+  {
+    "id": "fj-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "Which graph fails the vertical line test?",
+    "choices": [
+      "A straight non-vertical line",
+      "A parabola opening up",
+      "A sideways parabola $x=y^2$",
+      "An exponential growth curve"
+    ],
+    "answer": "A sideways parabola $x=y^2$",
+    "hint": "Look for one $x$ with two $y$ values.",
+    "solution": "$x=y^2$ is not a function of $x$.",
+    "explanation": "Vertical lines hit that graph twice."
+  }
+]

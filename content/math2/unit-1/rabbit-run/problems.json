@@ -1,0 +1,45 @@
+[
+  {
+    "id": "rr-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "72 ft of fencing forms a rectangle. If one side is $x$, the adjacent side is:",
+    "choices": ["$72-x$", "$36-x$", "$72-2x$", "$x-36$"],
+    "answer": "$36-x$",
+    "hint": "Perimeter $2x+2w=72$ so $x+w=36$.",
+    "solution": "$w=36-x$.",
+    "explanation": "Half the perimeter is split between length and width."
+  },
+  {
+    "id": "rr-2",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write the area model $A(x)$ for that pen. Enter like $x(36-x)$.",
+    "answer": "x(36-x)",
+    "acceptedAnswers": ["x(36-x)", "36x-x^2", "x*36-x^2"],
+    "hint": "Area = length × width.",
+    "solution": "$A(x)=x(36-x)$.",
+    "explanation": "This is a downward-opening quadratic."
+  },
+  {
+    "id": "rr-3",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "What side length $x$ maximizes area for $A(x)=x(36-x)$?",
+    "answer": 18,
+    "hint": "Vertex of $36x-x^2$ is at $x=-b/(2a)$ with $a=-1$, $b=36$.",
+    "solution": "$x=18$ (a square).",
+    "explanation": "$x=36/2=18$. Max area is $18\\cdot18=324$."
+  },
+  {
+    "id": "rr-4",
+    "label": "Classwork 4",
+    "type": "multiple-choice",
+    "prompt": "What kind of function is $A(x)=36x-x^2$?",
+    "choices": ["Linear", "Exponential", "Quadratic", "Absolute value"],
+    "answer": "Quadratic",
+    "hint": "Degree 2 polynomial.",
+    "solution": "Quadratic.",
+    "explanation": "The $x^2$ term makes it quadratic."
+  }
+]

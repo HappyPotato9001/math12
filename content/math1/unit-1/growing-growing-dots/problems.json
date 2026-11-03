@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ggd-1",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A pattern starts with 3 dots at $t=0$ and triples each minute. How many dots at $t=4$?",
+    "answer": 243,
+    "hint": "Use $f(t)=3\\cdot 3^t$ carefully: if it triples each minute from 3, then $f(t)=3\\cdot 3^t=3^{t+1}$. At $t=4$: $3^5=243$.",
+    "solution": "$3\\cdot 3^4 = 243$.",
+    "explanation": "Geometric: multiply by 3 four times after the start."
+  },
+  {
+    "id": "ggd-2",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write an explicit equation if $f(0)=5$ and the common ratio is 2. Enter like $5*2^t$.",
+    "answer": "5*2^t",
+    "acceptedAnswers": ["5*2^t", "5(2^t)", "5\\cdot2^t", "f(t)=5*2^t"],
+    "hint": "Start value times ratio to the power $t$.",
+    "solution": "$f(t)=5\\cdot 2^t$.",
+    "explanation": "Explicit geometric form is $a\\cdot r^t$."
+  },
+  {
+    "id": "ggd-3",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "Which sequence is geometric?",
+    "choices": ["2, 5, 8, 11", "3, 6, 12, 24", "1, 4, 9, 16", "10, 7, 4, 1"],
+    "answer": "3, 6, 12, 24",
+    "hint": "Look for a constant multiplier between terms.",
+    "solution": "Each term is multiplied by 2.",
+    "explanation": "Constant ratio 2 makes it geometric; the others are arithmetic or quadratic-ish."
+  },
+  {
+    "id": "ggd-4",
+    "label": "Ready for More?",
+    "type": "numeric",
+    "prompt": "If $f(t)=5\\cdot 2^t$, what is $f(6)$?",
+    "answer": 320,
+    "hint": "$2^6=64$, then multiply by 5.",
+    "solution": "$5\\cdot 64=320$.",
+    "explanation": "Substitute $t=6$ into the explicit equation."
+  }
+]

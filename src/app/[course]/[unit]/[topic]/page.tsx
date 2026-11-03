@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MarkdownView } from "@/components/MarkdownView";
 import { getLessonMarkdown } from "@/lib/content";
 import { getCourse, getTopic, getUnit } from "@/lib/curriculum";
+import { assetPath } from "@/lib/paths";
 import { allTopicParams } from "@/lib/staticParams";
 import type { CourseId } from "@/lib/types";
 
@@ -34,7 +35,10 @@ export default async function TopicLessonPage({ params }: PageProps) {
         <span className="mx-2">/</span>
         <span>{unit.title}</span>
       </div>
-      <h1 className="mt-3 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
+      <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+        Lesson {topic.lessonNumber}
+      </p>
+      <h1 className="mt-2 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
         {topic.title}
       </h1>
       <p className="mt-2 text-ink-soft">{topic.summary}</p>
@@ -44,8 +48,16 @@ export default async function TopicLessonPage({ params }: PageProps) {
           href={`/${courseId}/${unitSlug}/${topicSlug}/practice`}
           className="rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-deep"
         >
-          Practice this topic
+          Do classwork
         </Link>
+        <a
+          href={assetPath(unit.pdf)}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-xl border border-line px-4 py-2.5 text-sm hover:bg-paper-deep"
+        >
+          Open textbook PDF
+        </a>
         <Link
           href={`/${courseId}`}
           className="rounded-xl border border-line px-4 py-2.5 text-sm hover:bg-paper-deep"
@@ -58,12 +70,21 @@ export default async function TopicLessonPage({ params }: PageProps) {
         {topic.status === "stub" || !lesson ? (
           <div>
             <h2 className="font-[family-name:var(--font-fraunces)] text-2xl">
-              Coming soon
+              Use the class textbook
             </h2>
             <p className="mt-3 text-ink-soft">
-              This topic is outlined in the course map. Full notes and drills
-              are next — try a ready topic meanwhile.
+              This lesson follows your school packet. Open the unit PDF for Jump
+              Start, Launch/Explore, Ready for More, and Takeaways. Digitized
+              classwork drills are available on ready lessons.
             </p>
+            <a
+              href={assetPath(unit.pdf)}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-block text-accent underline"
+            >
+              Open {unit.title} PDF
+            </a>
           </div>
         ) : (
           <MarkdownView content={lesson} />

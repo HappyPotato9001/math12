@@ -1,0 +1,54 @@
+[
+  {
+    "id": "bc-1",
+    "label": "Classwork",
+    "type": "multiple-choice",
+    "prompt": "A shop sells adult tickets for $12 and student tickets for $8. They sell 40 tickets for $400. Which system matches?",
+    "choices": [
+      "$a+s=40$ and $12a+8s=400$",
+      "$a+s=400$ and $12a+8s=40$",
+      "$a+s=12$ and $8a+40s=400$",
+      "$12a+8s=40$ and $a+s=400$"
+    ],
+    "answer": "$a+s=40$ and $12a+8s=400$",
+    "hint": "One equation counts tickets; the other counts money.",
+    "solution": "$a+s=40$, $12a+8s=400$.",
+    "explanation": "Define variables from the story before solving."
+  },
+  {
+    "id": "bc-2",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Solve $a+s=40$ and $12a+8s=400$. How many adult tickets $a$?",
+    "answer": 20,
+    "hint": "From the first, $s=40-a$. Substitute into the second.",
+    "solution": "$a=20$.",
+    "explanation": "$12a+8(40-a)=400 \\Rightarrow 4a+320=400 \\Rightarrow a=20$."
+  },
+  {
+    "id": "bc-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Using the same system, how many student tickets $s$?",
+    "answer": 20,
+    "hint": "$s=40-a$.",
+    "solution": "$s=20$.",
+    "explanation": "Check money: $12\\cdot20+8\\cdot20=400$."
+  },
+  {
+    "id": "bc-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "The solution to a $2\\times2$ linear system is the point where:",
+    "choices": [
+      "Both lines have the same slope only",
+      "The two lines intersect",
+      "Either line crosses the y-axis",
+      "The lines are parallel"
+    ],
+    "answer": "The two lines intersect",
+    "hint": "One $(x,y)$ must satisfy both equations.",
+    "solution": "Intersection point.",
+    "explanation": "Graphically, systems are about shared points."
+  }
+]

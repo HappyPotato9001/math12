@@ -1,0 +1,44 @@
+[
+  {
+    "id": "bps-1",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "What number completes $x^2+8x+\\,?\\,$ into a perfect square?",
+    "answer": 16,
+    "hint": "Half of 8 is 4; square it.",
+    "solution": "$16$, since $(x+4)^2=x^2+8x+16$.",
+    "explanation": "$(\\frac{b}{2})^2$."
+  },
+  {
+    "id": "bps-2",
+    "label": "Classwork",
+    "type": "expression",
+    "prompt": "Rewrite $x^2+8x+5$ by completing the square. Enter like $(x+4)^2-11$.",
+    "answer": "(x+4)^2-11",
+    "acceptedAnswers": ["(x+4)^2-11", "(x + 4)^2 - 11"],
+    "hint": "Add and subtract 16: $x^2+8x+16+5-16$.",
+    "solution": "$(x+4)^2-11$.",
+    "explanation": "Vertex form appears after completing the square."
+  },
+  {
+    "id": "bps-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "What number completes $x^2-6x+\\,?\\,$?",
+    "answer": 9,
+    "hint": "Half of $-6$ is $-3$; square is 9.",
+    "solution": "$9$.",
+    "explanation": "$(x-3)^2=x^2-6x+9$."
+  },
+  {
+    "id": "bps-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "$(x+5)^2$ expands to:",
+    "choices": ["$x^2+25$", "$x^2+10x+25$", "$x^2+5x+25$", "$x^2+10x+10$"],
+    "answer": "$x^2+10x+25$",
+    "hint": "Use $(a+b)^2=a^2+2ab+b^2$.",
+    "solution": "$x^2+10x+25$.",
+    "explanation": "Middle term is $2\\cdot x\\cdot5$."
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "id": "gt-1",
+    "label": "Classwork",
+    "type": "multiple-choice",
+    "prompt": "Solve $x+4\\le 9$.",
+    "choices": ["$x\\le 5$", "$x\\ge 5$", "$x<5$", "$x>13$"],
+    "answer": "$x\\le 5$",
+    "hint": "Subtract 4; direction stays the same.",
+    "solution": "$x\\le 5$.",
+    "explanation": "No sign flip when adding/subtracting."
+  },
+  {
+    "id": "gt-2",
+    "label": "Classwork",
+    "type": "multiple-choice",
+    "prompt": "Solve $-3x>12$.",
+    "choices": ["$x>-4$", "$x<-4$", "$x>4$", "$x<4$"],
+    "answer": "$x<-4$",
+    "hint": "Divide by $-3$ and flip.",
+    "solution": "$x<-4$.",
+    "explanation": "Negative divisor reverses the inequality."
+  },
+  {
+    "id": "gt-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Boundary value for $2x-5\\ge 7$ (where the circle sits)?",
+    "answer": 6,
+    "hint": "Solve $2x-5=7$.",
+    "solution": "$x=6$ (closed circle).",
+    "explanation": "Inequality becomes $x\\ge 6$."
+  },
+  {
+    "id": "gt-4",
+    "label": "Check",
+    "type": "multiple-choice",
+    "prompt": "Which number solves $5-x<2$?",
+    "choices": ["$0$", "$2$", "$4$", "$-1$"],
+    "answer": "$4$",
+    "hint": "Solve to get $x>3$, then test.",
+    "solution": "$x>3$, so 4 works.",
+    "explanation": "From $5-x<2$, rearrange carefully and flip when multiplying by $-1$."
+  }
+]

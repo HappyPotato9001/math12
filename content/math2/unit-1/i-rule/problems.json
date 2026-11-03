@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ir-1",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "A linear logo has $2n+1$ squares at size $n$. How many squares at size 8?",
+    "answer": 17,
+    "hint": "Substitute $n=8$.",
+    "solution": "$2\\cdot8+1=17$.",
+    "explanation": "Linear explicit evaluation."
+  },
+  {
+    "id": "ir-2",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "A quadratic logo has $n^2+2n$ blocks at size $n$. How many at size 4?",
+    "answer": 24,
+    "hint": "$16+8$.",
+    "solution": "$16+8=24$.",
+    "explanation": "Quadratic evaluation."
+  },
+  {
+    "id": "ir-3",
+    "label": "Compare",
+    "type": "multiple-choice",
+    "prompt": "For large $n$, which grows faster?",
+    "choices": ["$2n+1$", "$n^2+2n$", "They grow the same", "Neither grows"],
+    "answer": "$n^2+2n$",
+    "hint": "Quadratic eventually outpaces linear.",
+    "solution": "Quadratic grows faster for large $n$.",
+    "explanation": "$n^2$ dominates linear terms."
+  },
+  {
+    "id": "ir-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "A function with constant first differences is:",
+    "choices": ["Quadratic", "Linear", "Exponential", "Absolute value"],
+    "answer": "Linear",
+    "hint": "Constant add each step.",
+    "solution": "Linear.",
+    "explanation": "Quadratic needs constant second differences."
+  }
+]

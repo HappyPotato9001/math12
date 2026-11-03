@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { PracticeDrill } from "@/components/PracticeDrill";
 import { getProblems, topicKey } from "@/lib/content";
 import { getCourse, getTopic, getUnit } from "@/lib/curriculum";
+import { assetPath } from "@/lib/paths";
 import { allTopicParams } from "@/lib/staticParams";
 import type { CourseId } from "@/lib/types";
 
@@ -38,32 +39,55 @@ export default async function PracticePage({ params }: PageProps) {
           {topic.title}
         </Link>
         <span className="mx-2">/</span>
-        <span>Practice</span>
+        <span>Classwork</span>
       </div>
-      <h1 className="mt-3 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
-        {topic.title} drills
+      <p className="mt-3 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+        Lesson {topic.lessonNumber} classwork
+      </p>
+      <h1 className="mt-2 font-[family-name:var(--font-fraunces)] text-4xl tracking-tight text-ink">
+        {topic.title}
       </h1>
       <p className="mt-2 text-ink-soft">
-        Check for instant feedback. Share a tough attempt with your class room.
+        Textbook-style prompts with instant feedback. Stuck? Share a photo of
+        your work with the class room.
       </p>
+
+      <div className="mt-4">
+        <a
+          href={assetPath(unit.pdf)}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm text-accent underline"
+        >
+          Open matching unit PDF
+        </a>
+      </div>
 
       <div className="mt-8">
         {topic.status === "stub" || problems.length === 0 ? (
           <div className="rounded-2xl border border-line bg-surface p-8">
             <p className="text-ink-soft">
-              Practice problems for this topic are coming soon.
+              Digitized classwork for this lesson is still being added. Use the
+              unit PDF for the full Jump Start / Launch / Ready for More set.
             </p>
-            <Link
-              href={lessonHref}
-              className="mt-4 inline-block text-accent underline"
-            >
-              Back to lesson
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <a
+                href={assetPath(unit.pdf)}
+                target="_blank"
+                rel="noreferrer"
+                className="text-accent underline"
+              >
+                Open unit PDF
+              </a>
+              <Link href={lessonHref} className="text-accent underline">
+                Back to lesson
+              </Link>
+            </div>
           </div>
         ) : (
           <PracticeDrill
             topicKey={key}
-            topicTitle={topic.title}
+            topicTitle={`Lesson ${topic.lessonNumber}: ${topic.title}`}
             topicPath={lessonHref}
             lessonHref={lessonHref}
             problems={problems}

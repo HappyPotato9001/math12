@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sw-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Scott does 3 push-ups on day 1 and adds 2 each day. How many on day 10?",
+    "answer": 21,
+    "hint": "Common difference 2 from a start of 3: $3+2\\cdot9$.",
+    "solution": "$3+2\\cdot9=21$.",
+    "explanation": "Nine steps after day 1."
+  },
+  {
+    "id": "sw-2",
+    "label": "Classwork 3",
+    "type": "multiple-choice",
+    "prompt": "What type of sequence is Scott’s push-up pattern (add 2 each day)?",
+    "choices": ["Arithmetic", "Geometric", "Neither", "Quadratic"],
+    "answer": "Arithmetic",
+    "hint": "Constant difference, not constant ratio.",
+    "solution": "Arithmetic.",
+    "explanation": "Adding the same amount each day is arithmetic growth."
+  },
+  {
+    "id": "sw-3",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Write an explicit formula for push-ups on day $n$ if day 1 is 3 and he adds 2 daily. Enter like $2n+1$.",
+    "answer": "2n+1",
+    "acceptedAnswers": ["2n+1", "3+2(n-1)", "2*n+1"],
+    "hint": "Simplify $3+2(n-1)$.",
+    "solution": "$f(n)=2n+1$.",
+    "explanation": "$3+2n-2=2n+1$."
+  },
+  {
+    "id": "sw-4",
+    "label": "Ready for More?",
+    "type": "multiple-choice",
+    "prompt": "Aly does 15 push-ups every day. Compared with Scott’s increasing plan (3,5,7,...), who does more on day 2?",
+    "choices": ["Scott", "Aly", "They tie", "Not enough information"],
+    "answer": "Aly",
+    "hint": "Scott on day 2 does $3+2=5$.",
+    "solution": "Aly does 15; Scott does 5 on day 2.",
+    "explanation": "Constant 15 beats early arithmetic values; later days may reverse that."
+  }
+]

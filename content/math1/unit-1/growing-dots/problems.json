@@ -1,0 +1,49 @@
+[
+  {
+    "id": "gd-1",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A dot pattern has 5 dots at $t=0$ and grows by 4 dots each minute. How many dots at $t=3$?",
+    "answer": 17,
+    "hint": "Start at 5, then add 4 three times.",
+    "solution": "$5+4\\cdot3=17$.",
+    "explanation": "Arithmetic growth: explicit form $f(t)=5+4t$."
+  },
+  {
+    "id": "gd-2",
+    "label": "Classwork 3",
+    "type": "numeric",
+    "prompt": "Same pattern: 5 dots at $t=0$, add 4 each minute. How many dots at $t=100$?",
+    "answer": 405,
+    "hint": "Use $f(t)=5+4t$.",
+    "solution": "$5+4\\cdot100=405$.",
+    "explanation": "Explicit equations make large inputs easy."
+  },
+  {
+    "id": "gd-3",
+    "label": "Classwork 4",
+    "type": "expression",
+    "prompt": "Write an explicit equation for dots at $t$ minutes if $f(0)=5$ and the common difference is 4. Enter like $5+4t$.",
+    "answer": "5+4t",
+    "acceptedAnswers": ["5+4t", "4t+5", "f(t)=5+4t", "f(t)=4t+5"],
+    "hint": "Start value plus rate times time.",
+    "solution": "$f(t)=5+4t$.",
+    "explanation": "Arithmetic sequences have constant difference, so the explicit form is linear."
+  },
+  {
+    "id": "gd-4",
+    "label": "Jump Start check",
+    "type": "multiple-choice",
+    "prompt": "Which best describes an arithmetic sequence?",
+    "choices": [
+      "Each term is multiplied by the same ratio",
+      "Each term increases by the same difference",
+      "The second differences are constant but first differences are not",
+      "Terms alternate signs only"
+    ],
+    "answer": "Each term increases by the same difference",
+    "hint": "Think constant add/subtract each step.",
+    "solution": "Constant difference between consecutive terms.",
+    "explanation": "That constant difference is the hallmark of arithmetic / linear growth."
+  }
+]

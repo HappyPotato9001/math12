@@ -1,0 +1,45 @@
+[
+  {
+    "id": "ffs-1",
+    "label": "Jump Start bridge",
+    "type": "multiple-choice",
+    "prompt": "For $3x^2-6x-4=0$, what is $b$?",
+    "choices": ["$3$", "$-6$", "$-4$", "$6$"],
+    "answer": "$-6$",
+    "hint": "Standard form $ax^2+bx+c$.",
+    "solution": "$b=-6$.",
+    "explanation": "Keep the sign with the coefficient."
+  },
+  {
+    "id": "ffs-2",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Discriminant of $x^2-5x+6=0$? Enter $b^2-4ac$.",
+    "answer": 1,
+    "hint": "$a=1,b=-5,c=6$.",
+    "solution": "$25-24=1$.",
+    "explanation": "Positive discriminant ⇒ two real solutions."
+  },
+  {
+    "id": "ffs-3",
+    "label": "Classwork",
+    "type": "expression",
+    "prompt": "Solve $x^2-5x+6=0$ using any valid method. Enter solutions like $2,3$ (smaller first).",
+    "answer": "2,3",
+    "acceptedAnswers": ["2,3", "2, 3", "3,2"],
+    "hint": "Factors or quadratic formula.",
+    "solution": "$x=2$ or $x=3$.",
+    "explanation": "$(x-2)(x-3)=0$."
+  },
+  {
+    "id": "ffs-4",
+    "label": "Takeaways",
+    "type": "multiple-choice",
+    "prompt": "If $b^2-4ac<0$ for a quadratic with real coefficients, the graph has how many $x$-intercepts?",
+    "choices": ["0", "1", "2", "Infinitely many"],
+    "answer": "0",
+    "hint": "No real roots.",
+    "solution": "0 $x$-intercepts.",
+    "explanation": "Complex solutions still exist, but they are not real intercepts."
+  }
+]

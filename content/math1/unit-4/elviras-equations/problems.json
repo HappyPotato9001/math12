@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ee-1",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Solve $2x+5=17$.",
+    "answer": 6,
+    "hint": "Subtract 5, then divide by 2.",
+    "solution": "$x=6$.",
+    "explanation": "Inverse operations undo addition then multiplication."
+  },
+  {
+    "id": "ee-2",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Solve $5x-9=21$.",
+    "answer": 6,
+    "hint": "Add 9, divide by 5.",
+    "solution": "$x=6$.",
+    "explanation": "Check: $5\\cdot6-9=21$."
+  },
+  {
+    "id": "ee-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "Solve $7n-2=3n+14$.",
+    "answer": 4,
+    "hint": "Collect variable terms on one side.",
+    "solution": "$4n=16$, so $n=4$.",
+    "explanation": "Subtract $3n$ and add 2, then divide."
+  },
+  {
+    "id": "ee-4",
+    "label": "Ready for More?",
+    "type": "numeric",
+    "prompt": "Solve $\\dfrac{x}{3}+4=10$.",
+    "answer": 18,
+    "hint": "Subtract 4, then multiply by 3.",
+    "solution": "$x=18$.",
+    "explanation": "Clear the constant first, then undo the division."
+  }
+]

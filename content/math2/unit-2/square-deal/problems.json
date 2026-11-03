@@ -1,0 +1,45 @@
+[
+  {
+    "id": "sd-1",
+    "label": "Classwork",
+    "type": "multiple-choice",
+    "prompt": "Vertex of $y=2(x-4)^2+7$?",
+    "choices": ["$(4,7)$", "$(-4,7)$", "$(4,-7)$", "$(2,7)$"],
+    "answer": "$(4,7)$",
+    "hint": "Read $(h,k)$ from $a(x-h)^2+k$.",
+    "solution": "$(4,7)$.",
+    "explanation": "$h=4$, $k=7$."
+  },
+  {
+    "id": "sd-2",
+    "label": "Classwork",
+    "type": "multiple-choice",
+    "prompt": "Does $y=-3(x+1)^2+5$ have a max or min?",
+    "choices": ["Maximum", "Minimum", "Neither", "Both"],
+    "answer": "Maximum",
+    "hint": "Sign of $a$.",
+    "solution": "Maximum because $a<0$.",
+    "explanation": "Downward parabola."
+  },
+  {
+    "id": "sd-3",
+    "label": "Classwork",
+    "type": "numeric",
+    "prompt": "For $y=(x-2)^2+9$, what is the vertex $y$-coordinate?",
+    "answer": 9,
+    "hint": "That is $k$.",
+    "solution": "$9$.",
+    "explanation": "Vertex $(2,9)$."
+  },
+  {
+    "id": "sd-4",
+    "label": "Ready for More?",
+    "type": "expression",
+    "prompt": "Complete the square: $x^2+8x+5$. Enter like $(x+4)^2-11$.",
+    "answer": "(x+4)^2-11",
+    "acceptedAnswers": ["(x+4)^2-11", "(x + 4)^2 - 11"],
+    "hint": "Half of 8 is 4.",
+    "solution": "$(x+4)^2-11$.",
+    "explanation": "Same completing-the-square move as Building the Perfect Square."
+  }
+]

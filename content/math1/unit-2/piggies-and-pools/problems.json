@@ -1,0 +1,49 @@
+[
+  {
+    "id": "pp-1",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "A piggy bank starts with 5 pennies and gets 3 more each day. How many pennies after 10 days?",
+    "answer": 35,
+    "hint": "Use $5+3\\cdot10$.",
+    "solution": "$5+30=35$.",
+    "explanation": "Linear / arithmetic growth."
+  },
+  {
+    "id": "pp-2",
+    "label": "Classwork 2",
+    "type": "numeric",
+    "prompt": "A pool has 5 gallons when a timer starts and fills at 2 gallons per minute. How many gallons after 20 minutes?",
+    "answer": 45,
+    "hint": "$5+2t$ at $t=20$.",
+    "solution": "$5+40=45$.",
+    "explanation": "Continuous linear fill model."
+  },
+  {
+    "id": "pp-3",
+    "label": "Classwork 3",
+    "type": "expression",
+    "prompt": "Write an explicit model for an account that starts at $50 and earns 3% per month. Enter like $50*(1.03)^m$.",
+    "answer": "50*(1.03)^m",
+    "acceptedAnswers": ["50*(1.03)^m", "50(1.03)^m", "50*1.03^m"],
+    "hint": "Multiply by $1.03$ each month.",
+    "solution": "$A(m)=50(1.03)^m$.",
+    "explanation": "Geometric / exponential growth from percent increase."
+  },
+  {
+    "id": "pp-4",
+    "label": "Compare",
+    "type": "multiple-choice",
+    "prompt": "Which situation is best modeled by an exponential function?",
+    "choices": [
+      "Adding 3 pennies every day",
+      "Filling a pool at 2 gallons per minute",
+      "A balance that grows by 3% each month",
+      "Walking at a steady 3 mph"
+    ],
+    "answer": "A balance that grows by 3% each month",
+    "hint": "Percent of current amount = multiply.",
+    "solution": "3% monthly growth is exponential.",
+    "explanation": "Constant percent change creates geometric growth."
+  }
+]

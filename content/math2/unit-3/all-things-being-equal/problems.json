@@ -1,0 +1,45 @@
+[
+  {
+    "id": "atbe-1",
+    "label": "Classwork 1",
+    "type": "multiple-choice",
+    "prompt": "Solutions of $x^2=9$?",
+    "choices": ["$x=9$ only", "$x=3$ only", "$x=\\pm 3$", "$x=\\pm 9$"],
+    "answer": "$x=\\pm 3$",
+    "hint": "Square root both sides; include both signs.",
+    "solution": "$x=3$ or $x=-3$.",
+    "explanation": "Two square roots unless the right side is 0."
+  },
+  {
+    "id": "atbe-2",
+    "label": "Classwork 7a",
+    "type": "expression",
+    "prompt": "Factor $x^2-9x+20$. Enter like $(x-4)(x-5)$.",
+    "answer": "(x-4)(x-5)",
+    "acceptedAnswers": ["(x-4)(x-5)", "(x-5)(x-4)"],
+    "hint": "Numbers that multiply to 20 and add to $-9$.",
+    "solution": "$(x-4)(x-5)$.",
+    "explanation": "Then set each factor equal to 0."
+  },
+  {
+    "id": "atbe-3",
+    "label": "Classwork 7a",
+    "type": "numeric",
+    "prompt": "One solution of $x^2-9x+20=0$ is 4. What is the other?",
+    "answer": 5,
+    "hint": "Factors $(x-4)(x-5)$.",
+    "solution": "$5$.",
+    "explanation": "Zero product property."
+  },
+  {
+    "id": "atbe-4",
+    "label": "Classwork 8",
+    "type": "expression",
+    "prompt": "Solve $(x-1)^2-4=0$ by inverse operations. Enter solutions like $3,-1$ (smaller first).",
+    "answer": "-1,3",
+    "acceptedAnswers": ["-1,3", "-1, 3", "3,-1"],
+    "hint": "$(x-1)^2=4$ so $x-1=\\pm 2$.",
+    "solution": "$x=-1$ or $x=3$.",
+    "explanation": "Connected to intercepts of $f(x)=(x-1)^2-4$."
+  }
+]

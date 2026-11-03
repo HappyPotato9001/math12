@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local class room data
 /data/
+
+# local PDF extraction scratch
+/tmp-pdf-text/

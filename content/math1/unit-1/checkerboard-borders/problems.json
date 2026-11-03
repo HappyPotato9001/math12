@@ -1,0 +1,43 @@
+[
+  {
+    "id": "cb-1",
+    "label": "Jump Start",
+    "type": "numeric",
+    "prompt": "A $5 \\times 5$ white square has a 1-tile-wide colored border around it (including corners). How many colored border tiles are there?",
+    "answer": 24,
+    "hint": "Try $4 \\times 5$ for the sides, then decide whether corners need a different grouping. Or compute total tiles in a $7 \\times 7$ square minus the inner $5 \\times 5$.",
+    "solution": "Outer square is $7 \\times 7 = 49$ tiles; inner is $25$; border $= 49-25=24$.",
+    "explanation": "A 1-tile border around $N \\times N$ makes an $(N+2)\\times(N+2)$ outer square. For $N=5$: $7^2-5^2=24$."
+  },
+  {
+    "id": "cb-2",
+    "label": "Classwork 1",
+    "type": "numeric",
+    "prompt": "Using the same 1-tile border idea, how many colored tiles surround a $6 \\times 6$ center?",
+    "answer": 28,
+    "hint": "Outer size is $8 \\times 8$. Subtract the inner $36$.",
+    "solution": "$8^2 - 6^2 = 64-36=28$.",
+    "explanation": "Same structure as the $5 \\times 5$ case with $N=6$."
+  },
+  {
+    "id": "cb-3",
+    "label": "Classwork 2",
+    "type": "expression",
+    "prompt": "Write an expression for the number of 1-tile border tiles around an $N \\times N$ center. Enter like $(N+2)^2-N^2$ or $4N+4$.",
+    "answer": "4N+4",
+    "acceptedAnswers": ["4N+4", "(N+2)^2-N^2", "4(N+1)", "(N+2)**2-N**2"],
+    "hint": "Expand $(N+2)^2-N^2$ or think: four sides of length $N$ plus 4 corners.",
+    "solution": "$4N+4$ (equivalent to $(N+2)^2-N^2$).",
+    "explanation": "$(N+2)^2-N^2 = 4N+4$. Different groupings, same border count."
+  },
+  {
+    "id": "cb-4",
+    "label": "Ready for More?",
+    "type": "numeric",
+    "prompt": "A rectangle center is $4$ tiles by $10$ tiles with a 1-tile border. How many border tiles?",
+    "answer": 32,
+    "hint": "Outer rectangle is $6$ by $12$. Subtract the inner $40$.",
+    "solution": "$6\\times12 - 4\\times10 = 72-40=32$.",
+    "explanation": "General rectangle $L \\times W$ with a 1-tile border uses $(L+2)(W+2)-LW$ border tiles."
+  }
+]

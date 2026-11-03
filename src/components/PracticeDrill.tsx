@@ -106,7 +106,12 @@ export function PracticeDrill({
       </div>
 
       <div className="animate-rise rounded-2xl border border-line bg-surface p-6 shadow-[var(--shadow)] sm:p-8">
-        <h2 className="font-[family-name:var(--font-fraunces)] text-2xl tracking-tight text-ink">
+        {problem.label && (
+          <p className="text-xs font-medium uppercase tracking-[0.16em] text-accent">
+            {problem.label}
+          </p>
+        )}
+        <h2 className="mt-2 font-[family-name:var(--font-fraunces)] text-2xl tracking-tight text-ink">
           <MathText text={problem.prompt} />
         </h2>
 
@@ -183,7 +188,7 @@ export function PracticeDrill({
             href={lessonHref}
             className="rounded-xl border border-line px-4 py-2.5 text-sm transition hover:bg-paper-deep"
           >
-            Lesson
+            Lesson notes
           </Link>
         </div>
 
