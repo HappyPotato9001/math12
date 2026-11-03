@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     : {}),
   basePath: basePath || undefined,
   assetPrefix: basePath || undefined,
+  serverExternalPackages: ["mongodb"],
   turbopack: {
     rules: {
       "*.css": {

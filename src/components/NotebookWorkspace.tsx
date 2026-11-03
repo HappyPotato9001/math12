@@ -27,6 +27,16 @@ export function NotebookWorkspace({ sources }: { sources: NotebookSource[] }) {
   const [answer, setAnswer] = useState("");
   const [notes, setNotes] = useState("");
   const [saved, setSaved] = useState(false);
+  const [testTitle, setTestTitle] = useState("");
+  const [testCount, setTestCount] = useState("8");
+  const [testDifficulty, setTestDifficulty] = useState("mixed");
+  const [testFormat, setTestFormat] = useState("mixed");
+  const [includeAnswers, setIncludeAnswers] = useState(true);
+  const [generatedTest, setGeneratedTest] = useState("");
+  const [testStatus, setTestStatus] = useState("");
+  const [testError, setTestError] = useState("");
+  const [savingTest, setSavingTest] = useState(false);
+  const [copiedTest, setCopiedTest] = useState(false);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(notesKey);
@@ -55,6 +65,8 @@ export function NotebookWorkspace({ sources }: { sources: NotebookSource[] }) {
         : [...current, id],
     );
     setAnswer("");
+    setGeneratedTest("");
+    setTestStatus("");
   }
 
   function askQuestion(event: React.FormEvent<HTMLFormElement>) {
@@ -85,6 +97,98 @@ export function NotebookWorkspace({ sources }: { sources: NotebookSource[] }) {
     window.localStorage.setItem(notesKey, notes);
     setSaved(true);
     window.setTimeout(() => setSaved(false), 1800);
+  }
+
+  function generatePracticeTest() {
+    setTestError("");
+    setTestStatus("");
+    if (!selectedSources.length) {
+      setTestError("Select at least one lesson source first.");
+      return;
+    }
+
+    const count = Math.min(20, Math.max(3, Number(testCount) || 8));
+    const questions = Array.from({ length: count }, (_, index) => {
+      const source = selectedSources[index % selectedSources.length];
+      const focus = source.summary || source.excerpt || "the key ideas from this lesson";
+      const format = testFormat === "mixed"
+        ? ["multiple choice", "short answer", "show your work"][index % 3]
+        : testFormat;
+      const prompt =
+        format === "multiple choice"
+          ? `Which statement best demonstrates ${source.title}? A) A related but incorrect idea  B) A correct application  C) An unrelated rule  D) A common misconception`
+          : format === "short answer"
+            ? `Explain the main idea of ${source.title} in your own words.`
+            : `Solve a ${testDifficulty} problem using the ideas from ${source.title}. Show your reasoning.`;
+      return `${index + 1}. [${format}; ${testDifficulty}] ${prompt}\n   Source focus: ${focus}`;
+    });
+
+    setGeneratedTest(
+      `${testTitle.trim() || "Practice Test"}\n\n${questions.join("\n\n")}${
+        includeAnswers
+          ? "\n\nAnswer key / review:\nUse the source focus under each question to check that your explanation and reasoning connect back to the selected lesson."
+          : ""
+      }`,
+    );
+    setTestTitle(
+      testTitle.trim() ||
+        `${selectedSources[0].title} practice test`,
+    );
+  }
+
+  async function copyPracticeTest() {
+    if (!generatedTest) return;
+    try {
+      await navigator.clipboard.writeText(generatedTest);
+      setCopiedTest(true);
+      window.setTimeout(() => setCopiedTest(false), 1800);
+    } catch {
+      setTestError("Copy is unavailable in this browser. Select the test text and copy it manually.");
+    }
+  }
+
+  async function savePracticeTest() {
+    if (!generatedTest.trim() || !testTitle.trim()) {
+      setTestError("Generate a test and give it a title first.");
+      return;
+    }
+    setSavingTest(true);
+    setTestError("");
+    setTestStatus("");
+    try {
+      const courseIds = new Set(
+        selectedSources.map((source) => source.id.split("/")[0]),
+      );
+      const course =
+        courseIds.size === 1
+          ? courseIds.has("math1")
+            ? "math1"
+            : "math2"
+          : "both";
+      const response = await fetch("/api/practice-tests", {
+        method: "POST",
+        body: (() => {
+          const form = new FormData();
+          form.set("title", testTitle.trim());
+          form.set(
+            "description",
+            `Generated from ${selectedSources.length} selected Notebook lesson${selectedSources.length === 1 ? "" : "s"}.`,
+          );
+          form.set("course", course);
+          form.set("source", "ai");
+          form.set("aiTool", "Notebook");
+          form.set("textContent", generatedTest.trim());
+          return form;
+        })(),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not save practice test.");
+      setTestStatus("Saved to your practice-test library.");
+    } catch (error) {
+      setTestError(error instanceof Error ? error.message : "Could not save practice test.");
+    } finally {
+      setSavingTest(false);
+    }
   }
 
   return (
@@ -180,6 +284,121 @@ export function NotebookWorkspace({ sources }: { sources: NotebookSource[] }) {
               placeholder="Capture a connection, a question, or the next step..."
               className="mt-4 min-h-56 w-full resize-y rounded-2xl border border-line bg-surface p-4 text-sm leading-6 text-ink outline-none ring-accent focus:ring-2"
             />
+          </section>
+
+          <section className="mt-8 rounded-3xl border border-accent/20 bg-gradient-to-br from-accent-soft/70 via-surface to-paper-deep/40 p-5 shadow-[var(--shadow)] sm:p-7">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-medium uppercase tracking-[0.16em] text-accent">Notebook LM</p>
+                <h2 className="mt-2 font-[family-name:var(--font-fraunces)] text-2xl text-ink">
+                  Make a practice test
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-ink-soft">
+                  Turn the selected lessons into a review test, then save it for later.
+                </p>
+              </div>
+              <span className="rounded-full border border-accent/20 bg-surface/80 px-3 py-1.5 text-xs font-medium text-accent-deep">
+                {selectedSources.length} lesson{selectedSources.length === 1 ? "" : "s"} in context
+              </span>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-[minmax(0,1fr)_8rem_11rem_11rem]">
+              <input
+                value={testTitle}
+                onChange={(event) => setTestTitle(event.target.value)}
+                placeholder="Practice test title"
+                className="rounded-xl border border-line bg-surface px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2"
+              />
+              <label className="text-sm text-ink-soft">
+                Questions
+                <input
+                  type="number"
+                  min={3}
+                  max={20}
+                  value={testCount}
+                  onChange={(event) => setTestCount(event.target.value)}
+                  className="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2.5 text-sm text-ink outline-none ring-accent focus:ring-2"
+                />
+              </label>
+              <label className="text-sm text-ink-soft">
+                Difficulty
+                <select
+                  value={testDifficulty}
+                  onChange={(event) => setTestDifficulty(event.target.value)}
+                  className="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2.5 text-sm text-ink outline-none ring-accent focus:ring-2"
+                >
+                  <option value="mixed">Mixed</option>
+                  <option value="foundations">Foundations</option>
+                  <option value="challenge">Challenge</option>
+                </select>
+              </label>
+              <label className="text-sm text-ink-soft">
+                Question style
+                <select
+                  value={testFormat}
+                  onChange={(event) => setTestFormat(event.target.value)}
+                  className="mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2.5 text-sm text-ink outline-none ring-accent focus:ring-2"
+                >
+                  <option value="mixed">Mixed</option>
+                  <option value="multiple choice">Multiple choice</option>
+                  <option value="short answer">Short answer</option>
+                  <option value="show your work">Show your work</option>
+                </select>
+              </label>
+            </div>
+            <label className="mt-4 flex cursor-pointer items-center gap-2 text-sm text-ink-soft">
+              <input
+                type="checkbox"
+                checked={includeAnswers}
+                onChange={(event) => setIncludeAnswers(event.target.checked)}
+                className="h-4 w-4 accent-accent"
+              />
+              Include source-based answer guidance
+            </label>
+            <div className="mt-3 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={generatePracticeTest}
+                disabled={!selectedSources.length}
+                className="rounded-xl bg-accent px-4 py-2.5 text-sm font-medium text-white transition hover:bg-accent-deep disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                Generate from sources
+              </button>
+              {generatedTest && (
+                <button
+                  type="button"
+                  onClick={() => void savePracticeTest()}
+                  disabled={savingTest}
+                  className="rounded-xl border border-accent/30 px-4 py-2.5 text-sm font-medium text-accent transition hover:bg-accent-soft disabled:opacity-50"
+                >
+                  {savingTest ? "Saving…" : "Save practice test"}
+                </button>
+              )}
+              {generatedTest && (
+                <button
+                  type="button"
+                  onClick={() => void copyPracticeTest()}
+                  className="rounded-xl border border-line bg-surface/80 px-4 py-2.5 text-sm font-medium text-ink-soft transition hover:bg-surface hover:text-ink"
+                >
+                  {copiedTest ? "Copied" : "Copy test"}
+                </button>
+              )}
+            </div>
+            {generatedTest && (
+              <textarea
+                value={generatedTest}
+                onChange={(event) => setGeneratedTest(event.target.value)}
+                className="mt-4 min-h-72 w-full rounded-2xl border border-line bg-surface p-4 font-mono text-xs leading-6 text-ink outline-none ring-accent focus:ring-2"
+                aria-label="Generated practice test"
+              />
+            )}
+            {testStatus && <p className="mt-3 text-sm text-accent-deep">{testStatus}</p>}
+            {testError && <p className="mt-3 text-sm text-warn">{testError}</p>}
+            <Link
+              href="/practice-tests"
+              className="mt-3 inline-block text-sm font-medium text-accent underline"
+            >
+              Open practice-test library
+            </Link>
           </section>
         </main>
 
