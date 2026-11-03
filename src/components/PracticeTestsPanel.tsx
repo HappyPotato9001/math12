@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useEffect, useState, type FormEvent } from "react";
 
 type PracticeCourse = "math1" | "math2" | "both";
@@ -48,6 +49,7 @@ export function PracticeTestsPanel({
   const [aiTool, setAiTool] = useState("");
   const [textContent, setTextContent] = useState("");
   const [file, setFile] = useState<File | null>(null);
+  const { status: sessionStatus } = useSession();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -56,12 +58,20 @@ export function PracticeTestsPanel({
     const response = await fetch("/api/practice-tests");
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Failed to load");
-    setTests(data.tests);
+    setTests(Array.isArray(data.tests) ? data.tests : []);
   }
 
   useEffect(() => {
-    void load().catch(() => setTests([]));
-  }, []);
+    if (sessionStatus === "loading") return;
+    if (sessionStatus !== "authenticated") {
+      setTests([]);
+      return;
+    }
+    void load().catch((err) => {
+      setTests([]);
+      setError(err instanceof Error ? err.message : "Could not load tests");
+    });
+  }, [sessionStatus]);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();

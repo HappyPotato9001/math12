@@ -63,7 +63,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers,
   callbacks: {
-    async jwt({ token, user, account, trigger }) {
+    async jwt({ token, user, account }) {
       if (account && user) {
         if (account.provider === "credentials") {
           token.userId = user.id;
@@ -88,8 +88,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
       }
 
-      if (trigger === "update" && token.userId) {
-        const fresh = getUserById(token.userId);
+      // Keep role/status in sync so admin Accept on the site takes effect
+      // without requiring students (or newly promoted admins) to sign out.
+      if (token.userId) {
+        const fresh = getUserById(token.userId as string);
         if (fresh) {
           token.role = fresh.role;
           token.status = fresh.status;

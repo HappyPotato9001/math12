@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useEffect, useState, type FormEvent } from "react";
 
 type ShareCourse = "math1" | "math2" | "general";
@@ -33,6 +34,7 @@ export function SharingBoard({
   const [body, setBody] = useState("");
   const [course, setCourse] = useState<ShareCourse>("general");
   const [link, setLink] = useState("");
+  const { status: sessionStatus } = useSession();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -40,12 +42,20 @@ export function SharingBoard({
     const response = await fetch("/api/shares");
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || "Failed to load");
-    setPosts(data.posts);
+    setPosts(Array.isArray(data.posts) ? data.posts : []);
   }
 
   useEffect(() => {
-    void load().catch(() => setPosts([]));
-  }, []);
+    if (sessionStatus === "loading") return;
+    if (sessionStatus !== "authenticated") {
+      setPosts([]);
+      return;
+    }
+    void load().catch((err) => {
+      setPosts([]);
+      setError(err instanceof Error ? err.message : "Could not load posts");
+    });
+  }, [sessionStatus]);
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();

@@ -1,8 +1,25 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
-import type { ReactNode } from "react";
+import { SessionProvider, useSession } from "next-auth/react";
+import { useEffect, useRef, type ReactNode } from "react";
+
+function SessionRefresher({ children }: { children: ReactNode }) {
+  const { status, update } = useSession();
+  const refreshed = useRef(false);
+
+  useEffect(() => {
+    if (status !== "authenticated" || refreshed.current) return;
+    refreshed.current = true;
+    void update();
+  }, [status, update]);
+
+  return children;
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  return <SessionProvider>{children}</SessionProvider>;
+  return (
+    <SessionProvider>
+      <SessionRefresher>{children}</SessionRefresher>
+    </SessionProvider>
+  );
 }

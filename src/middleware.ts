@@ -29,12 +29,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  if (token.status !== "approved") {
-    return NextResponse.redirect(new URL("/pending", request.url));
+  // /admin authorizes from the DB in the page/API so a freshly promoted
+  // admin is not blocked by a stale JWT role/status claim.
+  if (pathname.startsWith("/admin")) {
+    return NextResponse.next();
   }
 
-  if (pathname.startsWith("/admin") && token.role !== "admin") {
-    return NextResponse.redirect(new URL("/learning", request.url));
+  if (token.status !== "approved") {
+    return NextResponse.redirect(new URL("/pending", request.url));
   }
 
   return NextResponse.next();

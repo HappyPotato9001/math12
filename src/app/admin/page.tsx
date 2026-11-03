@@ -1,8 +1,16 @@
+import { redirect } from "next/navigation";
 import { AdminUsersClient } from "@/components/AdminUsersClient";
+import { getSessionUser } from "@/lib/server/session";
 
 export const dynamic = "force-dynamic";
 
-export default function AdminPage() {
+export default async function AdminPage() {
+  const user = await getSessionUser();
+  if (!user) redirect("/login?next=/admin");
+  if (user.role !== "admin" || user.status !== "approved") {
+    redirect(user.status === "approved" ? "/learning" : "/pending");
+  }
+
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-10 sm:py-14">
       <p className="text-sm font-medium uppercase tracking-[0.18em] text-accent">
@@ -12,8 +20,8 @@ export default function AdminPage() {
         Approve access
       </h1>
       <p className="mt-3 text-ink-soft">
-        Students can sign up with email, Google, or GitHub. Accept an account
-        here to unlock Math 1/2 lessons and classwork.
+        Accept pending accounts here to unlock Math 1/2 lessons, sharing, and
+        practice tests for that student.
       </p>
       <div className="mt-8">
         <AdminUsersClient />
