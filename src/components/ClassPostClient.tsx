@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { CommentForm } from "@/components/CommentForm";
 import { MathText } from "@/components/MathText";
+import { WorkImage } from "@/components/WorkImage";
 import { getPost, getRoom } from "@/lib/db";
 
 type PostView = NonNullable<ReturnType<typeof getPost>>;
@@ -76,10 +77,19 @@ export function ClassPostClient() {
         </h1>
         <div className="mt-4 rounded-xl bg-paper-deep/70 px-4 py-3 text-sm">
           <p className="font-medium text-ink">Their work</p>
-          <p className="mt-1 whitespace-pre-wrap text-ink-soft">{post.workText}</p>
-          <p className="mt-3 text-ink-soft">
-            Answer submitted: <span className="text-ink">{post.answer || "—"}</span>
-          </p>
+          {post.imageId && (
+            <WorkImage
+              imageId={post.imageId}
+              alt={`Work photo from ${post.authorName}`}
+              className="mt-3 max-h-[28rem] w-full rounded-xl border border-line object-contain bg-paper"
+            />
+          )}
+          <p className="mt-3 whitespace-pre-wrap text-ink-soft">{post.workText}</p>
+          {post.answer && (
+            <p className="mt-3 text-ink-soft">
+              Answer submitted: <span className="text-ink">{post.answer}</span>
+            </p>
+          )}
           <p className={`mt-2 text-sm ${post.isCorrect ? "text-ok" : "text-warn"}`}>
             {post.isCorrect ? "Marked correct" : "Marked incorrect / needs help"}
           </p>

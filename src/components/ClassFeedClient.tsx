@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { MathText } from "@/components/MathText";
+import { PhotoWorkForm } from "@/components/PhotoWorkForm";
+import { WorkImage } from "@/components/WorkImage";
 import { exportRoomData, getRoom, listPosts } from "@/lib/db";
 
 type FeedPost = ReturnType<typeof listPosts>[number];
@@ -16,7 +18,7 @@ export function ClassFeedClient() {
   const [copied, setCopied] = useState(false);
   const [missing, setMissing] = useState(false);
 
-  useEffect(() => {
+  const reload = useCallback(() => {
     if (!code) {
       setMissing(true);
       return;
@@ -33,9 +35,13 @@ export function ClassFeedClient() {
     setPosts(listPosts(room.code));
   }, [code]);
 
-  function copyExport() {
-    const payload = exportRoomData(code);
-    void navigator.clipboard.writeText(JSON.stringify(payload));
+  useEffect(() => {
+    reload();
+  }, [reload]);
+
+  async function copyExport() {
+    const payload = await exportRoomData(code);
+    await navigator.clipboard.writeText(JSON.stringify(payload));
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2000);
   }
@@ -78,7 +84,7 @@ export function ClassFeedClient() {
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={copyExport}
+            onClick={() => void copyExport()}
             className="rounded-xl border border-line px-3 py-2 text-sm hover:bg-paper-deep"
           >
             {copied ? "Copied export" : "Export room"}
@@ -92,11 +98,14 @@ export function ClassFeedClient() {
         </div>
       </div>
 
+      <div className="mt-8">
+        <PhotoWorkForm roomCode={code} onPosted={reload} />
+      </div>
+
       <div className="mt-8 space-y-4">
         {posts.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-line bg-surface p-8 text-ink-soft">
-            No shared work yet. Practice a topic and hit{" "}
-            <span className="text-ink">Share my work</span>.
+            No shared work yet. Post a photo above, or share from practice.
           </div>
         ) : (
           posts.map((post) => (
@@ -115,6 +124,13 @@ export function ClassFeedClient() {
               <p className="mt-3 text-ink">
                 <MathText text={post.problemPrompt} />
               </p>
+              {post.imageId && (
+                <WorkImage
+                  imageId={post.imageId}
+                  alt={`Work photo from ${post.authorName}`}
+                  className="mt-3 max-h-48 w-full rounded-xl border border-line object-cover bg-paper"
+                />
+              )}
               <p className="mt-3 line-clamp-3 text-sm text-ink-soft">
                 {post.workText}
               </p>
@@ -128,6 +144,11 @@ export function ClassFeedClient() {
                 >
                   {post.isCorrect ? "Marked correct" : "Needs help"}
                 </span>
+                {post.imageId && (
+                  <span className="rounded-full border border-line px-2.5 py-1 text-ink-soft">
+                    Photo attached
+                  </span>
+                )}
                 <span className="rounded-full border border-line px-2.5 py-1 text-ink-soft">
                   {post.commentCount} comment
                   {post.commentCount === 1 ? "" : "s"}

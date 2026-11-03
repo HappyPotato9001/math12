@@ -20,7 +20,7 @@ export function ClassRoomClient() {
     if (saved) setDisplayName(saved);
   }, []);
 
-  function onSubmit(event: FormEvent) {
+  async function onSubmit(event: FormEvent) {
     event.preventDefault();
     setError("");
     setLoading(true);
@@ -29,7 +29,7 @@ export function ClassRoomClient() {
 
       if (mode === "import") {
         const payload = JSON.parse(importText);
-        const ok = importRoomData(payload);
+        const ok = await importRoomData(payload);
         if (!ok || !payload.room) {
           throw new Error("Invalid room data.");
         }
@@ -70,7 +70,7 @@ export function ClassRoomClient() {
 
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={(event) => void onSubmit(event)}
       className="animate-rise rounded-2xl border border-line bg-surface p-6 shadow-[var(--shadow)] sm:p-8"
     >
       <div className="flex flex-wrap gap-1 rounded-xl bg-paper-deep p-1 text-sm">

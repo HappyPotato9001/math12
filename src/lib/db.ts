@@ -23,6 +23,7 @@ export type Post = {
   workText: string;
   answer: string;
   isCorrect: boolean;
+  imageId?: string;
   createdAt: string;
 };
 
@@ -174,6 +175,7 @@ export function createPost(input: {
   workText: string;
   answer: string;
   isCorrect: boolean;
+  imageId?: string;
 }) {
   const store = readStore();
   const room = store.rooms.find(
@@ -194,6 +196,7 @@ export function createPost(input: {
     workText: input.workText.trim(),
     answer: input.answer.trim(),
     isCorrect: input.isCorrect,
+    imageId: input.imageId,
     createdAt: new Date().toISOString(),
   };
   store.posts.unshift(post);
@@ -232,28 +235,35 @@ export function createComment(input: {
   };
 }
 
-export function exportRoomData(roomCode: string) {
+export async function exportRoomData(roomCode: string) {
+  const { getImages } = await import("./images");
   const store = readStore();
   const code = roomCode.toUpperCase();
+  const posts = store.posts.filter((post) => post.roomCode === code);
+  const imageIds = posts
+    .map((post) => post.imageId)
+    .filter((id): id is string => Boolean(id));
+  const images = await getImages(imageIds);
   return {
     room: store.rooms.find((room) => room.code === code) ?? null,
     members: store.members.filter((member) => member.roomCode === code),
-    posts: store.posts.filter((post) => post.roomCode === code),
+    posts,
     comments: store.comments.filter((comment) =>
-      store.posts.some(
-        (post) => post.id === comment.postId && post.roomCode === code,
-      ),
+      posts.some((post) => post.id === comment.postId),
     ),
+    images,
   };
 }
 
-export function importRoomData(payload: {
+export async function importRoomData(payload: {
   room: Room | null;
   members: Member[];
   posts: Post[];
   comments: Comment[];
+  images?: Record<string, string>;
 }) {
   if (!payload.room) return false;
+  const { saveImages } = await import("./images");
   const store = readStore();
   const code = payload.room.code.toUpperCase();
   store.rooms = [
@@ -274,5 +284,8 @@ export function importRoomData(payload: {
     ...payload.comments,
   ];
   writeStore(store);
+  if (payload.images && Object.keys(payload.images).length > 0) {
+    await saveImages(payload.images);
+  }
   return true;
 }
