@@ -59,7 +59,9 @@ export function AuthForm({ mode, oauth }: Props) {
         router.refresh();
         return;
       }
-      router.push(nextPath.startsWith("/") ? nextPath : "/learning");
+      const destination =
+        nextPath.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "/";
+      router.push(destination);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
